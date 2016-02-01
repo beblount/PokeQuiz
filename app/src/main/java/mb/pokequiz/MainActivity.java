@@ -1,4 +1,4 @@
-package com.example.bradley.pokequiz;
+package mb.pokequiz;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +14,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.bradley.pokequiz.R;
 
 public class MainActivity extends AppCompatActivity {
 
