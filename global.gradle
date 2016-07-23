@@ -1,0 +1,48 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+    // Android
+    buildToolsVersion = "23.0.2"
+    minSdkVersion = 19
+    targetSdkVersion = 23
+    compileSdkVersion = 23
+    versionCode = 1
+    versionName = "1.0"
+    applicationId = "mb.pokequiz"
+
+    // Library Versions
+    daggerVersion = '2.0.2'
+    butterKnifeVersion = '7.0.1'
+    rxJavaVersion = '1.0.14'
+    rxAndroidVersion = '1.1.0'
+    androidSupportVersion = '23.3.0'
+    gsonVersion = '2.5'
+    retrofitVersion = '2.0.0-beta3'
+    mosbyVersion = '2.0.1'
+    conductorVersion = '0.8.1'
+    javaxInjectVersion = '1'
+    javaxAnnotationVersion = '10.0-b28'
+
+    // Dependencies
+    dagger = "com.google.dagger:dagger:${daggerVersion}"
+    daggerCompiler = "com.google.dagger:dagger-compiler:${daggerVersion}"
+    butterKnife = "com.jakewharton:butterknife:${butterKnifeVersion}"
+    rxJava = "io.reactivex:rxjava:${rxJavaVersion}"
+    rxAndroid = "io.reactivex:rxandroid:${rxAndroidVersion}"
+    mosby = "com.hannesdorfmann.mosby:mvp:${mosbyVersion}"
+    mosbyViewState = "com.hannesdorfmann.mosby:viewstate:${mosbyVersion}"
+    conductor = "com.hannesdorfmann.mosby:mvp-conductor:${conductorVersion}"
+    conductorViewState = "com.hannesdorfmann.mosby:viewstate-conductor:${conductorVersion}"
+    javaxInject = "javax.inject:javax.inject:${javaxInjectVersion}"
+    javaxAnnotation = "org.glassfish:javax.annotation:${javaxAnnotationVersion}"
+    gson = "com.google.code.gson:gson:${gsonVersion}"
+    appCompat = "com.android.support:appcompat-v7:${androidSupportVersion}"
+    supportDesign = "com.android.support:design:${androidSupportVersion}"
+    retrofit = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    retrofitGson = "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    retrofitRx = "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
+}

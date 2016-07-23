@@ -3,20 +3,12 @@ package mb.pokequiz.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import javax.inject.Inject;
-
 import butterknife.ButterKnife;
 import mb.pokequiz.PokeApplication;
-import mb.pokequiz.data.api.PokeService;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
-/**
- * Created by mbpeele on 2/1/16.
- */
 public class BaseActivity extends AppCompatActivity {
-
-    @Inject PokeService pokeService;
 
     private CompositeSubscription compositeSubscription;
 
