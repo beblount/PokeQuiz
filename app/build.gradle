@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'kotlin-android'
 apply plugin: 'realm-android'
+apply plugin: 'kotlin-android-extensions'
 
 def config = rootProject.extensions.getByName("ext")
 
@@ -31,31 +31,31 @@ android {
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
     }
+
+    kapt {
+        generateStubs = true
+    }
 }
 
 dependencies {
     def dependencies = config.appDependencies
 
-    apt dependencies.daggerCompiler
+    compile config.kotlin
+
+    kapt dependencies.daggerCompiler
     compile dependencies.dagger
 
-    compile dependencies.rxAndroid
-
     compile dependencies.conductor
-    compile dependencies.conductorViewState
 
     compile dependencies.design
     compile dependencies.appCompat
 
-    compile config.kotlin
-
     compile dependencies.rxJava
+    compile dependencies.rxAndroid
 
     compile dependencies.retrofit
     compile dependencies.retrofitMoshi
     compile dependencies.retrofitRx
-
-    compile config.kotlin
 
     compile dependencies.fieldNamesHelper
 }

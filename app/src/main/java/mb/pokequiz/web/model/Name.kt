@@ -1,22 +1,21 @@
-package mb.pokequiz.data.model
+package mb.pokequiz.web.model
 
 import com.squareup.moshi.Json
-import mb.pokequiz.data.model.Language
 
-class Description {
+class Name {
 
     /**
 
      * @return
-     * *     The description
+     * *     The name
      */
     /**
 
-     * @param description
-     * *     The description
+     * @param name
+     * *     The name
      */
-    @Json(name = "description")
-    var description: String? = null
+    @Json(name = "name")
+    var name: String? = null
     /**
 
      * @return

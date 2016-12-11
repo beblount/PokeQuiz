@@ -6,8 +6,8 @@ allprojects {
 
 ext {
     // Android
-    buildToolsVersion = "23.0.2"
-    minSdkVersion = 19
+    buildToolsVersion = "25.0.0"
+    minSdkVersion = 21
     targetSdkVersion = 23
     compileSdkVersion = 23
     versionCode = 1
@@ -19,17 +19,15 @@ ext {
     rxJavaVersion = '2.0.2'
     rxAndroidVersion = '2.0.1'
     androidSupportVersion = '23.3.0'
-    gsonVersion = '2.5'
     retrofitVersion = '2.1.0'
-    conductorVersion = '0.8.1'
+    conductorVersion = '2.0.4'
     fieldNamesHelperVersion = '1.1.0'
     kotlinVersion = '1.0.5-2'
 
     appDependencies = [
             dagger: "com.google.dagger:dagger:${daggerVersion}",
             daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
-            conductor: "com.hannesdorfmann.mosby:mvp-conductor:${conductorVersion}",
-            conductorViewState: "com.hannesdorfmann.mosby:viewstate-conductor:${conductorVersion}",
+            conductor: "com.bluelinelabs:conductor:${conductorVersion}",
             appCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
             design: "com.android.support:design:${androidSupportVersion}",
             rxAndroid: "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",

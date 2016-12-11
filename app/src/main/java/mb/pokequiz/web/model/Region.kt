@@ -1,4 +1,4 @@
-package mb.pokequiz.data.model
+package mb.pokequiz.web.model
 
 import com.squareup.moshi.Json
 

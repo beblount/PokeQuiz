@@ -1,4 +1,4 @@
-package mb.pokequiz.data.api
+package mb.pokequiz.web.api
 
 import io.reactivex.Observable
 import retrofit2.http.GET

@@ -1,9 +1,8 @@
-package mb.pokequiz.data.model
+package mb.pokequiz.web.model
 
 import com.squareup.moshi.Json
-import mb.pokequiz.data.model.Language
 
-class Name {
+class Language {
 
     /**
 
@@ -20,14 +19,14 @@ class Name {
     /**
 
      * @return
-     * *     The language
+     * *     The url
      */
     /**
 
-     * @param language
-     * *     The language
+     * @param url
+     * *     The url
      */
-    @Json(name = "language")
-    var language: Language? = null
+    @Json(name = "url")
+    var url: String? = null
 
 }

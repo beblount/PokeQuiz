@@ -1,7 +1,6 @@
-package mb.pokequiz.data.model
+package mb.pokequiz.web.model
 
 import com.squareup.moshi.Json
-import mb.pokequiz.data.model.PokemonSpecies
 
 class PokemonEntry {
 
