@@ -1,6 +1,7 @@
 apply from: 'global.gradle'
 
 buildscript {
+    ext.kotlin_version = '1.0.5-2'
     repositories {
         jcenter()
     }
@@ -8,6 +9,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
