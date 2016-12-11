@@ -1,8 +1,8 @@
-package peele.miles.domain.model
+package mb.pokequiz.data.model
 
 import com.squareup.moshi.Json
 
-class VersionGroup {
+class Language {
 
     /**
 

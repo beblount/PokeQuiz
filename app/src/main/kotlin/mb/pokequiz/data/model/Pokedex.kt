@@ -1,6 +1,11 @@
-package peele.miles.domain.model
+package mb.pokequiz.data.model
 
 import com.squareup.moshi.Json
+import mb.pokequiz.data.model.Description
+import mb.pokequiz.data.model.Name
+import mb.pokequiz.data.model.PokemonEntry
+import mb.pokequiz.data.model.Region
+import mb.pokequiz.data.model.VersionGroup
 
 class Pokedex {
 

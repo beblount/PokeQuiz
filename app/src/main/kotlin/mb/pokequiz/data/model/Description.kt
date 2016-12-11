@@ -1,6 +1,7 @@
-package peele.miles.domain.model
+package mb.pokequiz.data.model
 
 import com.squareup.moshi.Json
+import mb.pokequiz.data.model.Language
 
 class Description {
 
