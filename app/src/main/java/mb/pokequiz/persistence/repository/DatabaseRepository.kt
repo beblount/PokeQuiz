@@ -9,9 +9,9 @@ import io.realm.RealmObject
  */
 interface DatabaseRepository {
 
-    fun <Entity : RealmObject> create(entity: Entity) : Single<Void>
+    fun <Entity : RealmObject> create(entity: Entity): Single<Entity>
 
     fun <Entity : RealmObject> update(entity: Entity) : Observable<Entity>
 
-    fun <Entity : RealmObject> delete(entity: Entity) : Single<Void>
+    fun <Entity : RealmObject> delete(entity: Entity): Single<Entity>
 }

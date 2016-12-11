@@ -8,7 +8,7 @@ import io.reactivex.Single
  */
 interface Repository {
 
-    fun <Model> create(model: Model) : Single<Void>
+    fun <Model> create(model: Model, clazz: Class<Model>): Single<Model>
 
     fun <Model> update(model: Model) : Observable<Model>
 

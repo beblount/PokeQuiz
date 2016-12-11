@@ -2,16 +2,14 @@ package mb.pokequiz.persistence.repository
 
 import io.reactivex.Observable
 import io.reactivex.Single
-import javax.inject.Inject
-import javax.inject.Singleton
+import mb.pokequiz.persistence.mapper.MapperFactory
 
 /**
  * Created by mbpeele on 12/11/16.
  */
-@Singleton
-class ModelRepository @Inject constructor (var database: DatabaseRepository) : Repository {
+class ModelRepository(var database: DatabaseRepository, val mapperFactory: MapperFactory) : Repository {
 
-    override fun <Model> create(model: Model): Single<Void> {
+    override fun <Model> create(model: Model, clazz: Class<Model>): Single<Model> {
         throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

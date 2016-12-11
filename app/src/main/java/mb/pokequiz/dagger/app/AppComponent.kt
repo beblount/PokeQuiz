@@ -2,6 +2,7 @@ package mb.pokequiz.dagger.app
 
 import dagger.Component
 import mb.pokequiz.ui.base.BaseActivity
+import mb.pokequiz.ui.home.HomeActivity
 import javax.inject.Singleton
 
 /**
@@ -12,4 +13,6 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(activity: BaseActivity)
+
+    fun inject(activity: HomeActivity)
 }
