@@ -1,40 +1,15 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'io.realm:realm-gradle-plugin:1.1.0'
-    }
-}
-
-apply plugin: 'com.android.library'
-apply plugin: 'realm-android'
+apply plugin: 'java'
 
 def config = rootProject.extensions.getByName("ext")
 
-android {
-    compileSdkVersion config.getAt("compileSdkVersion")
-    buildToolsVersion config.getAt("buildToolsVersion")
-
-    defaultConfig {
-        minSdkVersion config.getAt("minSdkVersion")
-        targetSdkVersion config.getAt("targetSdkVersion")
-        versionCode config.getAt("versionCode")
-        versionName config.getAt("versionName")
-    }
-
-    lintOptions {
-        abortOnError false
-    }
-}
-
 dependencies {
-    compile config.rxJava
+    def dependencies = config.domainDependencies
 
-    compile config.retrofit
-    compile config.retrofitGson
-    compile config.retrofitRx
+    compile dependencies.rxJava
 
-    compile config.gson
+    compile dependencies.retrofit
+    compile dependencies.retrofitGson
+    compile dependencies.retrofitRx
+
+    compile dependencies.gson
 }

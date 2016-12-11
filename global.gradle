@@ -26,23 +26,27 @@ ext {
     conductorVersion = '0.8.1'
     javaxInjectVersion = '1'
     javaxAnnotationVersion = '10.0-b28'
+    fieldNamesHelperVersion = '1.1.0'
 
-    // Dependencies
-    dagger = "com.google.dagger:dagger:${daggerVersion}"
-    daggerCompiler = "com.google.dagger:dagger-compiler:${daggerVersion}"
-    butterKnife = "com.jakewharton:butterknife:${butterKnifeVersion}"
-    rxJava = "io.reactivex:rxjava:${rxJavaVersion}"
-    rxAndroid = "io.reactivex:rxandroid:${rxAndroidVersion}"
-    mosby = "com.hannesdorfmann.mosby:mvp:${mosbyVersion}"
-    mosbyViewState = "com.hannesdorfmann.mosby:viewstate:${mosbyVersion}"
-    conductor = "com.hannesdorfmann.mosby:mvp-conductor:${conductorVersion}"
-    conductorViewState = "com.hannesdorfmann.mosby:viewstate-conductor:${conductorVersion}"
-    javaxInject = "javax.inject:javax.inject:${javaxInjectVersion}"
-    javaxAnnotation = "org.glassfish:javax.annotation:${javaxAnnotationVersion}"
-    gson = "com.google.code.gson:gson:${gsonVersion}"
-    appCompat = "com.android.support:appcompat-v7:${androidSupportVersion}"
-    supportDesign = "com.android.support:design:${androidSupportVersion}"
-    retrofit = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
-    retrofitGson = "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
-    retrofitRx = "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
+    appDependencies = [
+            dagger: "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
+            conductor: "com.hannesdorfmann.mosby:mvp-conductor:${conductorVersion}",
+            conductorViewState: "com.hannesdorfmann.mosby:viewstate-conductor:${conductorVersion}",
+            appCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
+            design: "com.android.support:design:${androidSupportVersion}",
+            rxAndroid: "io.reactivex:rxandroid:${rxAndroidVersion}"
+    ]
+
+    persistenceDependencies = [
+            fieldNamesHelper: "dk.ilios:realmfieldnameshelper:${fieldNamesHelperVersion}"
+    ]
+
+    domainDependencies = [
+            rxJava: "io.reactivex:rxjava:${rxJavaVersion}",
+            gson: "com.google.code.gson:gson:${gsonVersion}",
+            retrofit: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitRx: "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
+    ]
 }

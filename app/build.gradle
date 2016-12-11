@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'me.tatarka.retrolambda'
 
 def config = rootProject.extensions.getByName("ext")
 
@@ -24,23 +23,18 @@ android {
 dependencies {
     compile project(':domain')
 
-    apt config.daggerCompiler
-    compile config.dagger
-    compile config.javaxInject
-    provided config.javaxAnnotation
+    def dependencies = config.appDependencies
 
-    compile config.butterKnife
+    apt dependencies.daggerCompiler
+    compile dependencies.dagger
 
-    compile config.rxAndroid
+    compile dependencies.rxAndroid
 
-    compile config.mosby
-    compile config.mosbyViewState
+    compile dependencies.conductor
+    compile dependencies.conductorViewState
 
-    compile config.conductor
-    compile config.conductorViewState
-
-    compile config.supportDesign
-    compile config.appCompat
+    compile dependencies.design
+    compile dependencies.appCompat
 }
 
 task start(type: Exec, dependsOn: 'installDebug') {
