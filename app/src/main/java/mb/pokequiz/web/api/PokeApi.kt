@@ -1,7 +1,7 @@
 package mb.pokequiz.web.api
 
 import io.reactivex.Observable
-import mb.pokequiz.persistence.model.Pokedex
+import mb.pokequiz.web.model.Pokedex
 import retrofit2.http.GET
 import retrofit2.http.Path
 

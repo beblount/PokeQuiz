@@ -1,4 +1,4 @@
-package mb.pokequiz.persistence.model
+package mb.pokequiz.persistence.entity
 
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject

@@ -9,8 +9,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import mb.pokequiz.PokeApplication
 import mb.pokequiz.R
-import mb.pokequiz.persistence.model.Pokedex
 import mb.pokequiz.web.api.PokeApi
+import mb.pokequiz.web.model.Pokedex
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
