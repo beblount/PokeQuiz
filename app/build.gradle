@@ -21,9 +21,6 @@ android {
         abortOnError false
     }
 
-    dataBinding {
-        enabled = true
-    }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -54,7 +51,7 @@ dependencies {
     compile dependencies.rxAndroid
 
     compile dependencies.retrofit
-    compile dependencies.retrofitMoshi
+    compile dependencies.retrofitGson
     compile dependencies.retrofitRx
 
     compile dependencies.fieldNamesHelper

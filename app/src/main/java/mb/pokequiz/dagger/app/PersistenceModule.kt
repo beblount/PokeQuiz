@@ -4,8 +4,6 @@ import dagger.Module
 import dagger.Provides
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import mb.pokequiz.persistence.mapper.MapperFactory
-import mb.pokequiz.persistence.mapper.PokeMapperFactory
 import javax.inject.Singleton
 
 /**
@@ -22,11 +20,5 @@ class PersistenceModule {
                 .build()
         Realm.setDefaultConfiguration(config)
         return config
-    }
-
-    @Provides
-    @Singleton
-    fun mapperFactory() : MapperFactory {
-        return PokeMapperFactory()
     }
 }

@@ -1,13 +1,14 @@
 package mb.pokequiz.dagger.app
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import mb.pokequiz.web.api.PokeApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
@@ -24,10 +25,11 @@ class WebModule {
 
     @Provides
     @Singleton
-    fun retrofit(client: OkHttpClient, moshi: Moshi) : Retrofit {
+    fun retrofit(client: OkHttpClient, gson: Gson) : Retrofit {
         return Retrofit.Builder()
+                .baseUrl("http://pokeapi.co/api/v2/")
                 .client(client)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
     }
@@ -41,8 +43,8 @@ class WebModule {
 
     @Provides
     @Singleton
-    fun moshi() : Moshi {
-        return Moshi.Builder()
-                .build()
+    fun gson() : Gson {
+        return GsonBuilder()
+                .create()
     }
 }

@@ -1,8 +1,9 @@
 package mb.pokequiz.web.api
 
 import io.reactivex.Observable
+import mb.pokequiz.persistence.model.Pokedex
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Path
 
 /**
  * Created by mbpeele on 12/11/16.
@@ -10,7 +11,7 @@ import retrofit2.http.Query
 
 interface PokeApi {
 
-    @GET("/pokedex/{id}")
-    fun getPokedex(@Query("id") idOrName : String) : Observable<Void>
+    @GET("pokedex/{id}")
+    fun getPokedex(@Path("id") idOrName : String) : Observable<Pokedex>
 
 }
