@@ -10,11 +10,11 @@ import mb.pokequiz.ui.base.BaseActivity
  * Created by mbpeele on 12/11/16.
  */
 @Module
-class ActivityModule(val activity: BaseActivity) {
+class ActivityModule(val activity: BaseActivity, val realm: Realm) {
 
     @Provides
     @ActivityScope
     fun realm() : Realm {
-        return Realm.getDefaultInstance()
+        return realm
     }
 }

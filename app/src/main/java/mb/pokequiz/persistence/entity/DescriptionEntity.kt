@@ -6,10 +6,8 @@ import io.realm.RealmObject
 /**
  * Created by mbpeele on 12/11/16.
  */
-open class Name : RealmObject() {
+open class DescriptionEntity : RealmObject() {
 
-    @SerializedName("name")
-    var name: String? = null
-    @SerializedName("language")
-    var language: Language? = null
+    var description: String? = null
+    var languageEntity: LanguageEntity? = null
 }

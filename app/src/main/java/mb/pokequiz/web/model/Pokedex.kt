@@ -60,20 +60,20 @@ class Pokedex {
     /**
 
      * @return
-     * *     The names
+     * *     The nameEntities
      */
     /**
 
-     * @param names
-     * *     The names
+     * @param nameEntities
+     * *     The nameEntities
      */
-    @SerializedName("names")
+    @SerializedName("nameEntities")
     @Expose
     var names: List<Name>? = null
     /**
 
      * @return
-     * *     The pokemonEntries
+     * *     The pokemonEntryEntities
      */
     /**
 

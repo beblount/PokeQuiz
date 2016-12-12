@@ -21,14 +21,14 @@ class Name {
     /**
 
      * @return
-     * *     The language
+     * *     The languageEntity
      */
     /**
 
-     * @param language
-     * *     The language
+     * @param languageEntity
+     * *     The languageEntity
      */
-    @SerializedName("language")
+    @SerializedName("languageEntity")
     @Expose
     var language: Language? = null
 

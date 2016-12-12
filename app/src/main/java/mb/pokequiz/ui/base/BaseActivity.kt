@@ -2,6 +2,7 @@ package mb.pokequiz.ui.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import io.realm.Realm
 import mb.pokequiz.PokeApplication
 import mb.pokequiz.dagger.activity.ActivityComponent
 import mb.pokequiz.dagger.activity.ActivityModule
@@ -17,7 +18,7 @@ open class BaseActivity : AppCompatActivity() {
         PokeApplication.component.inject(this)
 
         activityComponent = DaggerActivityComponent.builder()
-                .activityModule(ActivityModule(this))
+                .activityModule(ActivityModule(this, Realm.getDefaultInstance()))
                 .build()
     }
 

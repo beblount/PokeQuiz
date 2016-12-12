@@ -6,10 +6,8 @@ import io.realm.RealmObject
 /**
  * Created by mbpeele on 12/11/16.
  */
-open class VersionGroup : RealmObject() {
+open class NameEntity : RealmObject() {
 
-    @SerializedName("name")
-    var name: String ?= null
-    @SerializedName("url")
-    var url: String ?= null
+    var name: String? = null
+    var languageEntity: LanguageEntity? = null
 }

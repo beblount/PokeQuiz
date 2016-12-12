@@ -21,7 +21,7 @@ class PokemonEntry {
     /**
 
      * @return
-     * *     The pokemonSpecies
+     * *     The pokemonSpeciesEntity
      */
     /**
 
