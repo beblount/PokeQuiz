@@ -2,19 +2,23 @@ package mb.pokequiz.dagger.activity
 
 import dagger.Module
 import dagger.Provides
-import io.realm.Realm
 import mb.pokequiz.dagger.ActivityScope
-import mb.pokequiz.ui.base.BaseActivity
+import mb.pokequiz.data.repository.PokeApi
+import mb.pokequiz.data.repository.PokeRepository
+import mb.pokequiz.data.repository.RealmRepository
+import mb.pokequiz.data.repository.Repository
 
 /**
- * Created by mbpeele on 12/11/16.
+ * Created by mbpeele on 12/25/16.
  */
 @Module
-class ActivityModule(val activity: BaseActivity, val realm: Realm) {
+@ActivityScope
+class ActivityModule {
 
     @Provides
     @ActivityScope
-    fun realm() : Realm {
-        return realm
+    fun repository(api: PokeApi) : PokeRepository {
+        val localRepository = RealmRepository()
+        return Repository(localRepository, api)
     }
 }

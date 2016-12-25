@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
-apply plugin: 'kotlin-android-extensions'
 
 def config = rootProject.extensions.getByName("ext")
 
@@ -29,8 +29,8 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 
-    kapt {
-        generateStubs = true
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -38,9 +38,13 @@ dependencies {
     def dependencies = config.appDependencies
 
     compile config.kotlin
+    compile dependencies.kotlinReflect
+
+    kapt dependencies.databinding
 
     kapt dependencies.daggerCompiler
     compile dependencies.dagger
+    provided dependencies.javax
 
     compile dependencies.conductor
 
@@ -49,10 +53,13 @@ dependencies {
 
     compile dependencies.rxJava
     compile dependencies.rxAndroid
+    compile dependencies.rxJavaInterop
 
     compile dependencies.retrofit
     compile dependencies.retrofitGson
     compile dependencies.retrofitRx
+    compile dependencies.okHttp
+    compile dependencies.loggingInterceptor
 
     compile dependencies.fieldNamesHelper
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="small_angle" format="float" type="dimen">0.0</item>
+    <item name="large_angle" format="float" type="dimen">180.0</item>
+
+</resources>

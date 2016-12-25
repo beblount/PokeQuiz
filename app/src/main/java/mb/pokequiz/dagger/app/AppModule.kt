@@ -8,6 +8,7 @@ import javax.inject.Singleton
 /**
  * Created by mbpeele on 12/11/16.
  */
+@Singleton
 @Module(includes = arrayOf(WebModule::class, PersistenceModule::class))
 class AppModule(var application: PokeApplication) {
 

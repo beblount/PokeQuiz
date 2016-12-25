@@ -1,8 +1,7 @@
 package mb.pokequiz.dagger.app
 
 import dagger.Component
-import mb.pokequiz.ui.base.BaseActivity
-import mb.pokequiz.ui.home.HomeActivity
+import mb.pokequiz.data.repository.PokeApi
 import javax.inject.Singleton
 
 /**
@@ -12,7 +11,5 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(AppModule::class))
 interface AppComponent {
 
-    fun inject(activity: BaseActivity)
-
-    fun inject(activity: HomeActivity)
+    fun api() : PokeApi
 }

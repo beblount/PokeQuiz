@@ -23,6 +23,10 @@ ext {
     conductorVersion = '2.0.4'
     fieldNamesHelperVersion = '1.1.0'
     kotlinVersion = '1.0.5-3'
+    databindingVersion = '2.2.2'
+    javaxVersion = '10.0-b28'
+    okHttpVersion = '3.4.1'
+    rxJavaInteropVersion = '0.8.1'
 
     appDependencies = [
             dagger: "com.google.dagger:dagger:${daggerVersion}",
@@ -36,6 +40,12 @@ ext {
             retrofitGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             retrofitRx: "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0",
             fieldNamesHelper: "dk.ilios:realmfieldnameshelper:${fieldNamesHelperVersion}",
+            databinding: "com.android.databinding:compiler:${databindingVersion}",
+            javax: "org.glassfish:javax.annotation:${javaxVersion}",
+            okHttp: "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            rxJavaInterop: "com.github.akarnokd:rxjava2-interop:${rxJavaInteropVersion}",
+            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
     ]
 
     kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
