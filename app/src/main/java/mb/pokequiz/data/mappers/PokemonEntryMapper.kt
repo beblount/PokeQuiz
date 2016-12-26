@@ -13,13 +13,13 @@ open class PokemonEntryMapper : Mapper<PokemonEntry, PokemonEntryEntity> {
         val entity = PokemonEntryEntity()
         entity.entryNumber = model.entry_number
         val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
-        entity.pokemonSpeciesEntity = mapper.toEntity(model.pokemon_species, factory)
+        entity.pokemon_species = mapper.toEntity(model.pokemon_species, factory)
         return entity
     }
 
     override fun toModel(entity: PokemonEntryEntity, factory: MapperFactory): PokemonEntry {
         val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
         return PokemonEntry(entity.entryNumber!!,
-                mapper.toModel(entity.pokemonSpeciesEntity!!, factory))
+                mapper.toModel(entity.pokemon_species!!, factory))
     }
 }

@@ -27,6 +27,7 @@ class PokeMapperFactory : MapperFactory {
     }
 
 
+    @Suppress("UNCHECKED_CAST")
     override fun <Model, Entity> create(kClass: KClass<*>): Mapper<Model, Entity> {
         if (map.contains(kClass)) {
             return map.get(kClass) as Mapper<Model, Entity>

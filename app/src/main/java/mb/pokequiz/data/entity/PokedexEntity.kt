@@ -14,13 +14,13 @@ open class PokedexEntity : RealmObject() {
     var name: String? = null
     var isMainSeries: Boolean? = null
     var descriptions: RealmList<DescriptionEntity>? = null
-    var nameEntities: RealmList<NameEntity>? = null
-    var pokemonEntryEntities: RealmList<PokemonEntryEntity>? = null
+    var names: RealmList<NameEntity>? = null
+    var pokemon_entries: RealmList<PokemonEntryEntity>? = null
     var region: NamedResourceEntity? = null
-    var versionGroups: RealmList<NamedResourceEntity>? = null
+    var version_groups: RealmList<NamedResourceEntity>? = null
 
     override fun toString(): String {
-        return "PokedexEntity(name=$name, isMainSeries=$isMainSeries, descriptions=$descriptions, nameEntities=$nameEntities, pokemonEntryEntities=$pokemonEntryEntities, region=$region, versionGroups=$versionGroups)"
+        return "PokedexEntity(name=$name, isMainSeries=$isMainSeries, descriptions=$descriptions, names=$names, pokemon_entries=$pokemon_entries, region=$region, version_groups=$version_groups)"
     }
 
 

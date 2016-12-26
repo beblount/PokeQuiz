@@ -23,9 +23,9 @@ open class PokeDexMapper : Mapper<Pokedex, PokedexEntity> {
         entity.isMainSeries = model.is_main_series
         entity.name = model.name
         entity.descriptions = descriptions
-        entity.nameEntities = names
-        entity.pokemonEntryEntities = pokemonEntries
-        entity.versionGroups = versionGroups
+        entity.names = names
+        entity.pokemon_entries = pokemonEntries
+        entity.version_groups = versionGroups
         entity.region = if (model.region == null) null else namedResourceMapper.toEntity(model.region, factory)
 
         return entity
@@ -37,10 +37,10 @@ open class PokeDexMapper : Mapper<Pokedex, PokedexEntity> {
         val pokemonEntryMapper = factory.create<PokemonEntry, PokemonEntryEntity>(NamedResource::class)
         val namedResourceMapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
 
-        val names = modelList(entity.nameEntities, nameMapper, factory)
+        val names = modelList(entity.names, nameMapper, factory)
         val descriptions = modelList(entity.descriptions, descriptionMapper, factory)
-        val pokemonEntries = modelList(entity.pokemonEntryEntities, pokemonEntryMapper, factory)
-        val versionGroups = modelList(entity.versionGroups, namedResourceMapper, factory)
+        val pokemonEntries = modelList(entity.pokemon_entries, pokemonEntryMapper, factory)
+        val versionGroups = modelList(entity.version_groups, namedResourceMapper, factory)
         val region = if (entity.region == null) null else namedResourceMapper.toModel(entity.region!!, factory)
 
         return Pokedex(

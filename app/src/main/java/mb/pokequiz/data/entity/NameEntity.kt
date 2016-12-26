@@ -8,5 +8,5 @@ import io.realm.RealmObject
 open class NameEntity : RealmObject() {
 
     var name: String? = null
-    var languageEntity: NamedResourceEntity? = null
+    var language: NamedResourceEntity? = null
 }

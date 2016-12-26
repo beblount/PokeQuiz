@@ -12,7 +12,7 @@ open class DescriptionMapper : Mapper<Description, DescriptionEntity> {
     override fun toEntity(model: Description, factory: MapperFactory): DescriptionEntity {
         val entity = DescriptionEntity()
         val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
-        entity.languageEntity = mapper.toEntity(model.language, factory)
+        entity.language = mapper.toEntity(model.language, factory)
         entity.description = model.description
         return entity
     }
@@ -20,6 +20,6 @@ open class DescriptionMapper : Mapper<Description, DescriptionEntity> {
     override fun toModel(entity: DescriptionEntity, factory: MapperFactory): Description {
         val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
         return Description(entity.description!!,
-                mapper.toModel(entity.languageEntity!!, factory))
+                mapper.toModel(entity.language!!, factory))
     }
 }

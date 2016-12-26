@@ -13,13 +13,13 @@ open class NameMapper : Mapper<Name, NameEntity> {
         val entity = NameEntity()
         entity.name = model.name
         val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
-        entity.languageEntity = mapper.toEntity(model.language, factory)
+        entity.language = mapper.toEntity(model.language, factory)
         return entity
     }
 
     override fun toModel(entity: NameEntity, factory: MapperFactory): Name {
         val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
         return Name(entity.name!!,
-                mapper.toModel(entity.languageEntity!!, factory))
+                mapper.toModel(entity.language!!, factory))
     }
 }
