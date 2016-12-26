@@ -40,6 +40,8 @@ dependencies {
     compile config.kotlin
     compile dependencies.kotlinReflect
 
+    compile dependencies.glide
+
     kapt dependencies.databinding
 
     kapt dependencies.daggerCompiler

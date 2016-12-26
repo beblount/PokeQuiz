@@ -14,14 +14,115 @@ interface Mapper<Model, Entity> {
 
     fun toEntity(model: Model) : Entity
 
+    object PokemonMapper : Mapper<Pokemon, PokemonEntity> {
+        override fun toModel(entity: PokemonEntity): Pokemon {
+            val forms = modelList(entity.forms, NamedResourceMapper)
+            val indices = modelList(entity.game_indices, GameIndexMapper)
+            val stats = modelList(entity.stats, StatMapper)
+            val species = NamedResourceMapper.toModel(entity.species!!)
+            val sprite = SpriteMapper.toModel(entity.sprite!!)
+            return Pokemon(entity.id!!,
+                    entity.name!!,
+                    entity.base_experience!!,
+                    entity.height!!,
+                    entity.is_default!!,
+                    entity.order!!,
+                    entity.weight!!,
+                    entity.location_area_encounters!!,
+                    sprite,
+                    forms,
+                    indices,
+                    species,
+                    stats)
+        }
+
+        override fun toEntity(model: Pokemon): PokemonEntity {
+            val entity = PokemonEntity()
+            entity.id = model.id
+            entity.base_experience = model.base_experience
+            entity.height = model.height
+            entity.is_default = model.is_default
+            entity.location_area_encounters = model.location_area_encounters
+            entity.name = model.name
+            entity.order = model.order
+            entity.weight = model.weight
+            entity.forms = entityList(model.forms, NamedResourceMapper)
+            entity.game_indices = entityList(model.game_indices, GameIndexMapper)
+            entity.stats = entityList(model.stats, StatMapper)
+            entity.species = NamedResourceMapper.toEntity(model.species)
+            entity.sprite = SpriteMapper.toEntity(model.sprites)
+            return entity
+        }
+
+    }
+
+    object SpriteMapper : Mapper<Sprite, SpriteEntity> {
+        override fun toModel(entity: SpriteEntity): Sprite {
+            return Sprite(entity.back_female,
+                    entity.back_shiny_female,
+                    entity.back_default,
+                    entity.front_female,
+                    entity.front_shiny_female,
+                    entity.back_shiny,
+                    entity.front_default,
+                    entity.front_shiny)
+        }
+
+        override fun toEntity(model: Sprite): SpriteEntity {
+            val entity = SpriteEntity()
+            entity.back_default = model.back_default
+            entity.back_female = model.back_female
+            entity.back_shiny = model.back_shiny
+            entity.back_shiny_female = model.back_shiny_female
+            entity.front_default = model.front_default
+            entity.front_female = model.front_female
+            entity.front_shiny = model.front_shiny
+            entity.front_shiny_female = model.front_shiny_female
+            return entity
+        }
+
+    }
+
+    object StatMapper : Mapper<Stat, StatEntity> {
+        override fun toModel(entity: StatEntity): Stat {
+            return Stat(entity.effort!!,
+                    entity.base_stat!!,
+                    NamedResourceMapper.toModel(entity.stat!!))
+        }
+
+        override fun toEntity(model: Stat): StatEntity {
+            val entity = StatEntity()
+            entity.effort = model.effort
+            entity.base_stat = model.base_stat
+            entity.stat = NamedResourceMapper.toEntity(model.stat)
+            return entity
+        }
+
+    }
+
+    object GameIndexMapper : Mapper<GameIndex, GameIndexEntity> {
+        override fun toModel(entity: GameIndexEntity): GameIndex {
+            return GameIndex(entity.game_index!!,
+                    NamedResourceMapper.toModel(entity.version!!))
+        }
+
+        override fun toEntity(model: GameIndex): GameIndexEntity {
+            val entity = GameIndexEntity()
+            entity.game_index = model.game_index
+            entity.version = NamedResourceMapper.toEntity(model.version)
+            return entity
+        }
+
+    }
+
     object PokeDexMapper : Mapper<Pokedex, PokedexEntity> {
         override fun toEntity(model: Pokedex): PokedexEntity {
             val entity = PokedexEntity()
 
-            val names = model.names.entityList(NameMapper)
-            val descriptions = model.descriptions.entityList(DescriptionMapper)
-            val pokemonEntries = model.pokemon_entries.entityList(PokemonEntryMapper)
-            val versionGroups = model.version_groups.entityList(VersionGroupMapper)
+            val names = entityList(model.names, NameMapper)
+            val descriptions = entityList(model.descriptions, DescriptionMapper)
+            val pokemonEntries = entityList(model.pokemon_entries, PokemonEntryMapper)
+            val versionGroups = entityList(model.version_groups, NamedResourceMapper)
 
             entity.id = model.id
             entity.isMainSeries = model.is_main_series
@@ -30,17 +131,17 @@ interface Mapper<Model, Entity> {
             entity.nameEntities = names
             entity.pokemonEntryEntities = pokemonEntries
             entity.versionGroups = versionGroups
-            entity.region = if (model.region == null) null else RegionMapper.toEntity(model.region)
+            entity.region = if (model.region == null) null else NamedResourceMapper.toEntity(model.region)
 
             return entity
         }
 
         override fun toModel(entity: PokedexEntity): Pokedex {
-            val names = entity.nameEntities!!.modelList(NameMapper)
-            val descriptions = entity.descriptions!!.modelList(DescriptionMapper)
-            val pokemonEntries = entity.pokemonEntryEntities!!.modelList(PokemonEntryMapper)
-            val versionGroups = entity.versionGroups!!.modelList(VersionGroupMapper)
-            val region = if (entity.region == null) null else RegionMapper.toModel(entity.region!!)
+            val names = modelList(entity.nameEntities, NameMapper)
+            val descriptions = modelList(entity.descriptions, DescriptionMapper)
+            val pokemonEntries = modelList(entity.pokemonEntryEntities, PokemonEntryMapper)
+            val versionGroups = modelList(entity.versionGroups, NamedResourceMapper)
+            val region = if (entity.region == null) null else NamedResourceMapper.toModel(entity.region!!)
 
             return Pokedex(
                     entity.id!!,
@@ -54,74 +155,31 @@ interface Mapper<Model, Entity> {
         }
     }
 
-    object RegionMapper : Mapper<Region, RegionEntity> {
-        override fun toEntity(model: Region): RegionEntity {
-            val entity = RegionEntity()
-            if (model == null) {
-                return entity
-            }
-
-            entity.name = model.name
-            entity.url = model.url
-            return entity
-        }
-
-        override fun toModel(entity: RegionEntity): Region {
-            return Region(entity.name!!, entity.url!!)
-        }
-    }
-
     object PokemonEntryMapper : Mapper<PokemonEntry, PokemonEntryEntity> {
         override fun toEntity(model: PokemonEntry): PokemonEntryEntity {
             val entity = PokemonEntryEntity()
             entity.entryNumber = model.entry_number
-            entity.pokemonSpeciesEntity = PokemonSpeciesMapper.toEntity(model.pokemon_species)
+            entity.pokemonSpeciesEntity = NamedResourceMapper.toEntity(model.pokemon_species)
             return entity
         }
 
         override fun toModel(entity: PokemonEntryEntity): PokemonEntry {
             return PokemonEntry(entity.entryNumber!!,
-                    PokemonSpeciesMapper.toModel(entity.pokemonSpeciesEntity!!))
-        }
-    }
-
-    object VersionGroupMapper : Mapper<VersionGroup, VersionGroupEntity> {
-        override fun toEntity(model: VersionGroup): VersionGroupEntity {
-            val entity = VersionGroupEntity()
-            entity.name = model.name
-            entity.url = model.url
-            return entity
-        }
-
-        override fun toModel(entity: VersionGroupEntity): VersionGroup {
-            return VersionGroup(entity.name!!, entity.url!!)
-        }
-    }
-
-    object PokemonSpeciesMapper : Mapper<PokemonSpecies, PokemonSpeciesEntity> {
-        override fun toEntity(model: PokemonSpecies): PokemonSpeciesEntity {
-            val entity = PokemonSpeciesEntity()
-            entity.name = model.name
-            entity.url = model.url
-            return entity
-        }
-
-        override fun toModel(entity: PokemonSpeciesEntity): PokemonSpecies {
-            return PokemonSpecies(entity.name!!, entity.url!!)
+                    NamedResourceMapper.toModel(entity.pokemonSpeciesEntity!!))
         }
     }
 
     object DescriptionMapper : Mapper<Description, DescriptionEntity> {
         override fun toEntity(model: Description): DescriptionEntity {
             val entity = DescriptionEntity()
-            entity.languageEntity = LanguageMapper.toEntity(model.language)
+            entity.languageEntity = NamedResourceMapper.toEntity(model.language)
             entity.description = model.description
             return entity
         }
 
         override fun toModel(entity: DescriptionEntity): Description {
             return Description(entity.description!!,
-                    LanguageMapper.toModel(entity.languageEntity!!))
+                    NamedResourceMapper.toModel(entity.languageEntity!!))
         }
     }
 
@@ -129,43 +187,44 @@ interface Mapper<Model, Entity> {
         override fun toEntity(model: Name): NameEntity {
             val entity = NameEntity()
             entity.name = model.name
-            entity.languageEntity = LanguageMapper.toEntity(model.language)
+            entity.languageEntity = NamedResourceMapper.toEntity(model.language)
             return entity
         }
 
         override fun toModel(entity: NameEntity): Name {
             return Name(entity.name!!,
-                    LanguageMapper.toModel(entity.languageEntity!!))
+                    NamedResourceMapper.toModel(entity.languageEntity!!))
         }
     }
 
-    object LanguageMapper : Mapper<Language, LanguageEntity> {
-        override fun toEntity(model: Language): LanguageEntity {
-            val entity = LanguageEntity()
+    object NamedResourceMapper : Mapper<NamedResource, NamedResourceEntity> {
+        override fun toModel(entity: NamedResourceEntity): NamedResource {
+            return NamedResource(entity.name!!, entity.url!!)
+        }
+
+        override fun toEntity(model: NamedResource): NamedResourceEntity {
+            val entity = NamedResourceEntity()
             entity.name = model.name
             entity.url = model.url
             return entity
         }
 
-        override fun toModel(entity: LanguageEntity): Language {
-            return Language(entity.name!!, entity.url!!)
-        }
     }
 
-    fun <E, T> List<T>.modelList(mapper: Mapper<E, T>) : List<E> {
-        if (isEmpty()) {
+    fun <E, T> modelList(list: List<T>?, mapper: Mapper<E, T>) : List<E> {
+        if (list == null) {
             return ArrayList()
         } else {
-            return map { mapper.toModel(it) }
+            return list.map { mapper.toModel(it) }
         }
     }
 
-    fun <E, T : RealmModel?> List<E>.entityList(mapper: Mapper<E, T>) : RealmList<T> {
-        if (isEmpty()) {
+    fun <E, T : RealmModel?> entityList(list: List<E>?, mapper: Mapper<E, T>) : RealmList<T> {
+        if (list == null) {
             return RealmList()
         } else {
             val realmList = RealmList<T>()
-            val entities = map { mapper.toEntity(it) }
+            val entities = list.map { mapper.toEntity(it) }
             realmList.addAll(entities)
             return realmList
         }

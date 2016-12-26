@@ -3,9 +3,9 @@ package mb.pokequiz.data.entity
 import io.realm.RealmObject
 
 /**
- * Created by mbpeele on 12/11/16.
+ * Created by mbpeele on 12/25/16.
  */
-open class LanguageEntity : RealmObject() {
+open class NamedResourceEntity : RealmObject() {
 
     var name: String? = null
     var url: String? = null

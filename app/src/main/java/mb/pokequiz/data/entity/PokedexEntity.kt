@@ -16,8 +16,8 @@ open class PokedexEntity : RealmObject() {
     var descriptions: RealmList<DescriptionEntity>? = null
     var nameEntities: RealmList<NameEntity>? = null
     var pokemonEntryEntities: RealmList<PokemonEntryEntity>? = null
-    var region: RegionEntity? = null
-    var versionGroups: RealmList<VersionGroupEntity>? = null
+    var region: NamedResourceEntity? = null
+    var versionGroups: RealmList<NamedResourceEntity>? = null
 
     override fun toString(): String {
         return "PokedexEntity(name=$name, isMainSeries=$isMainSeries, descriptions=$descriptions, nameEntities=$nameEntities, pokemonEntryEntities=$pokemonEntryEntities, region=$region, versionGroups=$versionGroups)"

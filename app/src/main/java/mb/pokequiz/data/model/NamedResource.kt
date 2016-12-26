@@ -1,6 +1,9 @@
 package mb.pokequiz.data.model
 
-data class Language(
+/**
+ * Created by mbpeele on 12/25/16.
+ */
+data class NamedResource(
         val name: String,
         val url: String) {
 }

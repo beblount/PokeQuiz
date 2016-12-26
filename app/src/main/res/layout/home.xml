@@ -5,6 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:ignore="missingPrefix" >
 
+    <data>
+        <variable
+            name="pokemon"
+            type="mb.pokequiz.data.model.Pokemon" />
+    </data>
+
     <FrameLayout
         android:id="@+id/activity_home"
         android:layout_width="match_parent"
@@ -16,12 +22,20 @@
         tools:context="mb.pokequiz.home.HomeActivity" >
 
         <TextView
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Who's \n That \n Pokemon"
+            android:text="Who's \n that \n pokemon"
             style="@style/PokemonTitle"
             app:font="@{@string/pokemon_solid}"/>
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:imageUrl="@{pokemon.sprites.getRandom}" />
 
     </FrameLayout>
 

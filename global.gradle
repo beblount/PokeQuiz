@@ -27,6 +27,7 @@ ext {
     javaxVersion = '10.0-b28'
     okHttpVersion = '3.4.1'
     rxJavaInteropVersion = '0.8.1'
+    glideVersion = '3.7.0'
 
     appDependencies = [
             dagger: "com.google.dagger:dagger:${daggerVersion}",
@@ -45,7 +46,8 @@ ext {
             okHttp: "com.squareup.okhttp3:okhttp:${okHttpVersion}",
             loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
             rxJavaInterop: "com.github.akarnokd:rxjava2-interop:${rxJavaInteropVersion}",
-            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
+            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
+            glide: "com.github.bumptech.glide:glide:${glideVersion}"
     ]
 
     kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"

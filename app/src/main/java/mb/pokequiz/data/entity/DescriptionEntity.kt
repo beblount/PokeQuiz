@@ -1,6 +1,5 @@
 package mb.pokequiz.data.entity
 
-import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
 
 /**
@@ -9,5 +8,5 @@ import io.realm.RealmObject
 open class DescriptionEntity : RealmObject() {
 
     var description: String? = null
-    var languageEntity: LanguageEntity? = null
+    var languageEntity: NamedResourceEntity? = null
 }

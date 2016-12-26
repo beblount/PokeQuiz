@@ -8,5 +8,5 @@ import io.realm.RealmObject
 open class PokemonEntryEntity : RealmObject() {
 
     var entryNumber: Int ?= null
-    var pokemonSpeciesEntity: PokemonSpeciesEntity?= null
+    var pokemonSpeciesEntity: NamedResourceEntity?= null
 }
