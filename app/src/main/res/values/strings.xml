@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Poke Quiz</string>
-    <string name="action_settings">Settings</string>
+    <string name="long_app_name">Who\'s \n That \n Pokemon?</string>
     <string name="base_pokeapi_url">http://pokeapi.co/api/v1/</string>
 </resources>

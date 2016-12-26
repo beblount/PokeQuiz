@@ -3,6 +3,7 @@ package mb.pokequiz.dagger.activity
 import dagger.Module
 import dagger.Provides
 import mb.pokequiz.dagger.ActivityScope
+import mb.pokequiz.data.mappers.MapperFactory
 import mb.pokequiz.data.repository.PokeApi
 import mb.pokequiz.data.repository.PokeRepository
 import mb.pokequiz.data.repository.RealmRepository
@@ -17,8 +18,8 @@ class ActivityModule {
 
     @Provides
     @ActivityScope
-    fun repository(api: PokeApi) : PokeRepository {
-        val localRepository = RealmRepository()
+    fun repository(api: PokeApi, factory: MapperFactory) : PokeRepository {
+        val localRepository = RealmRepository(factory)
         return Repository(localRepository, api)
     }
 }

@@ -1,8 +1,11 @@
 package mb.pokequiz.dagger.app
 
 import dagger.Module
+import dagger.Provides
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import mb.pokequiz.data.mappers.MapperFactory
+import mb.pokequiz.data.mappers.PokeMapperFactory
 import javax.inject.Singleton
 
 /**
@@ -17,6 +20,12 @@ class PersistenceModule() {
                 .deleteRealmIfMigrationNeeded()
                 .build()
         Realm.setDefaultConfiguration(config)
+    }
+
+    @Provides
+    @Singleton
+    fun factory() : MapperFactory {
+        return PokeMapperFactory()
     }
 
 }

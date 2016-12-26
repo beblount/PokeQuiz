@@ -7,7 +7,7 @@ import mb.pokequiz.data.model.Pokemon
 /**
  * Created by mbpeele on 12/24/16.
  */
-interface RealmApi {
+interface Database {
 
     fun save(pokedex: Pokedex)
 

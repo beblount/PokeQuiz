@@ -8,23 +8,27 @@ import mb.pokequiz.data.entity.PokedexEntity
 import mb.pokequiz.data.entity.PokedexEntityFields
 import mb.pokequiz.data.entity.PokemonEntity
 import mb.pokequiz.data.entity.PokemonEntityFields
-import mb.pokequiz.data.model.Mapper
+import mb.pokequiz.data.mappers.MapperFactory
 import mb.pokequiz.data.model.Pokedex
 import mb.pokequiz.data.model.Pokemon
 
 /**
  * Created by mbpeele on 12/24/16.
  */
-class RealmRepository : RealmApi {
+class RealmRepository(val factory: MapperFactory) : Database {
 
     val tag = RealmRepository::class.simpleName
 
     override fun save(pokemon: Pokemon) {
-        saveInternal(Mapper.PokemonMapper.toEntity(pokemon))
+        val mapper = factory.create<Pokemon, PokemonEntity>(Pokemon::class)
+        val entity = mapper.toEntity(pokemon, factory)
+        saveInternal(entity)
     }
 
     override fun save(pokedex: Pokedex) {
-        saveInternal(Mapper.PokeDexMapper.toEntity(pokedex))
+        val mapper = factory.create<Pokedex, PokedexEntity>(Pokemon::class)
+        val entity = mapper.toEntity(pokedex, factory)
+        saveInternal(entity)
     }
 
     override fun getPokemon(id: Int): Observable<Pokemon> {
@@ -37,7 +41,8 @@ class RealmRepository : RealmApi {
                 .first()
                 .filter { it.isValid }
                 .map { t ->
-                    Mapper.PokemonMapper.toModel(t)
+                    val mapper = factory.create<Pokemon, PokemonEntity>(Pokemon::class)
+                    mapper.toModel(t, factory)
                 }
                 .doOnCompleted { realm.close() }
 
@@ -54,7 +59,8 @@ class RealmRepository : RealmApi {
                 .first()
                 .filter { it.isValid }
                 .map { t ->
-                    Mapper.PokeDexMapper.toModel(t)
+                    val mapper = factory.create<Pokedex, PokedexEntity>(Pokemon::class)
+                    mapper.toModel(t, factory)
                 }
                 .doOnCompleted { realm.close() }
 

@@ -64,6 +64,11 @@ dependencies {
     compile dependencies.loggingInterceptor
 
     compile dependencies.fieldNamesHelper
+
+    testCompile testDependencies.junit
+    testCompile testDependencies.assertj
+    testCompile testDependencies.mockito
+    testCompile testDependencies.robolectric
 }
 
 task start(type: Exec, dependsOn: 'installDebug') {
