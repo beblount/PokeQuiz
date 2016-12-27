@@ -15,6 +15,7 @@ android {
         versionCode config.getAt("versionCode")
         versionName config.getAt("versionName")
         applicationId config.getAt("applicationId") + "app"
+        multiDexEnabled true
     }
 
     lintOptions {

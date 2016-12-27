@@ -1,4 +1,4 @@
-package mb.pokequiz.dagger.app
+package mb.pokequiz.application
 
 import dagger.Module
 import dagger.Provides
@@ -6,6 +6,8 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import mb.pokequiz.data.mappers.MapperFactory
 import mb.pokequiz.data.mappers.PokeMapperFactory
+import mb.pokequiz.data.repository.Database
+import mb.pokequiz.data.repository.RealmRepository
 import javax.inject.Singleton
 
 /**
@@ -26,6 +28,12 @@ class PersistenceModule() {
     @Singleton
     fun factory() : MapperFactory {
         return PokeMapperFactory()
+    }
+
+    @Provides
+    @Singleton
+    fun repository(factory: MapperFactory) : Database {
+        return RealmRepository(factory)
     }
 
 }

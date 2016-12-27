@@ -1,4 +1,4 @@
-package mb.pokequiz.ui
+package mb.pokequiz.base.ui
 
 import android.databinding.BindingAdapter
 import android.widget.ImageView

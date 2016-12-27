@@ -1,24 +1,22 @@
-package mb.pokequiz
+package mb.pokequiz.application
 
 import android.app.Application
 import io.realm.Realm
-import mb.pokequiz.dagger.app.*
 
 /**
  * Created by mbpeele on 2/1/16.
  */
 class PokeApplication : Application() {
 
-    companion object {
-        @JvmStatic lateinit var component: AppComponent
-    }
+    lateinit var appComponent: AppComponent
+        private set
 
     override fun onCreate() {
         super.onCreate()
 
         Realm.init(this)
 
-        component = DaggerAppComponent.builder()
+        appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
                 .persistenceModule(PersistenceModule())
                 .webModule(WebModule())

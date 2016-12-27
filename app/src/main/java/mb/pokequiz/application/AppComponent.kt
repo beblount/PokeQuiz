@@ -1,8 +1,7 @@
-package mb.pokequiz.dagger.app
+package mb.pokequiz.application
 
 import dagger.Component
-import mb.pokequiz.data.mappers.MapperFactory
-import mb.pokequiz.data.repository.PokeApi
+import mb.pokequiz.data.repository.PokeRepository
 import javax.inject.Singleton
 
 /**
@@ -12,7 +11,5 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(AppModule::class))
 interface AppComponent {
 
-    fun api() : PokeApi
-
-    fun factory() : MapperFactory
+    fun repository() : PokeRepository
 }

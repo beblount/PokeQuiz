@@ -1,8 +1,8 @@
-package mb.pokequiz.dagger.activity
+package mb.pokequiz.activity
 
 import dagger.Component
-import mb.pokequiz.dagger.ActivityScope
-import mb.pokequiz.dagger.app.AppComponent
+import mb.pokequiz.activity.ActivityScope
+import mb.pokequiz.application.AppComponent
 import mb.pokequiz.data.repository.PokeRepository
 
 /**
@@ -11,7 +11,5 @@ import mb.pokequiz.data.repository.PokeRepository
 @ActivityScope
 @Component(dependencies = arrayOf(AppComponent::class), modules = arrayOf(ActivityModule::class))
 interface ActivityComponent {
-
-    fun repository() : PokeRepository
 
 }

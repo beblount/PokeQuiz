@@ -1,4 +1,4 @@
-package mb.pokequiz.dagger.app
+package mb.pokequiz.application
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
