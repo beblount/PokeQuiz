@@ -26,18 +26,20 @@ class HomePresenter(val repository: PokeRepository) : BaseMvpPresenter<HomeView>
 
         randomPokemonDisposable = Observable.intervalRange(1, 721, 0, 10, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
                 .flatMap {
-                    repository.getPokemon(random.nextInt(721)).toObservable()
+                    repository.getPokemon(random.nextInt(721))
+                            .toObservable()
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnSubscribe { if (attached()) get().showLoading() }
+                            .doOnComplete { if (attached()) get().hideLoading() }
                 }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        {
-                            if (attached()) {
-                                get().onPokemonReceive(it)
-                            }
-                        }, {
-                            throw UnsupportedOperationException("not implemented")
-                        }, {
-                             throw UnsupportedOperationException("not implemented")
+                .subscribe({
+                    if (attached()) {
+                        get().onPokemonReceive(it)
+                    }}, {
+                    if (attached()) {
+                        get().showError()
+                    }
                 })
     }
 }
