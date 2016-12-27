@@ -92,8 +92,6 @@ class PokeDexMapperTest : MapperTest<Pokedex, PokedexEntity>() {
         }
         entity.version_groups = resources
 
-
-
         return entity
     }
 }

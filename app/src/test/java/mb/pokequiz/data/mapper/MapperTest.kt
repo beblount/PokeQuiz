@@ -9,7 +9,7 @@ import mb.pokequiz.data.mappers.PokeMapperFactory
 import mb.pokequiz.data.model.NamedResource
 import org.junit.Before
 import org.junit.Test
-import java.util.*
+import org.mockito.Matchers.*
 
 /**
  * Created by mbpeele on 12/26/16.
@@ -18,7 +18,6 @@ abstract class MapperTest<Model, Entity> : ApplicationTestCase() {
 
     lateinit var factory : MapperFactory
     lateinit var mapper : Mapper<Model, Entity>
-    val random : Random = Random()
 
     abstract fun createMapper() : Mapper<Model, Entity>
 
@@ -99,15 +98,15 @@ abstract class MapperTest<Model, Entity> : ApplicationTestCase() {
     }
 
     fun randomInt() : Int {
-        return random.nextInt(100)
+        return anyInt()
     }
 
     fun randomString() : String {
-        return UUID.randomUUID().toString()
+        return anyString()
     }
 
     fun randomBool() : Boolean {
-        return random.nextBoolean()
+        return anyBoolean()
     }
 
     fun createNamedResource() : NamedResource {
