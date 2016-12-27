@@ -10,13 +10,14 @@ open class PokeDexMapper : Mapper<Pokedex, PokedexEntity> {
     override fun toEntity(model: Pokedex, factory: MapperFactory): PokedexEntity {
         val entity = PokedexEntity()
 
-        val nameMapper = factory.create<Name, NameEntity>(NamedResource::class)
-        val names = entityList(model.names, nameMapper, factory)
-        val descriptionMapper = factory.create<Description, DescriptionEntity>(NamedResource::class)
-        val descriptions = entityList(model.descriptions, descriptionMapper, factory)
-        val pokemonEntryMapper = factory.create<PokemonEntry, PokemonEntryEntity>(NamedResource::class)
-        val pokemonEntries = entityList(model.pokemon_entries, pokemonEntryMapper, factory)
+        val nameMapper = factory.create<Name, NameEntity>(Name::class)
+        val descriptionMapper = factory.create<Description, DescriptionEntity>(Description::class)
+        val pokemonEntryMapper = factory.create<PokemonEntry, PokemonEntryEntity>(PokemonEntry::class)
         val namedResourceMapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
+
+        val names = entityList(model.names, nameMapper, factory)
+        val descriptions = entityList(model.descriptions, descriptionMapper, factory)
+        val pokemonEntries = entityList(model.pokemon_entries, pokemonEntryMapper, factory)
         val versionGroups = entityList(model.version_groups, namedResourceMapper, factory)
 
         entity.id = model.id
@@ -32,9 +33,9 @@ open class PokeDexMapper : Mapper<Pokedex, PokedexEntity> {
     }
 
     override fun toModel(entity: PokedexEntity, factory: MapperFactory): Pokedex {
-        val nameMapper = factory.create<Name, NameEntity>(NamedResource::class)
-        val descriptionMapper = factory.create<Description, DescriptionEntity>(NamedResource::class)
-        val pokemonEntryMapper = factory.create<PokemonEntry, PokemonEntryEntity>(NamedResource::class)
+        val nameMapper = factory.create<Name, NameEntity>(Name::class)
+        val descriptionMapper = factory.create<Description, DescriptionEntity>(Description::class)
+        val pokemonEntryMapper = factory.create<PokemonEntry, PokemonEntryEntity>(PokemonEntry::class)
         val namedResourceMapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
 
         val names = modelList(entity.names, nameMapper, factory)

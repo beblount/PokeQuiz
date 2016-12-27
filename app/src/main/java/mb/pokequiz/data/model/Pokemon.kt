@@ -13,8 +13,8 @@ data class Pokemon(
         val weight: Int,
         val location_area_encounters: String,
         val sprites: Sprite,
+        val species: NamedResource,
         val forms: List<NamedResource>,
         val game_indices: List<GameIndex>,
-        val species: NamedResource,
         val stats: List<Stat>) {
 }

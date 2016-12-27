@@ -23,7 +23,7 @@ interface Mapper<Model, Entity> {
 
     fun <E, T : RealmModel?> entityList(list: List<E>?, mapper: Mapper<E, T>, factory: MapperFactory): RealmList<T> {
         if (list == null) {
-            return RealmList<T>()
+            return RealmList()
         } else {
             val realmList = RealmList<T>()
             val entities = list.map { mapper.toEntity(it, factory) }

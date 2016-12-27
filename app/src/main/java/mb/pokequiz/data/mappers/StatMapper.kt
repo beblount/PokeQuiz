@@ -12,8 +12,8 @@ open class StatMapper : Mapper<Stat, StatEntity> {
     override fun toModel(entity: StatEntity, factory: MapperFactory): Stat {
         val namedResourceMapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
 
-        return Stat(entity.effort!!,
-                entity.base_stat!!,
+        return Stat(entity.base_stat!!,
+                entity.effort!!,
                 namedResourceMapper.toModel(entity.stat!!, factory))
     }
 

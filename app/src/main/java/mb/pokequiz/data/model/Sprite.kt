@@ -13,6 +13,7 @@ data class Sprite(
         val front_default: String?,
         val front_shiny: String?) {
 
+    @Deprecated("Please don't use this in production my god")
     fun getRandom() : String {
         if (back_female == null) {
             if (back_shiny_female == null) {

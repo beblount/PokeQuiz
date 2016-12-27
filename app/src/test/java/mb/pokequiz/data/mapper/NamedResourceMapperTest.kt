@@ -10,22 +10,16 @@ import mb.pokequiz.data.model.NamedResource
  */
 class NamedResourceMapperTest : MapperTest<NamedResource, NamedResourceEntity>() {
 
-    val fakeName : String = "SOMETHING ANYTHING BRO"
-    val fakeUrl : String = "http://mileswinsatlife.com"
-
     override fun createMapper(): Mapper<NamedResource, NamedResourceEntity> {
        return NamedResourceMapper()
     }
 
     override fun createModel(): NamedResource {
-        return NamedResource(fakeName, fakeUrl)
+        return createNamedResource()
     }
 
     override fun createEntity(): NamedResourceEntity {
-        val entity = NamedResourceEntity()
-        entity.name = fakeName
-        entity.url = fakeUrl
-        return entity
+        return createNamedResourceEntity()
     }
 
 }

@@ -27,9 +27,9 @@ open class PokemonMapper : Mapper<Pokemon, PokemonEntity> {
                 entity.weight!!,
                 entity.location_area_encounters!!,
                 sprite,
+                species,
                 forms,
                 indices,
-                species,
                 stats)
     }
 
