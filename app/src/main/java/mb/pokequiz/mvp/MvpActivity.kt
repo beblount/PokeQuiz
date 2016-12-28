@@ -1,11 +1,11 @@
-package mb.pokequiz.base.ui
+package mb.pokequiz.mvp
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import mb.pokequiz.application.AppComponent
 import mb.pokequiz.application.PokeApplication
-import mb.pokequiz.base.mvp.MvpPresenter
-import mb.pokequiz.base.mvp.MvpView
+import mb.pokequiz.mvp.MvpPresenter
+import mb.pokequiz.mvp.MvpView
 
 abstract class MvpActivity<View : MvpView, Presenter : MvpPresenter<View>> : AppCompatActivity() {
 

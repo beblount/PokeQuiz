@@ -10,6 +10,7 @@
         <item name="icon">@color/icons</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="android:toolbarStyle">@style/Toolbar</item>
     </style>
 
     <style name="FullScreen" parent="AppTheme" >
@@ -19,6 +20,11 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Toolbar" parent="ThemeOverlay.AppCompat.ActionBar" >
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
 
     <style name="PokemonTitle" >
         <item name="android:textSize">50sp</item>
@@ -43,6 +49,12 @@
 
     <style name="SmallText" parent="TextAppearance.AppCompat.Small" >
 
+    </style>
+
+    <style name="InlineActionButton" parent="@android:style/Widget.Material.Button" >
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:drawablePadding">@dimen/small_spacing</item>
+        <item name="android:background">?android:selectableItemBackgroundBorderless</item>
     </style>
 
 </resources>

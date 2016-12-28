@@ -36,7 +36,8 @@ object FontUtils {
         return typeface
     }
 
-    private class IllegalFontException internal constructor(fontName: String) :
+    private class IllegalFontException
+        internal constructor(fontName: String) :
             IllegalArgumentException("Supplied font name $fontName must match file name in assets/fonts/ directory")
 
 }

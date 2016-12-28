@@ -1,4 +1,4 @@
-package mb.pokequiz.base.mvp
+package mb.pokequiz.mvp
 
 /**
  * Created by mbpeele on 12/27/16.

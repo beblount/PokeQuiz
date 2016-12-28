@@ -14,7 +14,7 @@ android {
         targetSdkVersion config.getAt("targetSdkVersion")
         versionCode config.getAt("versionCode")
         versionName config.getAt("versionName")
-        applicationId config.getAt("applicationId") + "app"
+        applicationId config.getAt("applicationId")
         multiDexEnabled true
     }
 
@@ -39,9 +39,10 @@ dependencies {
     def dependencies = config.appDependencies
 
     compile config.kotlin
-    compile dependencies.kotlinReflect
+    compile config.kotlinReflect
 
     compile dependencies.glide
+    compile dependencies.glideOkHttp3
 
     kapt dependencies.databinding
 
@@ -49,10 +50,9 @@ dependencies {
     compile dependencies.dagger
     provided dependencies.javax
 
-    compile dependencies.conductor
-
     compile dependencies.design
     compile dependencies.appCompat
+    compile dependencies.palette
 
     compile dependencies.rxJava
     compile dependencies.rxAndroid

@@ -1,4 +1,4 @@
-package mb.pokequiz.base.mvp
+package mb.pokequiz.mvp
 
 import java.lang.ref.WeakReference
 
