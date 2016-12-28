@@ -1,21 +1,19 @@
-package mb.pokequiz.data.repository
+package mb.pokequiz.data.repository.poke
 
 import hu.akarnokd.rxjava.interop.RxJavaInterop
 import io.reactivex.Observable
 import io.realm.Realm
 import io.realm.RealmObject
-import mb.pokequiz.data.entity.PokedexEntity
-import mb.pokequiz.data.entity.PokedexEntityFields
-import mb.pokequiz.data.entity.PokemonEntity
-import mb.pokequiz.data.entity.PokemonEntityFields
+import mb.pokequiz.data.entity.*
 import mb.pokequiz.data.mappers.MapperFactory
 import mb.pokequiz.data.model.Pokedex
 import mb.pokequiz.data.model.Pokemon
+import mb.pokequiz.data.model.Profile
 
 /**
  * Created by mbpeele on 12/24/16.
  */
-class RealmRepository(val factory: MapperFactory) : Database {
+class RealmRepository(val factory: MapperFactory) : PokeDatabase {
 
     val tag = RealmRepository::class.simpleName
 
@@ -26,9 +24,20 @@ class RealmRepository(val factory: MapperFactory) : Database {
     }
 
     override fun save(pokedex: Pokedex) {
-        val mapper = factory.create<Pokedex, PokedexEntity>(Pokemon::class)
+        val mapper = factory.create<Pokedex, PokedexEntity>(Pokedex::class)
         val entity = mapper.toEntity(pokedex, factory)
         saveInternal(entity)
+    }
+
+    override fun getProfile(): Profile {
+        val realm = Realm.getDefaultInstance()
+        val entity = realm.where(ProfileEntity::class.java).findFirst()
+        if (entity == null) {
+            return Profile("", "")
+        } else {
+            val mapper = factory.create<Profile, ProfileEntity>(Profile::class)
+            return mapper.toModel(entity, factory)
+        }
     }
 
     override fun getPokemon(id: Int): Observable<Pokemon> {
@@ -59,7 +68,7 @@ class RealmRepository(val factory: MapperFactory) : Database {
                 .first()
                 .filter { it.isValid }
                 .map { t ->
-                    val mapper = factory.create<Pokedex, PokedexEntity>(Pokemon::class)
+                    val mapper = factory.create<Pokedex, PokedexEntity>(Pokedex::class)
                     mapper.toModel(t, factory)
                 }
                 .doOnCompleted { realm.close() }
@@ -69,9 +78,9 @@ class RealmRepository(val factory: MapperFactory) : Database {
 
     private fun saveInternal(realmObject: RealmObject) {
         Realm.getDefaultInstance().use {
-            it.executeTransaction {
+            it.executeTransactionAsync({
                 it.copyToRealmOrUpdate(realmObject)
-            }
+            })
         }
     }
 

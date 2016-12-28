@@ -1,7 +1,7 @@
 package mb.pokequiz.application
 
 import dagger.Component
-import mb.pokequiz.data.repository.PokeRepository
+import mb.pokequiz.data.repository.poke.PokeRepository
 import javax.inject.Singleton
 
 /**

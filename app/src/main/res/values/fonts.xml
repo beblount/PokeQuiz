@@ -2,4 +2,5 @@
 <resources>
     <string name="pokemon_hollow">pokemon_hollow.ttf</string>
     <string name="pokemon_solid">pokemon_solid.ttf</string>
+    <string name="pokemon_bit">pokemon_bit.ttf</string>
 </resources>

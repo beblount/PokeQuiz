@@ -7,7 +7,7 @@ import java.lang.ref.WeakReference
  */
 open class BaseMvpPresenter<View : MvpView> : MvpPresenter<View> {
 
-    var reference : WeakReference<View>? = null
+    private var reference : WeakReference<View>? = null
 
     override fun attach(view: View) {
         if (reference == null) {
@@ -22,11 +22,11 @@ open class BaseMvpPresenter<View : MvpView> : MvpPresenter<View> {
         }
     }
 
-    fun get() : View {
+    protected fun get() : View {
         return reference!!.get()
     }
 
-    fun attached() : Boolean {
+    protected fun attached() : Boolean {
         if (reference == null) {
             return false
         } else {

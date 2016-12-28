@@ -1,4 +1,4 @@
-package mb.pokequiz.data.repository
+package mb.pokequiz.data.repository.poke
 
 import io.reactivex.Observable
 import mb.pokequiz.data.model.Pokedex

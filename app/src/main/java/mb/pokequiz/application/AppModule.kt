@@ -2,11 +2,10 @@ package mb.pokequiz.application
 
 import dagger.Module
 import dagger.Provides
-import mb.pokequiz.application.PokeApplication
-import mb.pokequiz.data.repository.Database
-import mb.pokequiz.data.repository.PokeApi
-import mb.pokequiz.data.repository.PokeRepository
-import mb.pokequiz.data.repository.Repository
+import mb.pokequiz.data.repository.poke.PokeApi
+import mb.pokequiz.data.repository.poke.PokeDatabase
+import mb.pokequiz.data.repository.poke.PokeRepository
+import mb.pokequiz.data.repository.poke.Repository
 import javax.inject.Singleton
 
 /**
@@ -24,7 +23,7 @@ class AppModule(var application: PokeApplication) {
 
     @Provides
     @Singleton
-    fun repository(database: Database, pokeApi: PokeApi) : PokeRepository {
-        return Repository(database, pokeApi)
+    fun repository(pokeDatabase: PokeDatabase, pokeApi: PokeApi) : PokeRepository {
+        return Repository(pokeDatabase, pokeApi)
     }
 }

@@ -1,19 +1,17 @@
 package mb.pokequiz.home
 
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import mb.pokequiz.base.mvp.BaseMvpPresenter
-import mb.pokequiz.data.repository.PokeRepository
-import java.util.*
-import java.util.concurrent.TimeUnit
+import mb.pokequiz.data.model.Profile
+import mb.pokequiz.data.repository.poke.PokeRepository
 
 /**
  * Created by mbpeele on 12/27/16.
  */
-class HomePresenter(val repository: PokeRepository) : BaseMvpPresenter<HomeView>() {
+class HomePresenter(private val repository: PokeRepository) : BaseMvpPresenter<HomeView>() {
 
-    var randomPokemonDisposable: Disposable? = null
+    private var randomPokemonDisposable: Disposable? = null
 
     override fun detach() {
         super.detach()
@@ -21,25 +19,24 @@ class HomePresenter(val repository: PokeRepository) : BaseMvpPresenter<HomeView>
         randomPokemonDisposable?.dispose()
     }
 
-    fun getRandomPokemon() {
-        val random = Random()
-
-        randomPokemonDisposable = Observable.intervalRange(1, 721, 0, 10, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
-                .flatMap {
-                    repository.getPokemon(random.nextInt(721))
-                            .toObservable()
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .doOnSubscribe { if (attached()) get().showLoading() }
-                            .doOnComplete { if (attached()) get().hideLoading() }
-                }
+    fun getPokemon(int: Int) {
+        repository.getPokemon(int).toObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { if (attached()) get().showLoading() }
+                .doOnComplete { if (attached()) get().hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (attached()) {
                         get().onPokemonReceive(it)
                     }}, {
                     if (attached()) {
+                        get().hideLoading()
                         get().showError()
                     }
                 })
+    }
+
+    fun getProfile() : Profile {
+        return repository.getProfile()
     }
 }

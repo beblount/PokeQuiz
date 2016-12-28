@@ -1,7 +1,7 @@
 package mb.pokequiz.home
 
 import dagger.Component
-import mb.pokequiz.activity.ActivityScope
+import mb.pokequiz.application.ActivityScope
 import mb.pokequiz.application.AppComponent
 
 /**

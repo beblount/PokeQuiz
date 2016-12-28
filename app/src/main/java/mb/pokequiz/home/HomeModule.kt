@@ -2,8 +2,8 @@ package mb.pokequiz.home
 
 import dagger.Module
 import dagger.Provides
-import mb.pokequiz.activity.ActivityScope
-import mb.pokequiz.data.repository.PokeRepository
+import mb.pokequiz.application.ActivityScope
+import mb.pokequiz.data.repository.poke.PokeRepository
 
 /**
  * Created by mbpeele on 12/27/16.
