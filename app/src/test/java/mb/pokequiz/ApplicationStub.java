@@ -1,4 +1,4 @@
-package mb.pokequiz.data;
+package mb.pokequiz;
 
 import android.app.Application;
 

@@ -1,22 +1,23 @@
-package mb.pokequiz.home
+package mb.pokequiz.quiz
 
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Function
-import mb.pokequiz.mvp.BaseMvpPresenter
 import mb.pokequiz.data.model.Pokemon
-import mb.pokequiz.data.model.Profile
 import mb.pokequiz.data.repository.poke.PokeRepository
+import mb.pokequiz.mvp.BaseMvpPresenter
 import java.net.SocketTimeoutException
+import java.util.*
 
 /**
  * Created by mbpeele on 12/27/16.
  */
-class HomePresenter(private val repository: PokeRepository) : BaseMvpPresenter<HomeView>() {
+class QuizPresenter(private val repository: PokeRepository) : BaseMvpPresenter<QuizView>() {
 
     private var randomPokemonDisposable: Disposable? = null
+    private val random : Random = Random()
 
     override fun detach() {
         super.detach()
@@ -24,8 +25,9 @@ class HomePresenter(private val repository: PokeRepository) : BaseMvpPresenter<H
         randomPokemonDisposable?.dispose()
     }
 
-    fun getPokemon(int: Int) {
-        repository.getPokemon(int).toObservable()
+    fun getNextPokemon() {
+        val int = random.nextInt(721)
+        randomPokemonDisposable = repository.getPokemon(int).toObservable()
                 .onErrorResumeNext(Function<Throwable, ObservableSource<Pokemon>> { t ->
                     if (t is SocketTimeoutException) {
                         return@Function repository.getPokemon(int).toObservable()
@@ -35,20 +37,15 @@ class HomePresenter(private val repository: PokeRepository) : BaseMvpPresenter<H
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { if (attached()) get().showLoading() }
-                .doOnComplete { if (attached()) get().hideLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (attached()) {
-                        get().onPokemonReceive(it)
+                        get().onPokemonReceived(it)
                     }}, {
                     if (attached()) {
                         get().hideLoading()
                         get().showError()
                     }
                 })
-    }
-
-    fun getProfile() : Profile {
-        return repository.getProfile()
     }
 }

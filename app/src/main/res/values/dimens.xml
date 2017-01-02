@@ -6,8 +6,11 @@
 
     <dimen name="small_spacing">4dp</dimen>
     <dimen name="normal_spacing">8dp</dimen>
+    <dimen name="medium_spacing">16dp</dimen>
     <dimen name="large_spacing">32dp</dimen>
     <dimen name="xlarge_spacing">48dp</dimen>
     <dimen name="huge_spacing">64dp</dimen>
+
+    <dimen name="toolbar_elevation">6dp</dimen>
 
 </resources>

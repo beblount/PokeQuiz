@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'realm-android'
 
 def config = rootProject.extensions.getByName("ext")
@@ -51,7 +52,6 @@ dependencies {
     provided dependencies.javax
 
     compile dependencies.design
-    compile dependencies.appCompat
     compile dependencies.palette
 
     compile dependencies.rxJava
@@ -72,12 +72,8 @@ dependencies {
     testCompile testDependencies.robolectric
 }
 
-task start(type: Exec, dependsOn: 'installDebug') {
-    def adb = "$System.env.ANDROID_HOME/platform-tools/adb"
-
-    commandLine 'adb', 'shell', 'am', 'start', '-n', 'mb.pokequiz/.ui.MainActivity'
-}
-
-repositories {
-    mavenCentral()
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("lintVitalRelease")) {
+        task.enabled = false
+    }
 }

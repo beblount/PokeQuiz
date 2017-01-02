@@ -1,11 +1,14 @@
 package mb.pokequiz.application
 
+import android.content.Context
+import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import mb.pokequiz.data.repository.poke.PokeApi
 import mb.pokequiz.data.repository.poke.PokeDatabase
 import mb.pokequiz.data.repository.poke.PokeRepository
 import mb.pokequiz.data.repository.poke.Repository
+import mb.pokequiz.utils.ConnectionObserver
 import javax.inject.Singleton
 
 /**
@@ -25,5 +28,17 @@ class AppModule(var application: PokeApplication) {
     @Singleton
     fun repository(pokeDatabase: PokeDatabase, pokeApi: PokeApi) : PokeRepository {
         return Repository(pokeDatabase, pokeApi)
+    }
+
+    @Provides
+    @Singleton
+    fun preferences() : SharedPreferences {
+        return application.getSharedPreferences("pokemon", Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    @Singleton
+    fun connectionHandler(application: PokeApplication) : ConnectionObserver {
+        return ConnectionObserver(application)
     }
 }

@@ -4,11 +4,13 @@ import hu.akarnokd.rxjava.interop.RxJavaInterop
 import io.reactivex.Observable
 import io.realm.Realm
 import io.realm.RealmObject
-import mb.pokequiz.data.entity.*
+import mb.pokequiz.data.entity.PokedexEntity
+import mb.pokequiz.data.entity.PokedexEntityFields
+import mb.pokequiz.data.entity.PokemonEntity
+import mb.pokequiz.data.entity.PokemonEntityFields
 import mb.pokequiz.data.mappers.MapperFactory
 import mb.pokequiz.data.model.Pokedex
 import mb.pokequiz.data.model.Pokemon
-import mb.pokequiz.data.model.Profile
 
 /**
  * Created by mbpeele on 12/24/16.
@@ -27,17 +29,6 @@ class RealmRepository(val factory: MapperFactory) : PokeDatabase {
         val mapper = factory.create<Pokedex, PokedexEntity>(Pokedex::class)
         val entity = mapper.toEntity(pokedex, factory)
         saveInternal(entity)
-    }
-
-    override fun getProfile(): Profile {
-        val realm = Realm.getDefaultInstance()
-        val entity = realm.where(ProfileEntity::class.java).findFirst()
-        if (entity == null) {
-            return Profile("", "")
-        } else {
-            val mapper = factory.create<Profile, ProfileEntity>(Profile::class)
-            return mapper.toModel(entity, factory)
-        }
     }
 
     override fun getPokemon(id: Int): Observable<Pokemon> {

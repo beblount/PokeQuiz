@@ -1,5 +1,7 @@
 package mb.pokequiz.utils
 
+import android.graphics.drawable.Animatable
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
 import android.widget.Button
@@ -16,8 +18,16 @@ fun View.setLightStatusBar() {
     }
 }
 
-fun Button.tintDrawable(tint: Int) {
+fun View.isVisible() : Boolean {
+    return visibility == View.VISIBLE
+}
+
+fun Button.tintDrawables(tint: Int) {
     compoundDrawables
             .filterNotNull()
             .forEach { it.mutate().setTint(tint) }
+}
+
+fun Drawable.startAnim() {
+    (this as Animatable).start()
 }

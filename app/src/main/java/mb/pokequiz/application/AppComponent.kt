@@ -1,5 +1,6 @@
 package mb.pokequiz.application
 
+import android.content.SharedPreferences
 import dagger.Component
 import mb.pokequiz.data.repository.poke.PokeRepository
 import javax.inject.Singleton
@@ -12,4 +13,6 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun repository() : PokeRepository
+
+    fun preferences() : SharedPreferences
 }

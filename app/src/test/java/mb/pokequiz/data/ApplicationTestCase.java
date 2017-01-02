@@ -14,6 +14,7 @@ import org.robolectric.annotation.Config;
 
 import java.io.File;
 
+import mb.pokequiz.ApplicationStub;
 import mb.pokequiz.BuildConfig;
 
 @RunWith(RobolectricTestRunner.class)

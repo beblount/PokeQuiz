@@ -1,17 +1,23 @@
 package mb.pokequiz.utils
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.support.annotation.ColorInt
 import android.support.annotation.FloatRange
 import android.support.v4.graphics.ColorUtils
 import android.support.v7.graphics.Palette
-
+import android.view.View
 
 
 /**
  * Created by mbpeele on 12/27/16.
  */
 object ColorsUtils {
+
+    fun alpha(color: Int, @FloatRange(from = 0.0, to = 1.0) multiplier: Float) : Int {
+        val alphaMultiplier = multiplier * 255
+        return Color.argb(alphaMultiplier.toInt(), Color.red(color), Color.green(color), Color.blue(color))
+    }
 
     fun isDark(hsl: FloatArray): Boolean {
         return hsl[2] < 0.5f

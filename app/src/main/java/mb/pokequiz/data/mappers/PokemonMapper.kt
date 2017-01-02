@@ -12,10 +12,14 @@ open class PokemonMapper : Mapper<Pokemon, PokemonEntity> {
         val gameIndexMapper = factory.create<GameIndex, GameIndexEntity>(GameIndex::class)
         val statMapper = factory.create<Stat, StatEntity>(Stat::class)
         val spriteMapper = factory.create<Sprite, SpriteEntity>(Sprite::class)
+        val abilityMapper = factory.create<Ability, AbilityEntity>(Ability::class)
+        val typeMapper = factory.create<Type, TypeEntity>(Type::class)
 
+        val types = modelList(entity.types, typeMapper, factory)
         val forms = modelList(entity.forms, namedResourceMapper, factory)
         val indices = modelList(entity.game_indices, gameIndexMapper, factory)
         val stats = modelList(entity.stats, statMapper, factory)
+        val abilities = modelList(entity.abilities, abilityMapper, factory)
         val species = namedResourceMapper.toModel(entity.species!!, factory)
         val sprite = spriteMapper.toModel(entity.sprite!!, factory)
         return Pokemon(entity.id!!,
@@ -28,9 +32,11 @@ open class PokemonMapper : Mapper<Pokemon, PokemonEntity> {
                 entity.location_area_encounters!!,
                 sprite,
                 species,
+                abilities,
                 forms,
                 indices,
-                stats)
+                stats,
+                types)
     }
 
     override fun toEntity(model: Pokemon, factory: MapperFactory): PokemonEntity {
@@ -40,6 +46,8 @@ open class PokemonMapper : Mapper<Pokemon, PokemonEntity> {
         val gameIndexMapper = factory.create<GameIndex, GameIndexEntity>(GameIndex::class)
         val statMapper = factory.create<Stat, StatEntity>(Stat::class)
         val spriteMapper = factory.create<Sprite, SpriteEntity>(Sprite::class)
+        val abilityMapper = factory.create<Ability, AbilityEntity>(Ability::class)
+        val typeMapper = factory.create<Type, TypeEntity>(Type::class)
 
         entity.id = model.id
         entity.base_experience = model.base_experience
@@ -54,6 +62,8 @@ open class PokemonMapper : Mapper<Pokemon, PokemonEntity> {
         entity.stats = entityList(model.stats, statMapper, factory)
         entity.species = namedResourceMapper.toEntity(model.species, factory)
         entity.sprite = spriteMapper.toEntity(model.sprites, factory)
+        entity.abilities = entityList(model.abilities, abilityMapper, factory)
+        entity.types = entityList(model.types, typeMapper, factory)
         return entity
     }
 }

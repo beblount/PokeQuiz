@@ -11,10 +11,9 @@ import kotlin.reflect.KClass
  */
 class PokeMapperFactory : MapperFactory {
 
-    val map: HashMap<KClass<*>, Mapper<*, *>>
+    val map: HashMap<KClass<*>, Mapper<*, *>> = HashMap()
 
     init {
-        map = HashMap()
         map.put(Description::class, DescriptionMapper())
         map.put(GameIndex::class, GameIndexMapper())
         map.put(NamedResource::class, NamedResourceMapper())
@@ -24,6 +23,8 @@ class PokeMapperFactory : MapperFactory {
         map.put(Pokemon::class, PokemonMapper())
         map.put(Sprite::class, SpriteMapper())
         map.put(Stat::class, StatMapper())
+        map.put(Ability::class, AbilityMapper())
+        map.put(Type::class, TypeMapper())
     }
 
 
@@ -33,6 +34,14 @@ class PokeMapperFactory : MapperFactory {
             return map.get(kClass) as Mapper<Model, Entity>
         }
 
-        throw RuntimeException(kClass.simpleName.plus(" doesn't exist in package"))
+        throw MapperException(kClass)
+    }
+
+    class MapperException : Exception {
+
+        constructor(kClass: KClass<*>) {
+            ("No mapper exists for: " + kClass.simpleName)
+        }
+
     }
 }

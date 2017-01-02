@@ -46,9 +46,6 @@ ext {
             daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
             javax: "org.glassfish:javax.annotation:${javaxVersion}",
 
-            conductor: "com.bluelinelabs:conductor:${conductorVersion}",
-
-            appCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
             design: "com.android.support:design:${androidSupportVersion}",
             palette: "com.android.support:palette-v7:${androidSupportVersion}",
 

@@ -1,5 +1,8 @@
 package mb.pokequiz.data.model
 
+import android.os.Parcel
+import android.os.Parcelable
+
 /**
  * Created by mbpeele on 12/25/16.
  */
@@ -11,42 +14,35 @@ data class Sprite(
         val front_shiny_female: String?,
         val back_shiny: String?,
         val front_default: String?,
-        val front_shiny: String?) {
+        val front_shiny: String?) : Parcelable {
 
-    @Deprecated("Please don't use this in production my god")
-    fun getRandom() : String {
-        if (back_female == null) {
-            if (back_shiny_female == null) {
-                if (back_default == null) {
-                    if (front_female == null) {
-                        if (front_shiny_female == null) {
-                            if (back_shiny == null) {
-                                if (front_default == null) {
-                                    if (front_shiny == null) {
-                                        throw RuntimeException()
-                                    } else {
-                                        return front_shiny
-                                    }
-                                } else {
-                                    return front_default
-                                }
-                            } else {
-                                return back_shiny
-                            }
-                        } else {
-                            return front_shiny_female
-                        }
-                    } else {
-                        return front_female
-                    }
-                } else {
-                    return back_default
-                }
-            } else {
-                return back_shiny_female
-            }
-        } else {
-            return back_female
+    fun getFront(): String? {
+        return firstNonNull(front_female, front_shiny_female, front_default, front_shiny)
+    }
+
+    private fun firstNonNull(vararg args: String?) : String? {
+        return args.firstOrNull { it != null }
+    }
+
+    companion object {
+        @JvmField val CREATOR: Parcelable.Creator<Sprite> = object : Parcelable.Creator<Sprite> {
+            override fun createFromParcel(source: Parcel): Sprite = Sprite(source)
+            override fun newArray(size: Int): Array<Sprite?> = arrayOfNulls(size)
         }
+    }
+
+    constructor(source: Parcel) : this(source.readString(), source.readString(), source.readString(), source.readString(), source.readString(), source.readString(), source.readString(), source.readString())
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        dest?.writeString(back_female)
+        dest?.writeString(back_shiny_female)
+        dest?.writeString(back_default)
+        dest?.writeString(front_female)
+        dest?.writeString(front_shiny_female)
+        dest?.writeString(back_shiny)
+        dest?.writeString(front_default)
+        dest?.writeString(front_shiny)
     }
 }

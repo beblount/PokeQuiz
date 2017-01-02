@@ -2,6 +2,7 @@ package mb.pokequiz.utils
 
 import android.content.Context
 import android.graphics.Typeface
+import android.support.annotation.StringRes
 import java.io.IOException
 import java.util.*
 
@@ -26,6 +27,10 @@ object FontUtils {
             e.printStackTrace()
         }
 
+    }
+
+    operator fun get(context: Context, @StringRes stringRes: Int): Typeface {
+        return get(context, context.getString(stringRes))
     }
 
     operator fun get(context: Context, font: String): Typeface {

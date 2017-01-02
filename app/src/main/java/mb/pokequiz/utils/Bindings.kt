@@ -1,8 +1,6 @@
 package mb.pokequiz.utils
 
 import android.databinding.BindingAdapter
-import android.support.v7.widget.Toolbar
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -12,18 +10,9 @@ import com.bumptech.glide.Glide
  */
 
 @BindingAdapter("font")
-fun setFont(view: View, fontName: String) {
+fun setFont(view: TextView, fontName: String) {
     val font = FontUtils[view.context, fontName]
-    if (view is TextView) {
-        view.typeface = font
-    } else if (view is Toolbar) {
-        for (i in 0..view.childCount) {
-            val child = view.getChildAt(i)
-            if (child is TextView) {
-                child.typeface = font
-            }
-        }
-    }
+    view.typeface = font
 }
 
 @BindingAdapter("imageUrl")

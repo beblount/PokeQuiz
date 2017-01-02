@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import mb.pokequiz.application.AppComponent
 import mb.pokequiz.application.PokeApplication
-import mb.pokequiz.mvp.MvpPresenter
-import mb.pokequiz.mvp.MvpView
 
 abstract class MvpActivity<View : MvpView, Presenter : MvpPresenter<View>> : AppCompatActivity() {
 
     lateinit var presenter : Presenter
 
+    @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

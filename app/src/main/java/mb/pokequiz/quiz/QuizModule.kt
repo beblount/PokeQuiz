@@ -1,4 +1,4 @@
-package mb.pokequiz.home
+package mb.pokequiz.quiz
 
 import dagger.Module
 import dagger.Provides
@@ -10,12 +10,12 @@ import mb.pokequiz.data.repository.poke.PokeRepository
  */
 @Module
 @ActivityScope
-class HomeModule {
+class QuizModule {
 
     @Provides
     @ActivityScope
-    fun presenter(repository: PokeRepository) : HomePresenter {
-        return HomePresenter(repository)
+    fun presenter(repository: PokeRepository) : QuizPresenter {
+        return QuizPresenter(repository)
     }
 
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quiz_hint">Hint</string>
+    <string name="score_hint">Score</string>
+    <string name="failure_text">I don\'t know!</string>
+
+    <string name="hint_formatter">This pokemon\'s %1$s are: %2$s</string>
+</resources>

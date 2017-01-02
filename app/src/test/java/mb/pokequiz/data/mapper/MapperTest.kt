@@ -1,7 +1,7 @@
 package mb.pokequiz.data.mapper
 
 import junit.framework.Assert
-import mb.pokequiz.data.ApplicationTestCase
+import mb.pokequiz.ApplicationTestCase
 import mb.pokequiz.data.entity.NamedResourceEntity
 import mb.pokequiz.data.mappers.Mapper
 import mb.pokequiz.data.mappers.MapperFactory

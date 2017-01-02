@@ -20,8 +20,10 @@ open class PokemonEntity : RealmObject() {
     var location_area_encounters: String ?= null
     var sprite: SpriteEntity ?= null
     var species: NamedResourceEntity ?= null
+    var abilities: RealmList<AbilityEntity> ?= null
     var forms: RealmList<NamedResourceEntity> ?= null
     var game_indices: RealmList<GameIndexEntity> ?= null
     var stats: RealmList<StatEntity> ?= null
+    var types: RealmList<TypeEntity> ?= null
 
 }

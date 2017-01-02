@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:drawable="@drawable/ic_check_black_24dp" >
+
+    <target android:name="check" >
+
+        <aapt:attr name="android:animation" >
+
+            <set>
+
+                <objectAnimator
+                    android:duration="300"
+                    android:propertyName="pathData"
+                    android:valueFrom="@string/check_path"
+                    android:valueTo="@string/close_path"
+                    android:valueType="pathType" />
+
+                <objectAnimator
+                    android:duration="300"
+                    android:startOffset="1000"
+                    android:propertyName="pathData"
+                    android:valueFrom="@string/close_path"
+                    android:valueTo="@string/check_path"
+                    android:valueType="pathType" />
+
+            </set>
+
+        </aapt:attr>
+
+    </target>
+
+</animated-vector>

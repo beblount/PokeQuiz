@@ -1,15 +1,13 @@
-package mb.pokequiz.home
+package mb.pokequiz.widget
 
 import android.content.Context
-import android.graphics.Canvas
 import android.util.AttributeSet
-import android.view.View
+import android.widget.ImageView
 
 /**
- * Created by mbpeele on 12/28/16.
+ * Created by mbpeele on 12/29/16.
  */
-
-class Timer : View {
+class SquareImageView : ImageView {
 
     constructor(context: Context) : super(context) {
     }
@@ -23,7 +21,11 @@ class Timer : View {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
     }
 
-    override fun onDraw(canvas: Canvas?) {
-        super.onDraw(canvas)
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        val width = measuredWidth
+        setMeasuredDimension(width, width)
     }
+
 }
