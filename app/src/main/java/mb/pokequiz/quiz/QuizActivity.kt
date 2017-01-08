@@ -1,5 +1,7 @@
 package mb.pokequiz.quiz
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.app.ActivityOptions
 import android.app.AlertDialog
@@ -10,15 +12,12 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.graphics.Palette
 import android.text.Spannable
 import android.text.Spanned
 import android.text.TextPaint
-import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestListener
@@ -51,53 +50,58 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView<QuizBinding>(this, R.layout.quiz)
 
-        toolbar.title = ""
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        presenter.download()
 
-        failure.movementMethod = LinkMovementMethod.getInstance()
-
-        presenter.getNextPokemon()
-
-        hint.setOnClickListener {
-            if (pokemon != null) {
-                val textColor = Color.WHITE
-                var length = Snackbar.LENGTH_SHORT
-                var snackbarText = ""
-
-                if (hints.size == 2) {
-                    snackbarText = "No more hints"
-                } else {
-                    length = Snackbar.LENGTH_INDEFINITE
-
-                    val hint : Hint ?
-                    val types = hints.map(Hint::hintType)
-
-                    if (types.contains(Hint.ABILITY)) {
-                        val text = pokemon!!.types.map { it.type.name }
-                        snackbarText = getString(R.string.hint_formatter, "types", text)
-                        hint = Hint(snackbarText, Hint.TYPE)
-
-                        hints.add(hint)
-                    } else {
-                        val text = pokemon!!.abilities.map { it.ability.name }
-                        snackbarText = getString(R.string.hint_formatter, "abilities", text)
-                        hint = Hint(snackbarText, Hint.ABILITY)
-
-                        hints.add(hint)
-                    }
-                }
-
-                val snackbar = Snackbar.make(binding.root, snackbarText, length)
-                        .setActionTextColor(textColor)
-                        .setAction("Dismiss") { }
-
-                val textView = snackbar.view.findViewById(android.support.design.R.id.snackbar_text) as TextView
-                textView.setTextColor(textColor)
-
-                snackbar.show()
-            }
-        }
+//        toolbar.title = ""
+//        setSupportActionBar(toolbar)
+//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//
+//        failure.movementMethod = LinkMovementMethod.getInstance()
+//        failure.setOnClickListener {
+//            goToPokemonScreen()
+//        }
+//
+//        presenter.getNextPokemon()
+//
+//        hint.setOnClickListener {
+//            if (pokemon != null) {
+//                val textColor = Color.WHITE
+//                var length = Snackbar.LENGTH_SHORT
+//                var snackbarText = ""
+//
+//                if (hints.size == 2) {
+//                    snackbarText = "No more hints"
+//                } else {
+//                    length = Snackbar.LENGTH_INDEFINITE
+//
+//                    val hint : Hint ?
+//                    val types = hints.map(Hint::hintType)
+//
+//                    if (types.contains(Hint.ABILITY)) {
+//                        val text = pokemon!!.types.map { it.type.name }
+//                        snackbarText = getString(R.string.hint_formatter, "types", text)
+//                        hint = Hint(snackbarText, Hint.TYPE)
+//
+//                        hints.add(hint)
+//                    } else {
+//                        val text = pokemon!!.abilities.map { it.ability.name }
+//                        snackbarText = getString(R.string.hint_formatter, "abilities", text)
+//                        hint = Hint(snackbarText, Hint.ABILITY)
+//
+//                        hints.add(hint)
+//                    }
+//                }
+//
+//                val snackbar = Snackbar.make(binding.root, snackbarText, length)
+//                        .setActionTextColor(textColor)
+//                        .setAction("Dismiss") { }
+//
+//                val textView = snackbar.view.findViewById(android.support.design.R.id.snackbar_text) as TextView
+//                textView.setTextColor(textColor)
+//
+//                snackbar.show()
+//            }
+//        }
     }
 
     override fun inject(): QuizPresenter {
@@ -169,7 +173,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
                                 }
 
                         hideLoading()
-                        timer.start(60, this@QuizActivity)
+                        timer.start(5, this@QuizActivity)
                         return false
                     }
 
@@ -233,7 +237,12 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
                 .scaleX(1.2f)
                 .scaleY(1.2f)
                 .setInterpolator(AnimUtils.decelerate)
-                .setDuration(700)
+                .setDuration(2000)
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        goToPokemonScreen()
+                    }
+                })
                 .start()
     }
 

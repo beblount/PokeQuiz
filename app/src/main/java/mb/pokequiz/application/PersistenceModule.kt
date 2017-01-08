@@ -6,8 +6,7 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import mb.pokequiz.data.mappers.MapperFactory
 import mb.pokequiz.data.mappers.PokeMapperFactory
-import mb.pokequiz.data.repository.poke.PokeDatabase
-import mb.pokequiz.data.repository.poke.RealmRepository
+import mb.pokequiz.data.repository.poke.*
 import javax.inject.Singleton
 
 /**
@@ -34,6 +33,12 @@ class PersistenceModule() {
     @Singleton
     fun repository(factory: MapperFactory) : PokeDatabase {
         return RealmRepository(factory)
+    }
+
+    @Provides
+    @Singleton
+    fun repository(pokeDatabase: PokeDatabase, pokeApi: PokeApi) : PokeRepository {
+        return Repository(pokeDatabase, pokeApi)
     }
 
 }

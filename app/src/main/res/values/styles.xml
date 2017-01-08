@@ -21,6 +21,10 @@
         <item name="android:elevation">@dimen/toolbar_elevation</item>
     </style>
 
+    <style name="PokeToolbar.Null" >
+        <item name="android:background">@null</item>
+    </style>
+
     <style name="Poke.Widget.InlineActionButton" parent="@android:style/Widget.Material.Button" >
         <item name="android:gravity">center_horizontal</item>
         <item name="android:drawablePadding">@dimen/small_spacing</item>

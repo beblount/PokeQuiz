@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import kotlinx.android.synthetic.main.pokemon.*
 import mb.pokequiz.R
 import mb.pokequiz.data.model.Pokemon
 import mb.pokequiz.databinding.PokemonBinding
@@ -82,6 +83,9 @@ class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>(
                                 ColorsUtils.isDark(rgb), .1f)
 
                         window.statusBarColor = rgb
+                        name.text = pokemon.name
+                        name.setTextColor(contrastColor)
+                        binding.root.setBackgroundColor(background)
                         return false
                     }
 
