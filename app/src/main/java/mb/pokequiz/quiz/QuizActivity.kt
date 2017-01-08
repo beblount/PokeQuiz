@@ -24,8 +24,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.quiz.*
 import mb.pokequiz.R
-import mb.pokequiz.data.model.Hint
-import mb.pokequiz.data.model.Pokemon
+import mb.pokequiz.data.json.Hint
+import mb.pokequiz.data.json.Pokemon
 import mb.pokequiz.databinding.QuizBinding
 import mb.pokequiz.mvp.MvpActivity
 import mb.pokequiz.pokemon.PokemonActivity

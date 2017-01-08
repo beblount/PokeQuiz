@@ -3,7 +3,7 @@ package mb.pokequiz.data.mapper
 import mb.pokequiz.data.entity.SpriteEntity
 import mb.pokequiz.data.mappers.Mapper
 import mb.pokequiz.data.mappers.SpriteMapper
-import mb.pokequiz.data.model.Sprite
+import mb.pokequiz.data.json.Sprite
 
 /**
  * Created by mbpeele on 12/27/16.

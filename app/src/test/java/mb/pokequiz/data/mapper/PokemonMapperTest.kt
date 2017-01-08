@@ -4,7 +4,7 @@ import io.realm.RealmList
 import mb.pokequiz.data.entity.*
 import mb.pokequiz.data.mappers.Mapper
 import mb.pokequiz.data.mappers.PokemonMapper
-import mb.pokequiz.data.model.*
+import mb.pokequiz.data.json.*
 import java.util.*
 
 /**

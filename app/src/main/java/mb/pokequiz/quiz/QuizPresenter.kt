@@ -5,7 +5,7 @@ import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Function
-import mb.pokequiz.data.model.Pokemon
+import mb.pokequiz.data.json.Pokemon
 import mb.pokequiz.data.repository.poke.PokeRepository
 import mb.pokequiz.mvp.BaseMvpPresenter
 import java.net.SocketTimeoutException

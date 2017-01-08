@@ -1,6 +1,6 @@
 package mb.pokequiz.data.mappers
 
-import mb.pokequiz.data.model.*
+import mb.pokequiz.data.json.*
 import java.util.*
 import kotlin.reflect.KClass
 

@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.pokemon.*
 import mb.pokequiz.R
-import mb.pokequiz.data.model.Pokemon
+import mb.pokequiz.data.json.Pokemon
 import mb.pokequiz.databinding.PokemonBinding
 import mb.pokequiz.mvp.MvpActivity
 import mb.pokequiz.utils.ColorsUtils

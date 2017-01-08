@@ -3,7 +3,7 @@ package mb.pokequiz.data.mapper
 import mb.pokequiz.data.entity.DescriptionEntity
 import mb.pokequiz.data.mappers.DescriptionMapper
 import mb.pokequiz.data.mappers.Mapper
-import mb.pokequiz.data.model.Description
+import mb.pokequiz.data.json.Description
 
 /**
  * Created by mbpeele on 12/26/16.

@@ -1,6 +1,6 @@
 package mb.pokequiz.quiz
 
-import mb.pokequiz.data.model.Pokemon
+import mb.pokequiz.data.json.Pokemon
 import mb.pokequiz.mvp.MvpLoadingView
 
 /**

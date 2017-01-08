@@ -3,7 +3,7 @@ package mb.pokequiz.data.mapper
 import mb.pokequiz.data.entity.GameIndexEntity
 import mb.pokequiz.data.mappers.GameIndexMapper
 import mb.pokequiz.data.mappers.Mapper
-import mb.pokequiz.data.model.GameIndex
+import mb.pokequiz.data.json.GameIndex
 
 /**
  * Created by mbpeele on 12/26/16.

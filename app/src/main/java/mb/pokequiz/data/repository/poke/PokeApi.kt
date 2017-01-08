@@ -1,8 +1,8 @@
 package mb.pokequiz.data.repository.poke
 
 import io.reactivex.Observable
-import mb.pokequiz.data.model.Pokedex
-import mb.pokequiz.data.model.Pokemon
+import mb.pokequiz.data.json.Pokedex
+import mb.pokequiz.data.json.Pokemon
 import retrofit2.http.GET
 import retrofit2.http.Path
 

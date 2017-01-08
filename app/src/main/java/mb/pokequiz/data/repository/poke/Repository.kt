@@ -2,8 +2,8 @@ package mb.pokequiz.data.repository.poke
 
 import io.reactivex.Maybe
 import io.reactivex.Observable
-import mb.pokequiz.data.model.Pokedex
-import mb.pokequiz.data.model.Pokemon
+import mb.pokequiz.data.json.Pokedex
+import mb.pokequiz.data.json.Pokemon
 
 /**
  * Created by mbpeele on 12/24/16.

@@ -1,4 +1,4 @@
-package mb.pokequiz.data.model
+package mb.pokequiz.data.json
 
 /**
  * Created by mbpeele on 12/25/16.

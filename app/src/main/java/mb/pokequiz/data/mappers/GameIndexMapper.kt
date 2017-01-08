@@ -2,8 +2,8 @@ package mb.pokequiz.data.mappers
 
 import mb.pokequiz.data.entity.GameIndexEntity
 import mb.pokequiz.data.entity.NamedResourceEntity
-import mb.pokequiz.data.model.GameIndex
-import mb.pokequiz.data.model.NamedResource
+import mb.pokequiz.data.json.GameIndex
+import mb.pokequiz.data.json.NamedResource
 
 /**
  * Created by mbpeele on 12/26/16.

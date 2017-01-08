@@ -9,8 +9,8 @@ import mb.pokequiz.data.entity.PokedexEntityFields
 import mb.pokequiz.data.entity.PokemonEntity
 import mb.pokequiz.data.entity.PokemonEntityFields
 import mb.pokequiz.data.mappers.MapperFactory
-import mb.pokequiz.data.model.Pokedex
-import mb.pokequiz.data.model.Pokemon
+import mb.pokequiz.data.json.Pokedex
+import mb.pokequiz.data.json.Pokemon
 
 /**
  * Created by mbpeele on 12/24/16.

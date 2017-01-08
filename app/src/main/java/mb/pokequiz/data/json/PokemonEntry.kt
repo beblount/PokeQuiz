@@ -1,4 +1,4 @@
-package mb.pokequiz.data.model
+package mb.pokequiz.data.json
 
 data class PokemonEntry(
         val entry_number: Int,

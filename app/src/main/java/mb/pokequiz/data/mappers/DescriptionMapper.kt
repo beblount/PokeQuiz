@@ -2,8 +2,8 @@ package mb.pokequiz.data.mappers
 
 import mb.pokequiz.data.entity.DescriptionEntity
 import mb.pokequiz.data.entity.NamedResourceEntity
-import mb.pokequiz.data.model.Description
-import mb.pokequiz.data.model.NamedResource
+import mb.pokequiz.data.json.Description
+import mb.pokequiz.data.json.NamedResource
 
 /**
  * Created by mbpeele on 12/26/16.

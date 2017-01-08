@@ -1,4 +1,4 @@
-package mb.pokequiz.data.model
+package mb.pokequiz.data.json
 
 import android.os.Parcel
 import android.os.Parcelable

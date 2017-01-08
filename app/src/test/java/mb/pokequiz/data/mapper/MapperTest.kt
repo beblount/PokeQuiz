@@ -6,7 +6,7 @@ import mb.pokequiz.data.entity.NamedResourceEntity
 import mb.pokequiz.data.mappers.Mapper
 import mb.pokequiz.data.mappers.MapperFactory
 import mb.pokequiz.data.mappers.PokeMapperFactory
-import mb.pokequiz.data.model.NamedResource
+import mb.pokequiz.data.json.NamedResource
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Matchers.*
