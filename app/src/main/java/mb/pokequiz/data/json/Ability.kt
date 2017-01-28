@@ -17,7 +17,7 @@ data class Ability(
         }
     }
 
-    constructor(source: Parcel) : this(1.equals(source.readInt()), source.readInt(), source.readParcelable<NamedResource>(NamedResource::class.java.classLoader))
+    constructor(source: Parcel) : this(1 == source.readInt(), source.readInt(), source.readParcelable<NamedResource>(NamedResource::class.java.classLoader))
 
     override fun describeContents() = 0
 

@@ -4,8 +4,6 @@ import dagger.Module
 import dagger.Provides
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import mb.pokequiz.data.mappers.MapperFactory
-import mb.pokequiz.data.mappers.PokeMapperFactory
 import mb.pokequiz.data.repository.poke.*
 import javax.inject.Singleton
 
@@ -14,7 +12,7 @@ import javax.inject.Singleton
  */
 @Singleton
 @Module
-class PersistenceModule() {
+class PersistenceModule {
 
     init {
         val config = RealmConfiguration.Builder()
@@ -25,14 +23,8 @@ class PersistenceModule() {
 
     @Provides
     @Singleton
-    fun factory() : MapperFactory {
-        return PokeMapperFactory()
-    }
-
-    @Provides
-    @Singleton
-    fun repository(factory: MapperFactory) : PokeDatabase {
-        return RealmRepository(factory)
+    fun pokeDatabase() : PokeDatabase {
+        return RealmRepository()
     }
 
     @Provides

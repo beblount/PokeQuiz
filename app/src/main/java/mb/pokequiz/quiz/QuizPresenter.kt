@@ -4,17 +4,18 @@ import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
 import io.reactivex.functions.Function
 import mb.pokequiz.data.json.Pokemon
 import mb.pokequiz.data.repository.poke.PokeRepository
-import mb.pokequiz.mvp.BaseMvpPresenter
+import mb.pokequiz.mvp.BasePresenter
 import java.net.SocketTimeoutException
 import java.util.*
 
 /**
  * Created by mbpeele on 12/27/16.
  */
-class QuizPresenter(private val repository: PokeRepository) : BaseMvpPresenter<QuizView>() {
+class QuizPresenter(private val repository: PokeRepository) : BasePresenter<QuizView>() {
 
     private var randomPokemonDisposable: Disposable? = null
     private val random : Random = Random()
@@ -36,15 +37,18 @@ class QuizPresenter(private val repository: PokeRepository) : BaseMvpPresenter<Q
                     Observable.error(t)
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { if (attached()) get().showLoading() }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (attached()) {
-                        get().onPokemonReceived(it)
-                    }}, {
-                    if (attached()) {
-                        get().hideLoading()
-                        get().showError()
+                .doOnSubscribe { get()?.showLoading() }
+                .subscribe(object : Consumer<Pokemon> {
+                    override fun accept(t: Pokemon) {
+                       get()?.onPokemonReceived(t)
+                    }
+                }, object : Consumer<Throwable> {
+                    override fun accept(t: Throwable?) {
+                        val view = get()
+                        if (view != null) {
+                            view.hideLoading()
+                            view.showError()
+                        }
                     }
                 })
     }

@@ -6,12 +6,13 @@ import mb.pokequiz.data.json.NamedResource
 /**
  * Created by mbpeele on 12/26/16.
  */
-open class NamedResourceMapper : Mapper<NamedResource, NamedResourceEntity> {
-    override fun toModel(entity: NamedResourceEntity, factory: MapperFactory): NamedResource {
+object NamedResourceMapper {
+
+    fun toModel(entity: NamedResourceEntity): NamedResource {
         return NamedResource(entity.name!!, entity.url!!)
     }
 
-    override fun toEntity(model: NamedResource, factory: MapperFactory): NamedResourceEntity {
+    fun toEntity(model: NamedResource): NamedResourceEntity {
         val entity = NamedResourceEntity()
         entity.name = model.name
         entity.url = model.url

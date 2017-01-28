@@ -45,12 +45,11 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
 
     var rgb : Int = -1
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView<QuizBinding>(this, R.layout.quiz)
 
-        presenter.download()
+        presenter.getNextPokemon()
 
 //        toolbar.title = ""
 //        setSupportActionBar(toolbar)
@@ -127,6 +126,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
                 ds.isUnderlineText = true
             }
         }
+
         val spannable = failure.text as Spannable
         spannable.setSpan(clickableSpan, 0, spannable.length, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
         failure.text = spannable
@@ -205,11 +205,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
         guess.setText("")
         timer.stop()
 
-        if (progressDialog == null) {
-            progressDialog = ProgressDialog.show(this, "", "POKEMON!!!!")
-        }
-
-        progressDialog!!.show()
+        progressDialog?.show() ?: ProgressDialog.show(this, "", "POKEMONOOOON")
     }
 
     override fun hideLoading() {

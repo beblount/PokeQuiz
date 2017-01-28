@@ -1,24 +1,30 @@
 package mb.pokequiz.data.mappers
 
-import mb.pokequiz.data.entity.*
-import mb.pokequiz.data.json.*
+import mb.pokequiz.data.entity.PokedexEntity
+import mb.pokequiz.data.json.Pokedex
+import mb.pokequiz.data.mappers.MapperFuncs.entityList
+import mb.pokequiz.data.mappers.MapperFuncs.modelList
 
 /**
  * Created by mbpeele on 12/26/16.
  */
-open class PokeDexMapper : Mapper<Pokedex, PokedexEntity> {
-    override fun toEntity(model: Pokedex, factory: MapperFactory): PokedexEntity {
+object PokeDexMapper {
+
+     fun toEntity(model: Pokedex): PokedexEntity {
         val entity = PokedexEntity()
 
-        val nameMapper = factory.create<Name, NameEntity>(Name::class)
-        val descriptionMapper = factory.create<Description, DescriptionEntity>(Description::class)
-        val pokemonEntryMapper = factory.create<PokemonEntry, PokemonEntryEntity>(PokemonEntry::class)
-        val namedResourceMapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
-
-        val names = entityList(model.names, nameMapper, factory)
-        val descriptions = entityList(model.descriptions, descriptionMapper, factory)
-        val pokemonEntries = entityList(model.pokemon_entries, pokemonEntryMapper, factory)
-        val versionGroups = entityList(model.version_groups, namedResourceMapper, factory)
+        val names = entityList(model.names, {
+            NameMapper.toEntity(it)
+        })
+        val descriptions = entityList(model.descriptions, {
+            DescriptionMapper.toEntity(it)
+        })
+        val pokemonEntries = entityList(model.pokemon_entries, {
+            PokemonEntryMapper.toEntity(it)
+        })
+        val versionGroups = entityList(model.version_groups, {
+            NamedResourceMapper.toEntity(it)
+        })
 
         entity.id = model.id
         entity.isMainSeries = model.is_main_series
@@ -27,22 +33,25 @@ open class PokeDexMapper : Mapper<Pokedex, PokedexEntity> {
         entity.names = names
         entity.pokemon_entries = pokemonEntries
         entity.version_groups = versionGroups
-        entity.region = if (model.region == null) null else namedResourceMapper.toEntity(model.region, factory)
+        entity.region = if (model.region == null) null else NamedResourceMapper.toEntity(model.region)
 
         return entity
     }
 
-    override fun toModel(entity: PokedexEntity, factory: MapperFactory): Pokedex {
-        val nameMapper = factory.create<Name, NameEntity>(Name::class)
-        val descriptionMapper = factory.create<Description, DescriptionEntity>(Description::class)
-        val pokemonEntryMapper = factory.create<PokemonEntry, PokemonEntryEntity>(PokemonEntry::class)
-        val namedResourceMapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
-
-        val names = modelList(entity.names, nameMapper, factory)
-        val descriptions = modelList(entity.descriptions, descriptionMapper, factory)
-        val pokemonEntries = modelList(entity.pokemon_entries, pokemonEntryMapper, factory)
-        val versionGroups = modelList(entity.version_groups, namedResourceMapper, factory)
-        val region = if (entity.region == null) null else namedResourceMapper.toModel(entity.region!!, factory)
+    fun toModel(entity: PokedexEntity): Pokedex {
+        val names = modelList(entity.names, {
+            NameMapper.toModel(it)
+        })
+        val descriptions = modelList(entity.descriptions, {
+            DescriptionMapper.toModel(it)
+        })
+        val pokemonEntries = modelList(entity.pokemon_entries, {
+            PokemonEntryMapper.toModel(it)
+        })
+        val versionGroups = modelList(entity.version_groups, {
+            NamedResourceMapper.toModel(it)
+        })
+        val region = if (entity.region == null) null else NamedResourceMapper.toModel(entity.region!!)
 
         return Pokedex(
                 entity.id!!,

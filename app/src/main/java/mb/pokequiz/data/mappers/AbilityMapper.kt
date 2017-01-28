@@ -1,30 +1,24 @@
 package mb.pokequiz.data.mappers
 
 import mb.pokequiz.data.entity.AbilityEntity
-import mb.pokequiz.data.entity.NamedResourceEntity
 import mb.pokequiz.data.json.Ability
-import mb.pokequiz.data.json.NamedResource
 
 /**
  * Created by mbpeele on 1/1/17.
  */
-class AbilityMapper : Mapper<Ability, AbilityEntity> {
+object AbilityMapper {
 
-    override fun toModel(entity: AbilityEntity, factory: MapperFactory): Ability {
-        val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
-
+    fun toModel(entity: AbilityEntity): Ability {
         return Ability(entity.is_hidden!!,
                 entity.slot!!,
-                mapper.toModel(entity.ability!!, factory))
+                NamedResourceMapper.toModel(entity.ability!!))
     }
 
-    override fun toEntity(model: Ability, factory: MapperFactory): AbilityEntity {
-        val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
-
+    fun toEntity(model: Ability): AbilityEntity {
         val entity = AbilityEntity()
         entity.is_hidden = model.is_hidden
         entity.slot = model.slot
-        entity.ability = mapper.toEntity(model.ability, factory)
+        entity.ability = NamedResourceMapper.toEntity(model.ability)
 
         return entity
     }

@@ -1,25 +1,22 @@
 package mb.pokequiz.data.mappers
 
 import mb.pokequiz.data.entity.NameEntity
-import mb.pokequiz.data.entity.NamedResourceEntity
 import mb.pokequiz.data.json.Name
-import mb.pokequiz.data.json.NamedResource
 
 /**
  * Created by mbpeele on 12/26/16.
  */
-open class NameMapper : Mapper<Name, NameEntity> {
-    override fun toEntity(model: Name, factory: MapperFactory): NameEntity {
+object NameMapper {
+
+    fun toEntity(model: Name): NameEntity {
         val entity = NameEntity()
         entity.name = model.name
-        val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
-        entity.language = mapper.toEntity(model.language, factory)
+        entity.language = NamedResourceMapper.toEntity(model.language)
         return entity
     }
 
-    override fun toModel(entity: NameEntity, factory: MapperFactory): Name {
-        val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
+    fun toModel(entity: NameEntity): Name {
         return Name(entity.name!!,
-                mapper.toModel(entity.language!!, factory))
+                NamedResourceMapper.toModel(entity.language!!))
     }
 }

@@ -1,27 +1,22 @@
 package mb.pokequiz.data.mappers
 
-import mb.pokequiz.data.entity.NamedResourceEntity
 import mb.pokequiz.data.entity.TypeEntity
-import mb.pokequiz.data.json.NamedResource
 import mb.pokequiz.data.json.Type
 
 /**
  * Created by mbpeele on 1/1/17.
  */
-class TypeMapper : Mapper<Type, TypeEntity> {
+object TypeMapper {
 
-    override fun toModel(entity: TypeEntity, factory: MapperFactory): Type {
-        val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
-
-        return Type(entity.slot!!, mapper.toModel(entity.type!!, factory))
+    fun toModel(entity: TypeEntity): Type {
+        return Type(entity.slot!!,
+                NamedResourceMapper.toModel(entity.type!!))
     }
 
-    override fun toEntity(model: Type, factory: MapperFactory): TypeEntity {
-        val mapper = factory.create<NamedResource, NamedResourceEntity>(NamedResource::class)
-
+    fun toEntity(model: Type): TypeEntity {
         val entity = TypeEntity()
         entity.slot = model.slot
-        entity.type = mapper.toEntity(model.type, factory)
+        entity.type = NamedResourceMapper.toEntity(model.type)
         return entity
     }
 }

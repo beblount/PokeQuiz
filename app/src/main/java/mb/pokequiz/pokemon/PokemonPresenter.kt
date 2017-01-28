@@ -1,9 +1,9 @@
 package mb.pokequiz.pokemon
 
-import mb.pokequiz.mvp.BaseMvpPresenter
+import mb.pokequiz.mvp.BasePresenter
 
 /**
  * Created by mbpeele on 12/29/16.
  */
-class PokemonPresenter: BaseMvpPresenter<PokemonView>() {
+class PokemonPresenter: BasePresenter<PokemonView>() {
 }
