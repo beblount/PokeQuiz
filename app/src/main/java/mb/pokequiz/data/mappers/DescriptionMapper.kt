@@ -1,7 +1,7 @@
 package mb.pokequiz.data.mappers
 
 import mb.pokequiz.data.entity.DescriptionEntity
-import mb.pokequiz.data.json.Description
+import mb.pokequiz.domain.model.Description
 
 /**
  * Created by mbpeele on 12/26/16.

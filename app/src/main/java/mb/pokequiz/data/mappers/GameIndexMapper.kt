@@ -1,7 +1,7 @@
 package mb.pokequiz.data.mappers
 
 import mb.pokequiz.data.entity.GameIndexEntity
-import mb.pokequiz.data.json.GameIndex
+import mb.pokequiz.domain.model.GameIndex
 
 /**
  * Created by mbpeele on 12/26/16.

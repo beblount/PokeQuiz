@@ -37,6 +37,26 @@ object AnimUtils {
         return alpha
     }
 
+    fun gone(view: View): ObjectAnimator {
+        val alpha = alpha(view, 1f, 0f)
+        alpha.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                view.visibility = View.GONE
+            }
+        })
+        return alpha
+    }
+
+    fun invisible(view: View): ObjectAnimator {
+        val alpha = alpha(view, 1f, 0f)
+        alpha.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                view.visibility = View.INVISIBLE
+            }
+        })
+        return alpha
+    }
+
     fun textScale(textView: TextView, vararg scales: Float): ObjectAnimator {
         val floatProperty = object : FloatProperty<TextView>("") {
             override fun setValue(view: TextView, value: Float) {

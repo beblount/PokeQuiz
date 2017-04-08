@@ -1,12 +1,17 @@
 package mb.pokequiz.quiz
 
-import mb.pokequiz.data.json.Pokemon
-import mb.pokequiz.mvp.MvpLoadingView
+import mb.pokequiz.domain.model.Pokemon
+import mb.pokequiz.mvp.MvpView
 
 /**
  * Created by mbpeele on 12/27/16.
  */
-interface QuizView : MvpLoadingView {
+interface QuizView : MvpView {
 
     fun onPokemonReceived(pokemon: Pokemon)
+
+    fun showError()
+
+    fun showLoading()
+
 }

@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.pokemon.*
 import mb.pokequiz.R
-import mb.pokequiz.data.json.Pokemon
+import mb.pokequiz.domain.model.Pokemon
 import mb.pokequiz.databinding.PokemonBinding
 import mb.pokequiz.mvp.MvpActivity
 import mb.pokequiz.utils.ColorsUtils
@@ -52,18 +52,6 @@ class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>(
                 .build()
 
         return component.presenter()
-    }
-
-    override fun showLoading() {
-        throw UnsupportedOperationException("not implemented")
-    }
-
-    override fun hideLoading() {
-        throw UnsupportedOperationException("not implemented")
-    }
-
-    override fun showError() {
-        throw UnsupportedOperationException("not implemented")
     }
 
     fun onPokemonReceived(pokemon: Pokemon) {

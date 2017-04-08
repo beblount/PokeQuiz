@@ -31,7 +31,7 @@ ext {
 
     kotlinVersion = '1.1.1'
 
-    databindingVersion = '2.2.2'
+    databindingVersion = '2.4.0-alpha4'
 
     javaxVersion = '10.0-b28'
 
@@ -52,7 +52,7 @@ ext {
 
             retrofit: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            retrofitRx: "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0",
+            retrofitRx: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
 
             fieldNamesHelper: "dk.ilios:realmfieldnameshelper:${fieldNamesHelperVersion}",
 

@@ -1,7 +1,7 @@
 package mb.pokequiz.data.mappers
 
 import mb.pokequiz.data.entity.SpriteEntity
-import mb.pokequiz.data.json.Sprite
+import mb.pokequiz.domain.model.Sprite
 
 /**
  * Created by mbpeele on 12/26/16.

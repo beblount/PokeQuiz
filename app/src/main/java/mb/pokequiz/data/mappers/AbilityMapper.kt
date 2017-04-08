@@ -1,7 +1,7 @@
 package mb.pokequiz.data.mappers
 
 import mb.pokequiz.data.entity.AbilityEntity
-import mb.pokequiz.data.json.Ability
+import mb.pokequiz.domain.model.Ability
 
 /**
  * Created by mbpeele on 1/1/17.

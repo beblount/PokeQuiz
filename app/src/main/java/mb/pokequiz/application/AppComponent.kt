@@ -2,7 +2,7 @@ package mb.pokequiz.application
 
 import android.content.SharedPreferences
 import dagger.Component
-import mb.pokequiz.data.repository.poke.PokeRepository
+import mb.pokequiz.domain.web.PokeApi
 import javax.inject.Singleton
 
 /**
@@ -12,7 +12,8 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(AppModule::class))
 interface AppComponent {
 
-    fun repository() : PokeRepository
-
     fun preferences() : SharedPreferences
+
+    fun pokeApi() : PokeApi
+
 }

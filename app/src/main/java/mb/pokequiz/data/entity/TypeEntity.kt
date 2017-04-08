@@ -1,7 +1,7 @@
 package mb.pokequiz.data.entity
 
 import io.realm.RealmObject
-import mb.pokequiz.data.json.NamedResource
+import mb.pokequiz.domain.model.NamedResource
 
 /**
  * Created by mbpeele on 1/1/17.

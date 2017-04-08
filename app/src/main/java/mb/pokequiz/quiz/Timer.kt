@@ -86,7 +86,7 @@ class Timer : View {
     }
 
     fun start(int: Int, timerListener: TimerListener) {
-        value = int
+        value = int + 1
 
         shouldShow = true
 

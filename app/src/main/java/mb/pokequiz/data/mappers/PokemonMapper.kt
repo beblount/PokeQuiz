@@ -1,7 +1,7 @@
 package mb.pokequiz.data.mappers
 
 import mb.pokequiz.data.entity.PokemonEntity
-import mb.pokequiz.data.json.Pokemon
+import mb.pokequiz.domain.model.Pokemon
 import mb.pokequiz.data.mappers.MapperFuncs.entityList
 import mb.pokequiz.data.mappers.MapperFuncs.modelList
 

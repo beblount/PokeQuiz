@@ -4,14 +4,13 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
-import mb.pokequiz.utils.ConnectionObserver
 import javax.inject.Singleton
 
 /**
  * Created by mbpeele on 12/11/16.
  */
 @Singleton
-@Module(includes = arrayOf(WebModule::class, PersistenceModule::class))
+@Module(includes = arrayOf(WebModule::class))
 class AppModule(var application: PokeApplication) {
 
     @Singleton
@@ -24,11 +23,5 @@ class AppModule(var application: PokeApplication) {
     @Singleton
     fun preferences() : SharedPreferences {
         return application.getSharedPreferences("pokemon", Context.MODE_PRIVATE)
-    }
-
-    @Provides
-    @Singleton
-    fun connectionHandler(application: PokeApplication) : ConnectionObserver {
-        return ConnectionObserver(application)
     }
 }

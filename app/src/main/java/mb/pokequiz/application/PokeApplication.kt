@@ -2,6 +2,7 @@ package mb.pokequiz.application
 
 import android.app.Application
 import io.realm.Realm
+import io.realm.RealmConfiguration
 
 /**
  * Created by mbpeele on 2/1/16.
@@ -15,10 +16,13 @@ class PokeApplication : Application() {
         super.onCreate()
 
         Realm.init(this)
+        val config = RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build()
+        Realm.setDefaultConfiguration(config)
 
         appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
-                .persistenceModule(PersistenceModule())
                 .webModule(WebModule())
                 .build()
     }

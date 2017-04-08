@@ -1,4 +1,4 @@
-package mb.pokequiz.data.json
+package mb.pokequiz.domain.model
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -10,6 +10,7 @@ data class Ability(
         val is_hidden: Boolean,
         val slot: Int,
         val ability: NamedResource) : Parcelable {
+
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<Ability> = object : Parcelable.Creator<Ability> {
             override fun createFromParcel(source: Parcel): Ability = Ability(source)

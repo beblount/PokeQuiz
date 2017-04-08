@@ -1,10 +1,7 @@
 package mb.pokequiz.quiz
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.app.ActivityOptions
-import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.res.ColorStateList
 import android.databinding.DataBindingUtil
@@ -12,26 +9,29 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.graphics.Palette
 import android.text.Spannable
 import android.text.Spanned
 import android.text.TextPaint
+import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.util.Log
 import android.view.View
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.quiz.*
 import mb.pokequiz.R
-import mb.pokequiz.data.json.Hint
-import mb.pokequiz.data.json.Pokemon
 import mb.pokequiz.databinding.QuizBinding
+import mb.pokequiz.domain.model.Hint
+import mb.pokequiz.domain.model.Pokemon
 import mb.pokequiz.mvp.MvpActivity
 import mb.pokequiz.pokemon.PokemonActivity
 import mb.pokequiz.utils.AnimUtils
 import mb.pokequiz.utils.ColorsUtils
-import mb.pokequiz.utils.Logger
 import mb.pokequiz.utils.startAnim
 import java.util.*
 
@@ -40,7 +40,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
 
     lateinit var binding : QuizBinding
     var progressDialog : ProgressDialog ?= null
-    var pokemon : Pokemon ?= null
+    var pokemon : Pokemon?= null
     val hints : ArrayList<Hint> = ArrayList()
 
     var rgb : Int = -1
@@ -51,56 +51,54 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
 
         presenter.getNextPokemon()
 
-//        toolbar.title = ""
-//        setSupportActionBar(toolbar)
-//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-//
-//        failure.movementMethod = LinkMovementMethod.getInstance()
-//        failure.setOnClickListener {
-//            goToPokemonScreen()
-//        }
-//
-//        presenter.getNextPokemon()
-//
-//        hint.setOnClickListener {
-//            if (pokemon != null) {
-//                val textColor = Color.WHITE
-//                var length = Snackbar.LENGTH_SHORT
-//                var snackbarText = ""
-//
-//                if (hints.size == 2) {
-//                    snackbarText = "No more hints"
-//                } else {
-//                    length = Snackbar.LENGTH_INDEFINITE
-//
-//                    val hint : Hint ?
-//                    val types = hints.map(Hint::hintType)
-//
-//                    if (types.contains(Hint.ABILITY)) {
-//                        val text = pokemon!!.types.map { it.type.name }
-//                        snackbarText = getString(R.string.hint_formatter, "types", text)
-//                        hint = Hint(snackbarText, Hint.TYPE)
-//
-//                        hints.add(hint)
-//                    } else {
-//                        val text = pokemon!!.abilities.map { it.ability.name }
-//                        snackbarText = getString(R.string.hint_formatter, "abilities", text)
-//                        hint = Hint(snackbarText, Hint.ABILITY)
-//
-//                        hints.add(hint)
-//                    }
-//                }
-//
-//                val snackbar = Snackbar.make(binding.root, snackbarText, length)
-//                        .setActionTextColor(textColor)
-//                        .setAction("Dismiss") { }
-//
-//                val textView = snackbar.view.findViewById(android.support.design.R.id.snackbar_text) as TextView
-//                textView.setTextColor(textColor)
-//
-//                snackbar.show()
-//            }
-//        }
+        toolbar.title = ""
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        failure.movementMethod = LinkMovementMethod.getInstance()
+        failure.setOnClickListener {
+            goToPokemonScreen()
+        }
+
+        hint.setOnClickListener {
+            if (pokemon != null) {
+                val textColor = Color.WHITE
+                var length = Snackbar.LENGTH_SHORT
+                var snackbarText = ""
+
+                if (hints.size == 2) {
+                    snackbarText = "No more hints"
+                } else {
+                    length = Snackbar.LENGTH_INDEFINITE
+
+                    val hint : Hint ?
+                    val types = hints.map(Hint::hintType)
+
+                    if (types.contains(Hint.ABILITY)) {
+                        val text = pokemon!!.types.map { it.type.name }
+                        snackbarText = getString(R.string.hint_formatter, "types", text)
+                        hint = Hint(snackbarText, Hint.TYPE)
+
+                        hints.add(hint)
+                    } else {
+                        val text = pokemon!!.abilities.map { it.ability.name }
+                        snackbarText = getString(R.string.hint_formatter, "abilities", text)
+                        hint = Hint(snackbarText, Hint.ABILITY)
+
+                        hints.add(hint)
+                    }
+                }
+
+                val snackbar = Snackbar.make(binding.root, snackbarText, length)
+                        .setActionTextColor(textColor)
+                        .setAction("Dismiss") { }
+
+                val textView = snackbar.view.findViewById(android.support.design.R.id.snackbar_text) as TextView
+                textView.setTextColor(textColor)
+
+                snackbar.show()
+            }
+        }
     }
 
     override fun inject(): QuizPresenter {
@@ -162,25 +160,21 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
                                     val backIcon = AnimUtils.colorFilter(toolbar.navigationIcon!!,
                                             R.color.icons, rgb)
 
-                                    val textScale = AnimUtils.textScale(failure, .8f, 1f)
                                     val alpha = AnimUtils.alpha(failure, 0f, 1f)
                                     val visible = AnimUtils.visible(failure)
 
                                     val set = AnimatorSet()
                                     set.playTogether(guessBackground, fabBackground, fabDrawable,
-                                            statusBar, backIcon, textScale, alpha, visible)
+                                            statusBar, backIcon, alpha, visible)
                                     set.start()
                                 }
-
-                        hideLoading()
                         timer.start(5, this@QuizActivity)
                         return false
                     }
 
                     override fun onException(e: Exception?, model: String?, target: Target<Bitmap>?,
                                              isFirstResource: Boolean): Boolean {
-                        Logger.error(QuizActivity::class.simpleName!!, "Glide error", e)
-                        showError()
+                        Log.e(QuizActivity::class.simpleName!!, "Glide error", e)
                         return false
                     }
                 })
@@ -200,46 +194,53 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
         }
     }
 
-    override fun showLoading() {
-        Glide.clear(image)
-        guess.setText("")
-        timer.stop()
-
-        progressDialog?.show() ?: ProgressDialog.show(this, "", "POKEMONOOOON")
-    }
-
-    override fun hideLoading() {
-        progressDialog?.hide()
-    }
-
     override fun showError() {
-        AlertDialog.Builder(this)
-                .setTitle("Shit")
-                .setMessage("BRUH")
-                .show()
+        image.setImageDrawable(getDrawable(R.drawable.ic_error_outline_black_24dp))
+        image.setOnClickListener {
+            presenter.getNextPokemon()
+        }
     }
 
-    override fun onTimeout() {
-        // run some shitty animation then go to Pokemon screen
-        // Just do some random stuff for now
+    override fun showLoading() {
+        image.setImageDrawable(null)
+        image.setOnClickListener(null)
+        image.clearColorFilter()
+
         guess.isEnabled = false
         fab.isEnabled = false
         hint.isEnabled = false
         grade.isEnabled = false
         failure.isEnabled = false
-        image.clearColorFilter()
 
-        timer.animate()
-                .scaleX(1.2f)
-                .scaleY(1.2f)
-                .setInterpolator(AnimUtils.decelerate)
-                .setDuration(2000)
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        goToPokemonScreen()
-                    }
-                })
-                .start()
+        val alpha = AnimUtils.alpha(failure, 0f, 1f)
+        val visible = AnimUtils.invisible(failure)
+        val set = AnimatorSet()
+        set.playTogether(alpha, visible)
+        set.start()
+    }
+
+    override fun onTimeout() {
+        // run some animation then go to Pokemon screen
+        // Just do some random stuff for now
+        presenter.getNextPokemon()
+//        guess.isEnabled = false
+//        fab.isEnabled = false
+//        hint.isEnabled = false
+//        grade.isEnabled = false
+//        failure.isEnabled = false
+//        image.clearColorFilter()
+//
+//        timer.animate()
+//                .scaleX(1.2f)
+//                .scaleY(1.2f)
+//                .setInterpolator(AnimUtils.decelerate)
+//                .setDuration(2000)
+//                .setListener(object : AnimatorListenerAdapter() {
+//                    override fun onAnimationEnd(animation: Animator?) {
+//                        goToPokemonScreen()
+//                    }
+//                })
+//                .start()
     }
 
     private fun goToPokemonScreen() {
