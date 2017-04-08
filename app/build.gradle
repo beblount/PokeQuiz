@@ -7,24 +7,20 @@ apply plugin: 'realm-android'
 def config = rootProject.extensions.getByName("ext")
 
 android {
-    compileSdkVersion config.getAt("compileSdkVersion")
-    buildToolsVersion config.getAt("buildToolsVersion")
+    compileSdkVersion config["compileSdkVersion"]
+    buildToolsVersion config["buildToolsVersion"]
 
     defaultConfig {
-        minSdkVersion config.getAt("minSdkVersion")
-        targetSdkVersion config.getAt("targetSdkVersion")
+        minSdkVersion config["minSdkVersion"]
+        targetSdkVersion config["targetSdkVersion"]
         versionCode config.getAt("versionCode")
-        versionName config.getAt("versionName")
-        applicationId config.getAt("applicationId")
+        versionName config["versionName"]
+        applicationId config["applicationId"]
         multiDexEnabled true
     }
 
     lintOptions {
         abortOnError false
-    }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
     }
 
     packagingOptions {
@@ -60,7 +56,6 @@ dependencies {
 
     compile dependencies.rxJava
     compile dependencies.rxAndroid
-    compile dependencies.rxJavaInterop
 
     compile dependencies.retrofit
     compile dependencies.retrofitGson
@@ -76,7 +71,7 @@ dependencies {
 }
 
 tasks.whenTaskAdded { task ->
-    if (task.name.equals("lintVitalRelease")) {
+    if (task.name == "lintVitalRelease") {
         task.enabled = false
     }
 }
