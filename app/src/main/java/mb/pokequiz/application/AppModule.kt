@@ -4,6 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
+import peele.miles.db.repository.LocalApi
+import peele.miles.db.repository.PokeRepository
+import peele.miles.db.repository.RealmRepository
+import mb.pokequiz.api.web.RemoteApi
 import javax.inject.Singleton
 
 /**
@@ -23,5 +27,15 @@ class AppModule(var application: PokeApplication) {
     @Singleton
     fun preferences() : SharedPreferences {
         return application.getSharedPreferences("pokemon", Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    fun pokeRepository(remoteApi: RemoteApi, localApi: LocalApi) : PokeRepository {
+        return PokeRepository(remoteApi, localApi)
+    }
+
+    @Provides
+    fun localApi() : LocalApi {
+        return RealmRepository()
     }
 }

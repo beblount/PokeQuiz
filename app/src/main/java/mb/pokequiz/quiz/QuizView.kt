@@ -1,6 +1,6 @@
 package mb.pokequiz.quiz
 
-import mb.pokequiz.domain.model.Pokemon
+import mb.pokequiz.api.model.Pokemon
 import mb.pokequiz.mvp.MvpView
 
 /**

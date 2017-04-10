@@ -1,7 +1,6 @@
 package mb.pokequiz.quiz
 
 import android.animation.AnimatorSet
-import android.app.ActivityOptions
 import android.app.ProgressDialog
 import android.content.res.ColorStateList
 import android.databinding.DataBindingUtil
@@ -25,11 +24,10 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.quiz.*
 import mb.pokequiz.R
+import mb.pokequiz.api.model.Hint
+import mb.pokequiz.api.model.Pokemon
 import mb.pokequiz.databinding.QuizBinding
-import mb.pokequiz.domain.model.Hint
-import mb.pokequiz.domain.model.Pokemon
 import mb.pokequiz.mvp.MvpActivity
-import mb.pokequiz.pokemon.PokemonActivity
 import mb.pokequiz.utils.AnimUtils
 import mb.pokequiz.utils.ColorsUtils
 import mb.pokequiz.utils.startAnim
@@ -74,16 +72,16 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
                     val hint : Hint ?
                     val types = hints.map(Hint::hintType)
 
-                    if (types.contains(Hint.ABILITY)) {
+                    if (types.contains(Hint.HintType.ABILITY)) {
                         val text = pokemon!!.types.map { it.type.name }
                         snackbarText = getString(R.string.hint_formatter, "types", text)
-                        hint = Hint(snackbarText, Hint.TYPE)
+                        hint = Hint(snackbarText, Hint.HintType.TYPE)
 
                         hints.add(hint)
                     } else {
                         val text = pokemon!!.abilities.map { it.ability.name }
                         snackbarText = getString(R.string.hint_formatter, "abilities", text)
-                        hint = Hint(snackbarText, Hint.ABILITY)
+                        hint = Hint(snackbarText, Hint.HintType.ABILITY)
 
                         hints.add(hint)
                     }
@@ -244,9 +242,5 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
     }
 
     private fun goToPokemonScreen() {
-        val intent = PokemonActivity.newIntent(this@QuizActivity, pokemon!!)
-        val options = ActivityOptions.makeSceneTransitionAnimation(this,
-                image, getString(R.string.to_pokemon_image))
-        startActivity(intent, options.toBundle())
     }
 }

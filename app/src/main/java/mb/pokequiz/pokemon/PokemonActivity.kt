@@ -1,7 +1,5 @@
 package mb.pokequiz.pokemon
 
-import android.content.Context
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
@@ -13,7 +11,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.pokemon.*
 import mb.pokequiz.R
-import mb.pokequiz.domain.model.Pokemon
+import mb.pokequiz.api.model.Pokemon
 import mb.pokequiz.databinding.PokemonBinding
 import mb.pokequiz.mvp.MvpActivity
 import mb.pokequiz.utils.ColorsUtils
@@ -25,24 +23,10 @@ class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>(
 
     lateinit var binding : PokemonBinding
 
-    companion object {
-
-        const val POKEMON_KEY = "pokemon"
-
-        fun newIntent(context: Context, pokemon: Pokemon) : Intent {
-            val intent = Intent(context, PokemonActivity::class.java)
-            intent.putExtra(POKEMON_KEY, pokemon)
-            return intent
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.pokemon)
-
-        val pokemon = intent.getParcelableExtra<Pokemon>(POKEMON_KEY)
-        onPokemonReceived(pokemon)
     }
 
     override fun inject(): PokemonPresenter {

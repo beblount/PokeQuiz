@@ -3,8 +3,7 @@ package mb.pokequiz.quiz
 import dagger.Module
 import dagger.Provides
 import mb.pokequiz.application.ActivityScope
-import mb.pokequiz.data.repository.PokeRepository
-import mb.pokequiz.domain.web.RemoteApi
+import peele.miles.db.repository.PokeRepository
 
 /**
  * Created by mbpeele on 12/27/16.
@@ -14,9 +13,8 @@ import mb.pokequiz.domain.web.RemoteApi
 class QuizModule {
 
     @Provides
-    fun presenter(remoteApi: RemoteApi) : QuizPresenter {
-        val repository = PokeRepository(remoteApi)
-        return QuizPresenter(repository)
+    fun presenter(pokeRepository: PokeRepository) : QuizPresenter {
+        return QuizPresenter(pokeRepository)
     }
 
 }

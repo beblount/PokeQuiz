@@ -2,7 +2,7 @@ package mb.pokequiz.quiz
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import mb.pokequiz.data.repository.PokeRepository
+import peele.miles.db.repository.PokeRepository
 import mb.pokequiz.mvp.BasePresenter
 import java.util.*
 

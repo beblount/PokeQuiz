@@ -1,0 +1,15 @@
+apply plugin: 'kotlin'
+
+def config = rootProject.extensions.getByName("ext")
+
+dependencies {
+    compile config.kotlin
+
+    def dependencies = config.appDependencies
+
+    compile dependencies.retrofit
+    compile dependencies.retrofitGson
+    compile dependencies.retrofitRx
+    compile dependencies.okHttp
+    compile dependencies.loggingInterceptor
+}

@@ -2,7 +2,7 @@ package mb.pokequiz.application
 
 import android.content.SharedPreferences
 import dagger.Component
-import mb.pokequiz.domain.web.RemoteApi
+import peele.miles.db.repository.PokeRepository
 import javax.inject.Singleton
 
 /**
@@ -14,6 +14,6 @@ interface AppComponent {
 
     fun preferences() : SharedPreferences
 
-    fun pokeApi() : RemoteApi
+    fun repository() : PokeRepository
 
 }

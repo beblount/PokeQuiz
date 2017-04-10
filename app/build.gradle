@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'realm-android'
 
 def config = rootProject.extensions.getByName("ext")
 
@@ -13,10 +12,9 @@ android {
     defaultConfig {
         minSdkVersion config["minSdkVersion"]
         targetSdkVersion config["targetSdkVersion"]
-        versionCode config.getAt("versionCode")
+        versionCode config["versionCode"]
         versionName config["versionName"]
         applicationId config["applicationId"]
-        multiDexEnabled true
     }
 
     lintOptions {
@@ -37,6 +35,8 @@ android {
 }
 
 dependencies {
+    compile project(':db')
+
     def dependencies = config.appDependencies
 
     compile config.kotlin
@@ -54,20 +54,7 @@ dependencies {
     compile dependencies.design
     compile dependencies.palette
 
-    compile dependencies.rxJava
     compile dependencies.rxAndroid
-
-    compile dependencies.retrofit
-    compile dependencies.retrofitGson
-    compile dependencies.retrofitRx
-    compile dependencies.okHttp
-    compile dependencies.loggingInterceptor
-
-    compile dependencies.fieldNamesHelper
-
-    testCompile testDependencies.junit
-    testCompile testDependencies.assertj
-    testCompile testDependencies.mockito
 }
 
 tasks.whenTaskAdded { task ->
