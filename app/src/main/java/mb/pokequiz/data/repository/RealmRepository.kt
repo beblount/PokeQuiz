@@ -16,9 +16,9 @@ import mb.pokequiz.domain.model.Pokemon
 /**
  * Created by mbpeele on 4/8/17.
  */
-class RealmRepository {
+class RealmRepository : LocalApi {
 
-    fun getPokemon(id : Int) : Observable<Pokemon> {
+    override fun getPokemon(id : Int) : Observable<Pokemon> {
         return getRealm()
                 .flatMap {
                     val entity = it.where(PokemonEntity::class.java)
@@ -31,7 +31,7 @@ class RealmRepository {
                 }
     }
 
-    fun cachePokemon(pokemon: Pokemon) {
+    override fun cachePokemon(pokemon: Pokemon) {
         getRealm()
                 .doOnNext {
                     it.executeTransactionAsync {
@@ -45,7 +45,12 @@ class RealmRepository {
         val observable : Observable<T> = Observable.create {
             it.onNext(entity)
 
-            val changeListener = RealmChangeListener<T> { element -> it.onNext(element) }
+            val changeListener = RealmChangeListener<T> { element ->
+                if (element.isLoaded && !element.isValid)
+                    it.onComplete()
+                else
+                  it.onNext(element)
+            }
 
             RealmObject.addChangeListener(entity, changeListener)
 
@@ -64,6 +69,7 @@ class RealmRepository {
             })
 
             it.onNext(realm)
+            it.onComplete()
         }
     }
 }

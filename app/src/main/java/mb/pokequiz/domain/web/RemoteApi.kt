@@ -10,7 +10,7 @@ import retrofit2.http.Path
  * Created by mbpeele on 12/11/16.
  */
 
-interface PokeApi {
+interface RemoteApi {
 
     @GET("pokedex/{id}")
     fun getPokedex(@Path("id") id: Int) : Observable<Pokedex>

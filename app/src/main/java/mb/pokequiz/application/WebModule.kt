@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
-import mb.pokequiz.domain.web.PokeApi
+import mb.pokequiz.domain.web.RemoteApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,8 +20,8 @@ import javax.inject.Singleton
 class WebModule {
 
     @Provides
-    fun pokeApi(retrofit: Retrofit) : PokeApi {
-        return retrofit.create(PokeApi::class.java)
+    fun pokeApi(retrofit: Retrofit) : RemoteApi {
+        return retrofit.create(RemoteApi::class.java)
     }
 
     @Provides
