@@ -13,7 +13,7 @@ abstract class MvpActivity<View : MvpView, Presenter : MvpPresenter<View>> : App
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        presenter = inject()
+        presenter = inject(application as PokeApplication)
         presenter.attach(this as View)
     }
 
@@ -22,7 +22,7 @@ abstract class MvpActivity<View : MvpView, Presenter : MvpPresenter<View>> : App
         presenter.detach()
     }
 
-    abstract fun inject() : Presenter
+    abstract fun inject(application: PokeApplication): Presenter
 
     fun appComponent() : AppComponent {
         return (application as PokeApplication).appComponent

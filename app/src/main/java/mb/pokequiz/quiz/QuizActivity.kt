@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.quiz.*
 import mb.pokequiz.R
 import mb.pokequiz.api.model.Hint
 import mb.pokequiz.api.model.Pokemon
+import mb.pokequiz.application.PokeApplication
 import mb.pokequiz.databinding.QuizBinding
 import mb.pokequiz.mvp.MvpActivity
 import mb.pokequiz.utils.AnimUtils
@@ -99,7 +100,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
         }
     }
 
-    override fun inject(): QuizPresenter {
+    override fun inject(application: PokeApplication): QuizPresenter {
         val component = DaggerQuizComponent.builder()
                 .appComponent(appComponent())
                 .quizModule(QuizModule())
@@ -220,7 +221,6 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
     override fun onTimeout() {
         // run some animation then go to Pokemon screen
         // Just do some random stuff for now
-        presenter.getNextPokemon()
 //        guess.isEnabled = false
 //        fab.isEnabled = false
 //        hint.isEnabled = false

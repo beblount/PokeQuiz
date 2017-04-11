@@ -12,6 +12,7 @@ import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.pokemon.*
 import mb.pokequiz.R
 import mb.pokequiz.api.model.Pokemon
+import mb.pokequiz.application.PokeApplication
 import mb.pokequiz.databinding.PokemonBinding
 import mb.pokequiz.mvp.MvpActivity
 import mb.pokequiz.utils.ColorsUtils
@@ -29,7 +30,7 @@ class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>(
         binding = DataBindingUtil.setContentView(this, R.layout.pokemon)
     }
 
-    override fun inject(): PokemonPresenter {
+    override fun inject(application: PokeApplication): PokemonPresenter {
         val component = DaggerPokemonComponent.builder()
                 .appComponent(appComponent())
                 .pokemonModule(PokemonModule())
