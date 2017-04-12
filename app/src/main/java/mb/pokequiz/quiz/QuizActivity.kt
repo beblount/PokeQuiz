@@ -1,7 +1,6 @@
 package mb.pokequiz.quiz
 
 import android.animation.AnimatorSet
-import android.app.ProgressDialog
 import android.content.res.ColorStateList
 import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
@@ -29,6 +28,7 @@ import mb.pokequiz.api.model.Pokemon
 import mb.pokequiz.application.PokeApplication
 import mb.pokequiz.databinding.QuizBinding
 import mb.pokequiz.mvp.MvpActivity
+import mb.pokequiz.pokemon.PokemonActivity
 import mb.pokequiz.utils.AnimUtils
 import mb.pokequiz.utils.ColorsUtils
 import mb.pokequiz.utils.startAnim
@@ -38,7 +38,6 @@ import java.util.*
 class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.TimerListener {
 
     lateinit var binding : QuizBinding
-    var progressDialog : ProgressDialog ?= null
     var pokemon : Pokemon?= null
     val hints : ArrayList<Hint> = ArrayList()
 
@@ -221,6 +220,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
     override fun onTimeout() {
         // run some animation then go to Pokemon screen
         // Just do some random stuff for now
+        goToPokemonScreen()
 //        guess.isEnabled = false
 //        fab.isEnabled = false
 //        hint.isEnabled = false
@@ -242,5 +242,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
     }
 
     private fun goToPokemonScreen() {
+        val intent = PokemonActivity.createIntent(this)
+        startActivity(intent)
     }
 }

@@ -5,6 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:ignore="missingPrefix" >
 
+    <data>
+        <variable
+            name="pokemon"
+            type="mb.pokequiz.api.model.Pokemon" />
+    </data>
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

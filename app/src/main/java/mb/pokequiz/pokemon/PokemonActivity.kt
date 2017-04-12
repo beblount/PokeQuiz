@@ -1,5 +1,7 @@
 package mb.pokequiz.pokemon
 
+import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
@@ -21,6 +23,12 @@ import mb.pokequiz.utils.ColorsUtils
  * Created by mbpeele on 12/29/16.
  */
 class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>() {
+
+    companion object {
+        fun createIntent(context: Context) : Intent {
+            return Intent(context, PokemonActivity::class.java)
+        }
+    }
 
     lateinit var binding : PokemonBinding
 

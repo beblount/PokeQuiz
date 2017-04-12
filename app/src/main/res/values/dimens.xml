@@ -13,4 +13,7 @@
 
     <dimen name="toolbar_elevation">6dp</dimen>
 
+    <!-- Elevation stuff -->
+    <dimen name="fab_elevation">6dp</dimen>
+
 </resources>

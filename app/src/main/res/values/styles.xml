@@ -13,6 +13,16 @@
         <item name="android:toolbarStyle">@style/PokeToolbar</item>
     </style>
 
+    <style name="Poke.FloatingActivity" >
+        <item name="android:windowBackground">@color/alpha_window_background</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
     <style name="Poke.Widget" parent="android:Widget" />
 
     <style name="PokeToolbar" parent="ThemeOverlay.AppCompat.ActionBar" >
