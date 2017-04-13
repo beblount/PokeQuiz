@@ -2,7 +2,6 @@ package mb.pokequiz.pokemon
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -25,8 +24,12 @@ import mb.pokequiz.utils.ColorsUtils
 class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>() {
 
     companion object {
-        fun createIntent(context: Context) : Intent {
-            return Intent(context, PokemonActivity::class.java)
+        private const val KEY_POKEMON_ID = "pokemonId"
+
+        fun createIntent(context: Context, pokemonId: Int) : Intent {
+            val intent = Intent(context, PokemonActivity::class.java)
+            intent.putExtra(KEY_POKEMON_ID, pokemonId)
+            return intent
         }
     }
 
@@ -36,6 +39,10 @@ class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>(
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.pokemon)
+
+        val id = intent.extras[KEY_POKEMON_ID] as Int
+        val pokemon = presenter.getPokemon(id)
+        loadView(pokemon)
     }
 
     override fun inject(application: PokeApplication): PokemonPresenter {
@@ -47,7 +54,7 @@ class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>(
         return component.presenter()
     }
 
-    fun onPokemonReceived(pokemon: Pokemon) {
+    fun loadView(pokemon: Pokemon) {
         Glide.with(this)
                 .load(pokemon.sprites.getFront())
                 .asBitmap()
@@ -57,16 +64,10 @@ class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>(
                         val palette = Palette.from(resource).generate()
                         val swatch = ColorsUtils.getMostPopulousSwatch(palette)
                         val rgb = swatch.rgb
-                        val lightenedColor = ColorsUtils.lighten(rgb, .15)
-                        val colorStateList = ColorStateList.valueOf(rgb)
-                        val contrastColor = ColorsUtils.contrast(rgb)
-                        val background = ColorsUtils.scrimify(rgb,
-                                ColorsUtils.isDark(rgb), .1f)
 
                         window.statusBarColor = rgb
-                        name.text = pokemon.name
-                        name.setTextColor(contrastColor)
-                        binding.root.setBackgroundColor(background)
+                        name.text = presenter.formatPokemonName(pokemon)
+                        name.setTextColor(rgb)
                         return false
                     }
 

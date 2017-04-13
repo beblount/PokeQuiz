@@ -14,10 +14,9 @@ data class Sprite(
         val front_shiny: String?) {
 
     fun getFront(): String? {
-        return firstNonNull(front_female, front_shiny_female, front_default, front_shiny)
-    }
-
-    private fun firstNonNull(vararg args: String?) : String? {
-        return args.firstOrNull { it != null }
+        return arrayOf(front_female, front_shiny_female, front_default, front_shiny)
+                .firstOrNull {
+                    it != null
+                }
     }
 }

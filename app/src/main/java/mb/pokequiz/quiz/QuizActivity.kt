@@ -38,7 +38,6 @@ import java.util.*
 class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.TimerListener {
 
     lateinit var binding : QuizBinding
-    var pokemon : Pokemon?= null
     val hints : ArrayList<Hint> = ArrayList()
 
     var rgb : Int = -1
@@ -54,12 +53,11 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         failure.movementMethod = LinkMovementMethod.getInstance()
-        failure.setOnClickListener {
-            goToPokemonScreen()
-        }
 
         hint.setOnClickListener {
-            if (pokemon != null) {
+            if (binding.pokemon != null) {
+                val pokemon = binding.pokemon!!
+
                 val textColor = Color.WHITE
                 var length = Snackbar.LENGTH_SHORT
                 var snackbarText = ""
@@ -73,13 +71,13 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
                     val types = hints.map(Hint::hintType)
 
                     if (types.contains(Hint.HintType.ABILITY)) {
-                        val text = pokemon!!.types.map { it.type.name }
+                        val text = pokemon.types.map { it.type.name }
                         snackbarText = getString(R.string.hint_formatter, "types", text)
                         hint = Hint(snackbarText, Hint.HintType.TYPE)
 
                         hints.add(hint)
                     } else {
-                        val text = pokemon!!.abilities.map { it.ability.name }
+                        val text = pokemon.abilities.map { it.ability.name }
                         snackbarText = getString(R.string.hint_formatter, "abilities", text)
                         hint = Hint(snackbarText, Hint.HintType.ABILITY)
 
@@ -109,7 +107,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
     }
 
     override fun onPokemonReceived(pokemon: Pokemon) {
-        this.pokemon = pokemon
+        binding.pokemon = pokemon
 
         guess.isEnabled = true
 
@@ -166,7 +164,12 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
                                             statusBar, backIcon, alpha, visible)
                                     set.start()
                                 }
+
                         timer.start(5, this@QuizActivity)
+
+                        failure.setOnClickListener {
+                            goToPokemonScreen(binding.pokemon.id)
+                        }
                         return false
                     }
 
@@ -185,7 +188,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
                 guess.isEnabled = false
                 timer.stop()
 
-                goToPokemonScreen()
+                goToPokemonScreen(pokemon.id)
             } else {
                 fab.drawable.startAnim()
             }
@@ -209,6 +212,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
         hint.isEnabled = false
         grade.isEnabled = false
         failure.isEnabled = false
+        failure.setOnClickListener(null)
 
         val alpha = AnimUtils.alpha(failure, 0f, 1f)
         val visible = AnimUtils.invisible(failure)
@@ -220,7 +224,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
     override fun onTimeout() {
         // run some animation then go to Pokemon screen
         // Just do some random stuff for now
-        goToPokemonScreen()
+        goToPokemonScreen(binding.pokemon.id)
 //        guess.isEnabled = false
 //        fab.isEnabled = false
 //        hint.isEnabled = false
@@ -241,8 +245,8 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
 //                .start()
     }
 
-    private fun goToPokemonScreen() {
-        val intent = PokemonActivity.createIntent(this)
+    private fun goToPokemonScreen(pokemonId: Int) {
+        val intent = PokemonActivity.createIntent(this, pokemonId)
         startActivity(intent)
     }
 }

@@ -3,6 +3,7 @@ package mb.pokequiz.pokemon
 import dagger.Module
 import dagger.Provides
 import mb.pokequiz.application.ActivityScope
+import peele.miles.db.repository.PokeRepository
 
 /**
  * Created by mbpeele on 12/29/16.
@@ -13,7 +14,7 @@ class PokemonModule {
 
     @Provides
     @ActivityScope
-    fun presenter() : PokemonPresenter {
-        return PokemonPresenter()
+    fun presenter(pokeRepository: PokeRepository) : PokemonPresenter {
+        return PokemonPresenter(pokeRepository)
     }
 }

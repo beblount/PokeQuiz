@@ -12,12 +12,14 @@ class PokeRepository(private val remoteApi: RemoteApi, private val localApi: Loc
 
     fun getPokemonById(id: Int) : Single<Pokemon> {
         val web = remoteApi.getPokemon(id)
-                .doOnNext {
+                .doOnSuccess {
                     localApi.cachePokemon(it)
                 }
+                .toObservable()
 
-        return Observable.concat(web, localApi.getPokemon(id))
-                .firstOrError()
+        val local = localApi.getPokemon(id)
+
+        return Observable.merge(web, local).firstOrError()
     }
 
 }

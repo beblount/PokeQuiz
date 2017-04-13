@@ -1,6 +1,7 @@
 package peele.miles.db.repository
 
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.disposables.Disposables
 import io.realm.Realm
 import io.realm.RealmChangeListener
@@ -17,7 +18,7 @@ class RealmRepository : LocalApi {
 
     override fun getPokemon(id : Int) : Observable<Pokemon> {
         return getRealm()
-                .flatMap {
+                .flatMapObservable {
                     val entity = it.where(PokemonEntity::class.java)
                             .equalTo(PokemonEntityFields.ID, id)
                             .findFirstAsync()
@@ -29,13 +30,14 @@ class RealmRepository : LocalApi {
     }
 
     override fun cachePokemon(pokemon: Pokemon) {
-        getRealm()
-                .doOnNext {
+        val disposable = getRealm()
+                .map {
                     it.executeTransactionAsync {
                         val entity = PokemonMapper.toEntity(pokemon)
                         it.insertOrUpdate(entity)
                     }
                 }
+                .subscribe()
     }
 
     private fun <T : RealmObject> createRealmObservable(entity: T) : Observable<T> {
@@ -57,16 +59,15 @@ class RealmRepository : LocalApi {
         return observable.filter { it.isLoaded }
     }
 
-    private fun getRealm() : Observable<Realm> {
-        return Observable.create {
+    private fun getRealm() : Single<Realm> {
+        return Single.create {
             val realm = Realm.getDefaultInstance()
 
             it.setDisposable(Disposables.fromRunnable {
                 realm.close()
             })
 
-            it.onNext(realm)
-            it.onComplete()
+            it.onSuccess(realm)
         }
     }
 }
