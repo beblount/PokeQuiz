@@ -14,6 +14,8 @@ class PokemonPresenter(val pokeRepository: PokeRepository) : BasePresenter<Pokem
     }
 
     fun formatPokemonName(pokemon: Pokemon) : String {
-        return pokemon.name.capitalize()
+        val name = pokemon.name.capitalize()
+        val order = "#" + pokemon.order
+        return String.format("%s %s", name, order)
     }
 }

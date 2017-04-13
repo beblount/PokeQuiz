@@ -42,7 +42,7 @@ class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>(
 
         val id = intent.extras[KEY_POKEMON_ID] as Int
         val pokemon = presenter.getPokemon(id)
-        loadView(pokemon)
+        loadImage(pokemon)
     }
 
     override fun inject(application: PokeApplication): PokemonPresenter {
@@ -54,7 +54,7 @@ class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>(
         return component.presenter()
     }
 
-    fun loadView(pokemon: Pokemon) {
+    fun loadImage(pokemon: Pokemon) {
         Glide.with(this)
                 .load(pokemon.sprites.getFront())
                 .asBitmap()

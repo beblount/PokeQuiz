@@ -1,9 +1,9 @@
 package mb.pokequiz.api.web
 
-import io.reactivex.Observable
 import io.reactivex.Single
 import mb.pokequiz.api.model.Pokedex
 import mb.pokequiz.api.model.Pokemon
+import mb.pokequiz.api.model.Species
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -18,5 +18,8 @@ interface RemoteApi {
 
     @GET("pokemon/{id}")
     fun getPokemon(@Path("id") id: Int) : Single<Pokemon>
+
+    @GET("pokemon-species/{id}")
+    fun getSpecies(@Path("id") id: Int) : Single<Species>
 
 }
