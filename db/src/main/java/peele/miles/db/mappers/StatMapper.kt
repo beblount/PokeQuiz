@@ -6,15 +6,15 @@ import peele.miles.db.entity.StatEntity
 /**
  * Created by mbpeele on 12/26/16.
  */
-object StatMapper {
+object StatMapper : Mapper<Stat, StatEntity> {
 
-    fun toModel(entity: StatEntity): Stat {
+    override fun toModel(entity: StatEntity): Stat {
         return Stat(entity.base_stat!!,
                 entity.effort!!,
                 NamedResourceMapper.toModel(entity.stat!!))
     }
 
-    fun toEntity(model: Stat): StatEntity {
+    override fun toEntity(model: Stat): StatEntity {
         val entity = StatEntity()
         entity.effort = model.effort
         entity.base_stat = model.base_stat

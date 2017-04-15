@@ -1,5 +1,7 @@
 package mb.pokequiz.pokemon
 
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
 import mb.pokequiz.api.model.Pokemon
 import mb.pokequiz.mvp.BasePresenter
 import peele.miles.db.repository.PokeRepository
@@ -9,8 +11,12 @@ import peele.miles.db.repository.PokeRepository
  */
 class PokemonPresenter(val pokeRepository: PokeRepository) : BasePresenter<PokemonView>() {
 
-    fun getPokemon(id: Int) : Pokemon {
-        return pokeRepository.getPokemonById(id).blockingGet()
+    fun getPokemon(id: Int) {
+        pokeRepository.getPokemonById(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(Consumer {
+                    get()?.onPokemonReceived(it)
+                })
     }
 
     fun formatPokemonName(pokemon: Pokemon) : String {

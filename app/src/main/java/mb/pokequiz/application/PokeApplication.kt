@@ -1,8 +1,7 @@
 package mb.pokequiz.application
 
 import android.app.Application
-import io.realm.Realm
-import io.realm.RealmConfiguration
+import peele.miles.db.Database
 
 /**
  * Created by mbpeele on 2/1/16.
@@ -15,11 +14,7 @@ class PokeApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Realm.init(this)
-        val config = RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build()
-        Realm.setDefaultConfiguration(config)
+        Database.init(this)
 
         appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))

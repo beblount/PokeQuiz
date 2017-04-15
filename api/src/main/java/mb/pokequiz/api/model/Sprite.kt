@@ -19,4 +19,17 @@ data class Sprite(
                     it != null
                 }
     }
+
+    fun nonNullCount(): Int {
+        return arrayOf(front_female, front_shiny_female, front_default, front_shiny,
+                back_female, back_shiny_female, back_default, back_shiny)
+                .filterNotNull()
+                .size
+    }
+
+    fun nonNullImages() : List<String> {
+        return arrayOf(front_female, front_shiny_female, front_default, front_shiny,
+                back_female, back_shiny_female, back_default, back_shiny)
+                .filterNotNull()
+    }
 }

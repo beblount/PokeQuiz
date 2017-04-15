@@ -6,16 +6,16 @@ import peele.miles.db.entity.NameEntity
 /**
  * Created by mbpeele on 12/26/16.
  */
-object NameMapper {
+object NameMapper : Mapper<Name, NameEntity> {
 
-    fun toEntity(model: Name): NameEntity {
+    override fun toEntity(model: Name): NameEntity {
         val entity = NameEntity()
         entity.name = model.name
         entity.language = NamedResourceMapper.toEntity(model.language)
         return entity
     }
 
-    fun toModel(entity: NameEntity): Name {
+    override fun toModel(entity: NameEntity): Name {
         return Name(entity.name!!,
                 NamedResourceMapper.toModel(entity.language!!))
     }

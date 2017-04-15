@@ -6,16 +6,16 @@ import peele.miles.db.entity.DescriptionEntity
 /**
  * Created by mbpeele on 12/26/16.
  */
-object DescriptionMapper {
+object DescriptionMapper : Mapper<Description, DescriptionEntity> {
 
-    fun toEntity(model: Description): DescriptionEntity {
+    override fun toEntity(model: Description): DescriptionEntity {
         val entity = DescriptionEntity()
         entity.language = NamedResourceMapper.toEntity(model.language)
         entity.description = model.description
         return entity
     }
 
-    fun toModel(entity: DescriptionEntity): Description {
+    override fun toModel(entity: DescriptionEntity): Description {
         return Description(entity.description!!,
                 NamedResourceMapper.toModel(entity.language!!))
     }

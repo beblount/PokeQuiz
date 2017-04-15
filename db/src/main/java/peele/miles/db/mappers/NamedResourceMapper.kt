@@ -6,13 +6,13 @@ import peele.miles.db.entity.NamedResourceEntity
 /**
  * Created by mbpeele on 12/26/16.
  */
-object NamedResourceMapper {
+object NamedResourceMapper : Mapper<NamedResource, NamedResourceEntity> {
 
-    fun toModel(entity: NamedResourceEntity): NamedResource {
+    override fun toModel(entity: NamedResourceEntity): NamedResource {
         return NamedResource(entity.name!!, entity.url!!)
     }
 
-    fun toEntity(model: NamedResource): NamedResourceEntity {
+    override fun toEntity(model: NamedResource): NamedResourceEntity {
         val entity = NamedResourceEntity()
         entity.name = model.name
         entity.url = model.url

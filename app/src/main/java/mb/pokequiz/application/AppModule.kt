@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
-import peele.miles.db.repository.LocalApi
+import peele.miles.db.repository.realm.LocalApi
 import peele.miles.db.repository.PokeRepository
-import peele.miles.db.repository.RealmRepository
+import peele.miles.db.repository.realm.RealmRepository
 import mb.pokequiz.api.web.RemoteApi
 import javax.inject.Singleton
 

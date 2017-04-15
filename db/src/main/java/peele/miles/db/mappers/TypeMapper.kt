@@ -6,14 +6,14 @@ import peele.miles.db.entity.TypeEntity
 /**
  * Created by mbpeele on 1/1/17.
  */
-object TypeMapper {
+object TypeMapper : Mapper<Type, TypeEntity> {
 
-    fun toModel(entity: TypeEntity): Type {
+    override fun toModel(entity: TypeEntity): Type {
         return Type(entity.slot!!,
                 NamedResourceMapper.toModel(entity.type!!))
     }
 
-    fun toEntity(model: Type): TypeEntity {
+    override fun toEntity(model: Type): TypeEntity {
         val entity = TypeEntity()
         entity.slot = model.slot
         entity.type = NamedResourceMapper.toEntity(model.type)

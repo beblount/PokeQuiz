@@ -2,8 +2,8 @@ package mb.pokequiz.quiz
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import peele.miles.db.repository.PokeRepository
 import mb.pokequiz.mvp.BasePresenter
+import peele.miles.db.repository.PokeRepository
 import java.util.*
 
 /**
@@ -24,7 +24,8 @@ class QuizPresenter(val repository: PokeRepository) : BasePresenter<QuizView>() 
         while (int == 0) {
             int = random.nextInt(721)
         }
-        randomPokemonDisposable = repository.getPokemonById(int).toObservable()
+        randomPokemonDisposable =
+                repository.getPokemonById(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
                     get()?.showLoading()

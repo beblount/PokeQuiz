@@ -37,14 +37,14 @@ import java.util.*
 
 class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.TimerListener {
 
-    lateinit var binding : QuizBinding
     val hints : ArrayList<Hint> = ArrayList()
+    var pokemon: Pokemon ?= null
 
     var rgb : Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<QuizBinding>(this, R.layout.quiz)
+        DataBindingUtil.setContentView<QuizBinding>(this, R.layout.quiz)
 
         presenter.getNextPokemon()
 
@@ -55,8 +55,8 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
         failure.movementMethod = LinkMovementMethod.getInstance()
 
         hint.setOnClickListener {
-            if (binding.pokemon != null) {
-                val pokemon = binding.pokemon!!
+            if (pokemon != null) {
+                val pokemon = pokemon!!
 
                 val textColor = Color.WHITE
                 var length = Snackbar.LENGTH_SHORT
@@ -85,7 +85,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
                     }
                 }
 
-                val snackbar = Snackbar.make(binding.root, snackbarText, length)
+                val snackbar = Snackbar.make(root, snackbarText, length)
                         .setActionTextColor(textColor)
                         .setAction("Dismiss") { }
 
@@ -107,7 +107,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
     }
 
     override fun onPokemonReceived(pokemon: Pokemon) {
-        binding.pokemon = pokemon
+        this.pokemon = pokemon
 
         guess.isEnabled = true
 
@@ -168,7 +168,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
                         timer.start(5, this@QuizActivity)
 
                         failure.setOnClickListener {
-                            goToPokemonScreen(binding.pokemon.id)
+                            goToPokemonScreen(pokemon.id)
                         }
                         return false
                     }
@@ -224,7 +224,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
     override fun onTimeout() {
         // run some animation then go to Pokemon screen
         // Just do some random stuff for now
-        goToPokemonScreen(binding.pokemon.id)
+        goToPokemonScreen(pokemon!!.id)
 //        guess.isEnabled = false
 //        fab.isEnabled = false
 //        hint.isEnabled = false

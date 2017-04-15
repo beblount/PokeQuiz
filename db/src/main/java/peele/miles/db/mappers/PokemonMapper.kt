@@ -8,9 +8,9 @@ import peele.miles.db.mappers.MapperFuncs.modelList
 /**
  * Created by mbpeele on 12/26/16.
  */
-object PokemonMapper {
+object PokemonMapper : Mapper<Pokemon, PokemonEntity> {
 
-    fun toModel(entity: PokemonEntity): Pokemon {
+    override fun toModel(entity: PokemonEntity): Pokemon {
         val types = modelList(entity.types, {
             TypeMapper.toModel(it)
         })
@@ -45,7 +45,7 @@ object PokemonMapper {
                 types)
     }
 
-    fun toEntity(model: Pokemon): PokemonEntity {
+    override fun toEntity(model: Pokemon): PokemonEntity {
         val entity = PokemonEntity()
 
         entity.id = model.id

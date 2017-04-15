@@ -6,15 +6,15 @@ import peele.miles.db.entity.AbilityEntity
 /**
  * Created by mbpeele on 1/1/17.
  */
-object AbilityMapper {
+object AbilityMapper : Mapper<Ability, AbilityEntity> {
 
-    fun toModel(entity: AbilityEntity): Ability {
+    override fun toModel(entity: AbilityEntity): Ability {
         return Ability(entity.is_hidden!!,
                 entity.slot!!,
                 NamedResourceMapper.toModel(entity.ability!!))
     }
 
-    fun toEntity(model: Ability): AbilityEntity {
+    override fun toEntity(model: Ability): AbilityEntity {
         val entity = AbilityEntity()
         entity.is_hidden = model.is_hidden
         entity.slot = model.slot

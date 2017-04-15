@@ -8,9 +8,9 @@ import peele.miles.db.mappers.MapperFuncs.modelList
 /**
  * Created by mbpeele on 12/26/16.
  */
-object PokeDexMapper {
+object PokeDexMapper : Mapper<Pokedex, PokedexEntity> {
 
-     fun toEntity(model: Pokedex): PokedexEntity {
+     override fun toEntity(model: Pokedex): PokedexEntity {
         val entity = PokedexEntity()
 
         val names = entityList(model.names, {
@@ -38,7 +38,7 @@ object PokeDexMapper {
         return entity
     }
 
-    fun toModel(entity: PokedexEntity): Pokedex {
+    override fun toModel(entity: PokedexEntity): Pokedex {
         val names = modelList(entity.names, {
             NameMapper.toModel(it)
         })

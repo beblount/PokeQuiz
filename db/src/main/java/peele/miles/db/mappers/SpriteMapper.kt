@@ -6,9 +6,9 @@ import peele.miles.db.entity.SpriteEntity
 /**
  * Created by mbpeele on 12/26/16.
  */
-object SpriteMapper {
+object SpriteMapper : Mapper<Sprite, SpriteEntity> {
 
-    fun toModel(entity: SpriteEntity): Sprite {
+    override fun toModel(entity: SpriteEntity): Sprite {
         return Sprite(entity.back_female,
                 entity.back_shiny_female,
                 entity.back_default,
@@ -19,7 +19,7 @@ object SpriteMapper {
                 entity.front_shiny)
     }
 
-    fun toEntity(model: Sprite): SpriteEntity {
+    override fun toEntity(model: Sprite): SpriteEntity {
         val entity = SpriteEntity()
         entity.back_default = model.back_default
         entity.back_female = model.back_female
