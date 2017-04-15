@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import mb.pokequiz.application.AppComponent
 import mb.pokequiz.application.PokeApplication
+import mb.pokequiz.presentation.mvp.MvpPresenter
+import mb.pokequiz.presentation.mvp.MvpView
 
-abstract class MvpActivity<View : MvpView, Presenter : MvpPresenter<View>> : AppCompatActivity() {
+abstract class MvpActivity<in View : MvpView, Presenter : MvpPresenter<View>> : AppCompatActivity() {
 
     lateinit var presenter : Presenter
 
@@ -27,6 +29,4 @@ abstract class MvpActivity<View : MvpView, Presenter : MvpPresenter<View>> : App
     fun appComponent() : AppComponent {
         return (application as PokeApplication).appComponent
     }
-
-
 }

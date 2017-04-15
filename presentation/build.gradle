@@ -1,0 +1,9 @@
+apply plugin: 'kotlin'
+
+def config = rootProject.extensions.getByName("ext")
+
+dependencies {
+    compile project(':api')
+
+    compile config.kotlin
+}

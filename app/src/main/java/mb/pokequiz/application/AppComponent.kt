@@ -2,7 +2,8 @@ package mb.pokequiz.application
 
 import android.content.SharedPreferences
 import dagger.Component
-import peele.miles.db.repository.PokeRepository
+import mb.pokequiz.api.source.PokeApi
+import mb.pokequiz.presentation.mvp.SchedulerProvider
 import javax.inject.Singleton
 
 /**
@@ -14,6 +15,8 @@ interface AppComponent {
 
     fun preferences() : SharedPreferences
 
-    fun repository() : PokeRepository
+    fun repository() : PokeApi
+
+    fun schedulerProvider() : SchedulerProvider
 
 }

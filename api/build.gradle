@@ -7,6 +7,8 @@ dependencies {
 
     def dependencies = config.appDependencies
 
+    compile dependencies.rxJava
+
     compile dependencies.retrofit
     compile dependencies.retrofitGson
     compile dependencies.retrofitRx

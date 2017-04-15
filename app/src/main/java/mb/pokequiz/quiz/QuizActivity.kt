@@ -29,6 +29,8 @@ import mb.pokequiz.application.PokeApplication
 import mb.pokequiz.databinding.QuizBinding
 import mb.pokequiz.mvp.MvpActivity
 import mb.pokequiz.pokemon.PokemonActivity
+import mb.pokequiz.presentation.quiz.QuizPresenter
+import mb.pokequiz.presentation.quiz.QuizView
 import mb.pokequiz.utils.AnimUtils
 import mb.pokequiz.utils.ColorsUtils
 import mb.pokequiz.utils.startAnim

@@ -1,0 +1,22 @@
+package mb.pokequiz.db.mappers
+
+import mb.pokequiz.api.model.Type
+import mb.pokequiz.db.entity.TypeEntity
+
+/**
+ * Created by mbpeele on 1/1/17.
+ */
+object TypeMapper : Mapper<Type, TypeEntity> {
+
+    override fun toModel(entity: TypeEntity): Type {
+        return Type(entity.slot!!,
+                NamedResourceMapper.toModel(entity.type!!))
+    }
+
+    override fun toEntity(model: Type): TypeEntity {
+        val entity = TypeEntity()
+        entity.slot = model.slot
+        entity.type = NamedResourceMapper.toEntity(model.type)
+        return entity
+    }
+}

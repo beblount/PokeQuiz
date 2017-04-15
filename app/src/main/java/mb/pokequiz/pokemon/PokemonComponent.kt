@@ -3,6 +3,7 @@ package mb.pokequiz.pokemon
 import dagger.Component
 import mb.pokequiz.application.ActivityScope
 import mb.pokequiz.application.AppComponent
+import mb.pokequiz.presentation.pokemon.PokemonPresenter
 
 /**
  * Created by mbpeele on 12/29/16.

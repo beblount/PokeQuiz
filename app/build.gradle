@@ -36,6 +36,7 @@ android {
 
 dependencies {
     compile project(':db')
+    compile project(':presentation')
 
     def dependencies = config.appDependencies
 

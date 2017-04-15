@@ -4,10 +4,15 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
-import peele.miles.db.repository.realm.LocalApi
-import peele.miles.db.repository.PokeRepository
-import peele.miles.db.repository.realm.RealmRepository
-import mb.pokequiz.api.web.RemoteApi
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import mb.pokequiz.api.source.LocalApi
+import mb.pokequiz.api.source.PokeApi
+import mb.pokequiz.api.source.RemoteApi
+import mb.pokequiz.db.repository.PokeRepository
+import mb.pokequiz.db.repository.realm.RealmRepository
+import mb.pokequiz.presentation.mvp.SchedulerProvider
 import javax.inject.Singleton
 
 /**
@@ -30,12 +35,37 @@ class AppModule(var application: PokeApplication) {
     }
 
     @Provides
-    fun pokeRepository(remoteApi: RemoteApi, localApi: LocalApi) : PokeRepository {
+    fun pokeRepository(remoteApi: RemoteApi, localApi: LocalApi) : PokeApi {
         return PokeRepository(remoteApi, localApi)
     }
 
     @Provides
     fun localApi() : LocalApi {
         return RealmRepository()
+    }
+
+    @Provides
+    fun schedulerProvider() : SchedulerProvider {
+        return object : SchedulerProvider {
+            override fun ui(): Scheduler {
+                return AndroidSchedulers.mainThread()
+            }
+
+            override fun computation(): Scheduler {
+                return Schedulers.computation()
+            }
+
+            override fun trampoline(): Scheduler {
+                return Schedulers.trampoline()
+            }
+
+            override fun newThread(): Scheduler {
+                return Schedulers.newThread()
+            }
+
+            override fun io(): Scheduler {
+                return Schedulers.io()
+            }
+        }
     }
 }

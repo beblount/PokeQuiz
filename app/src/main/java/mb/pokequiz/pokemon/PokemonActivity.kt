@@ -10,6 +10,8 @@ import mb.pokequiz.api.model.Pokemon
 import mb.pokequiz.application.PokeApplication
 import mb.pokequiz.databinding.PokemonBinding
 import mb.pokequiz.mvp.MvpActivity
+import mb.pokequiz.presentation.pokemon.PokemonPresenter
+import mb.pokequiz.presentation.pokemon.PokemonView
 
 /**
  * Created by mbpeele on 12/29/16.
