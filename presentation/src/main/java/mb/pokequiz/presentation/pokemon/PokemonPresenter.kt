@@ -5,7 +5,7 @@ import mb.pokequiz.api.model.Pokemon
 import mb.pokequiz.api.source.PokeApi
 import mb.pokequiz.presentation.mvp.BasePresenter
 import mb.pokequiz.presentation.mvp.SchedulerProvider
-import mb.pokequiz.presentation.pokemon.PokemonView
+import mb.pokequiz.utils.length
 
 /**
  * Created by mbpeele on 12/29/16.
@@ -22,7 +22,7 @@ class PokemonPresenter(val pokeApi: PokeApi, schedulerProvider: SchedulerProvide
 
     fun formatPokemonName(pokemon: Pokemon) : String {
         val name = pokemon.name.capitalize()
-        val order = "#" + pokemon.order
-        return String.format("%s %s", name, order)
+        val orderString = "#" + "0".repeat(3 - pokemon.order.length()) + pokemon.order
+        return String.format("%s %s", name, orderString)
     }
 }

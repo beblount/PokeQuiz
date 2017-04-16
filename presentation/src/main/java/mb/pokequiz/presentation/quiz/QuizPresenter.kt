@@ -24,8 +24,7 @@ class QuizPresenter(val pokeApi: PokeApi, schedulerProvider: SchedulerProvider) 
         while (int == 0) {
             int = random.nextInt(721)
         }
-        randomPokemonDisposable =
-                pokeApi.getPokemonById(1)
+        randomPokemonDisposable = pokeApi.getPokemonById(int)
                 .observeOn(schedulerProvider.ui())
                 .doOnSubscribe {
                     get()?.showLoading()

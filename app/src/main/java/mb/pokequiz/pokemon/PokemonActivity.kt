@@ -35,6 +35,8 @@ class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>(
 
         binding = DataBindingUtil.setContentView(this, R.layout.pokemon)
 
+        tabLayout.setupWithViewPager(pager)
+
         val id = intent.extras[KEY_POKEMON_ID] as Int
         presenter.getPokemon(id)
     }
@@ -49,7 +51,7 @@ class PokemonActivity : PokemonView, MvpActivity<PokemonView, PokemonPresenter>(
     }
 
     override fun onPokemonReceived(pokemon: Pokemon) {
-        val adapter = PokemonFormsPagerAdapter(this, pokemon)
+        val adapter = PokemonFormsPagerAdapter(this, tabLayout, pokemon)
         pager.adapter = adapter
         name.text = presenter.formatPokemonName(pokemon)
     }

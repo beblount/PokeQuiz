@@ -32,6 +32,10 @@ android {
     dexOptions {
         preDexLibraries true
     }
+
+    kapt {
+        generateStubs = true
+    }
 }
 
 dependencies {
