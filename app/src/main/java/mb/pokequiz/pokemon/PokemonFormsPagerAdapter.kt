@@ -34,7 +34,7 @@ class PokemonFormsPagerAdapter(val activity: Activity, val tabLayout: TabLayout,
         val binding = DataBindingUtil.inflate<PokemonImageBinding>(inflater, R.layout.pokemon_image, container, false)
         container.addView(binding.root)
 
-        load(position, data[position], binding)
+        load(data[position], binding)
 
         return binding.root
     }
@@ -55,7 +55,7 @@ class PokemonFormsPagerAdapter(val activity: Activity, val tabLayout: TabLayout,
         return ""
     }
 
-    private fun load(position: Int, url: String, binding: PokemonImageBinding) {
+    private fun load(url: String, binding: PokemonImageBinding) {
         Glide.with(activity)
                 .load(url)
                 .asBitmap()

@@ -28,14 +28,6 @@ android {
     dataBinding {
         enabled = true
     }
-
-    dexOptions {
-        preDexLibraries true
-    }
-
-    kapt {
-        generateStubs = true
-    }
 }
 
 dependencies {
@@ -60,10 +52,4 @@ dependencies {
     compile dependencies.palette
 
     compile dependencies.rxAndroid
-}
-
-tasks.whenTaskAdded { task ->
-    if (task.name == "lintVitalRelease") {
-        task.enabled = false
-    }
 }

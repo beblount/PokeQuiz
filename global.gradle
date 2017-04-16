@@ -10,28 +10,19 @@ ext {
 
     // Library Versions
     daggerVersion = '2.9'
-
     rxJavaVersion = '2.0.2'
-
     rxAndroidVersion = '2.0.1'
-
     androidSupportVersion = '25.1.0'
-
     retrofitVersion = '2.2.0'
-
-    conductorVersion = '2.0.4'
-
     fieldNamesHelperVersion = '1.1.0'
-
     kotlinVersion = '1.1.1'
-
     databindingVersion = '2.4.0-alpha4'
-
     javaxVersion = '10.0-b28'
-
     okHttpVersion = '3.4.1'
-
     glideVersion = '3.7.0'
+
+    kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+    kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
 
     appDependencies = [
             dagger: "com.google.dagger:dagger:${daggerVersion}",
@@ -68,7 +59,4 @@ ext {
             mockito: "org.mockito:mockito-core:${mockitoVersion}",
             assertj: "org.assertj:assertj-core:${assertJVersion}",
     ]
-
-    kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
-    kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
 }
