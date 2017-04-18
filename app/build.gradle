@@ -53,3 +53,10 @@ dependencies {
 
     compile dependencies.rxAndroid
 }
+
+task restart(type: Exec) {
+    commandLine 'adb', 'shell', 'am', 'start', '-n', "${config["applicationId"]}/.quiz.QuizActivity"
+}
+
+restart.dependsOn clean
+restart.dependsOn 'installDebug'

@@ -8,7 +8,7 @@
 
     <path
         android:name="close"
-        android:fillColor="@color/icons"
+        android:fillColor="@android:color/black"
         android:pathData="@string/close_path" />
 
 </vector>

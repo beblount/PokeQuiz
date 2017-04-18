@@ -11,11 +11,6 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true" >
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize" />
-
         <LinearLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
@@ -36,6 +31,7 @@
                 tools:src="@android:drawable/btn_star_big_off" />
 
             <LinearLayout
+                android:id="@+id/quizControls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -46,6 +42,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:drawableTop="@drawable/ic_help_outline_black_36dp"
+                    android:text="@string/quiz_hint"
                     app:font="@{@string/pokemon_bit}"
                     style="@style/Poke.Widget.InlineActionButton"
                     tools:text="2 Hints" />
@@ -62,6 +59,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:drawableTop="@drawable/ic_history_black_36dp"
+                    android:text="@string/score_hint"
                     app:font="@{@string/pokemon_bit}"
                     style="@style/Poke.Widget.InlineActionButton"
                     tools:text="100%" />
@@ -89,8 +87,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/medium_spacing"
-                android:paddingBottom="@dimen/large_spacing"
+                android:paddingTop="@dimen/medium_spacing"
+                android:paddingBottom="@dimen/medium_spacing"
                 android:text="@string/failure_text"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
@@ -98,18 +96,49 @@
                 app:font="@{@string/pokemon_bit}"
                 tools:visibility="visible" />
 
+            <LinearLayout
+                android:id="@+id/postQuizControls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible" >
+
+                <Button
+                    android:id="@+id/keepPlaying"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/quiz_continue"
+                    app:font="@{@string/pokemon_bit}"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+                <Button
+                    android:id="@+id/seeDetails"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/quiz_details"
+                    app:font="@{@string/pokemon_bit}"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:layout_gravity="bottom|end"
-            android:src="@drawable/ic_check_to_close_to_check"
-            app:layout_anchor="@id/content"
-            app:layout_anchorGravity="bottom|end"
-            app:layout_behavior="mb.pokequiz.widget.SnackbarBehavior" />
+        <mb.pokequiz.widget.LoadingPokeball
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/fab_elevation"
+            android:visibility="invisible"
+            tools:visibility="gone" />
+
+        <mb.pokequiz.widget.ErrorView
+            android:id="@+id/error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:visibility="gone" />
 
     </android.support.design.widget.CoordinatorLayout>
 

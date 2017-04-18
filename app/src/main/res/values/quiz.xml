@@ -4,5 +4,11 @@
     <string name="score_hint">Score</string>
     <string name="failure_text">I don\'t know!</string>
 
+    <string name="quiz_continue">Continue</string>
+    <string name="quiz_details">Details</string>
+
     <string name="hint_formatter">This pokemon\'s %1$s are: %2$s</string>
+
+    <string name="error_couldnt_get_pokemon">Couldn\'t get this Pokemon :( . \n Click me to retry</string>
+
 </resources>

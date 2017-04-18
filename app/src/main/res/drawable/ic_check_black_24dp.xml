@@ -8,7 +8,7 @@
 
     <path
         android:name="check"
-        android:fillColor="@color/icons"
+        android:fillColor="@android:color/black"
         android:pathData="@string/check_path" />
 
 </vector>

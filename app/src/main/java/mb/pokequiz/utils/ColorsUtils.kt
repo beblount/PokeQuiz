@@ -1,12 +1,12 @@
 package mb.pokequiz.utils
 
+import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.support.annotation.ColorInt
 import android.support.annotation.FloatRange
+import android.support.annotation.IntDef
 import android.support.v4.graphics.ColorUtils
 import android.support.v7.graphics.Palette
-import android.view.View
 
 
 /**
@@ -14,9 +14,33 @@ import android.view.View
  */
 object ColorsUtils {
 
+    const val IS_LIGHT = 0L
+    const val IS_DARK = 1L
+    const val LIGHTNESS_UNKNOWN = 2L
+
+    @Retention()
+    @IntDef(IS_LIGHT, IS_DARK, LIGHTNESS_UNKNOWN)
+    annotation class Lightness
+
     fun alpha(color: Int, @FloatRange(from = 0.0, to = 1.0) multiplier: Float) : Int {
         val alphaMultiplier = multiplier * 255
         return Color.argb(alphaMultiplier.toInt(), Color.red(color), Color.green(color), Color.blue(color))
+    }
+
+    @Lightness fun isDark(palette: Palette): Long {
+        val mostPopulous = palette.mostPopulousSwatch()
+        return if (isDark(mostPopulous.hsl)) IS_DARK else IS_LIGHT
+    }
+
+    fun isDark(bitmap: Bitmap, backupPixelX: Int, backupPixelY: Int): Boolean {
+        // first try palette with a small color quant size
+        val palette = Palette.from(bitmap).maximumColorCount(3).generate()
+        if (palette.swatches.size > 0) {
+            return isDark(palette) == IS_DARK
+        } else {
+            // if palette failed, then check the color of the specified pixel
+            return isDark(bitmap.getPixel(backupPixelX, backupPixelY))
+        }
     }
 
     fun isDark(hsl: FloatArray): Boolean {
@@ -32,17 +56,6 @@ object ColorsUtils {
     fun contrast(color: Int): Int {
         val y = (299 * Color.red(color) + 587 * Color.green(color) + 114 * Color.blue(color)) / 1000
         return if (y >= 128) Color.BLACK else Color.WHITE
-    }
-
-    fun getMostPopulousSwatch(palette: Palette) : Palette.Swatch {
-        var mostPopulous : Palette.Swatch? = null
-        for (swatch in palette.swatches) {
-            if (mostPopulous == null || swatch.population > mostPopulous.population) {
-                mostPopulous = swatch
-            }
-        }
-
-        return mostPopulous!!
     }
 
     fun lighten(color: Int, fraction: Double): Int {

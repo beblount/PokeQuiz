@@ -11,8 +11,9 @@ import java.util.*
  */
 class QuizPresenter(val pokeApi: PokeApi, schedulerProvider: SchedulerProvider) : BasePresenter<QuizView>(schedulerProvider) {
 
-    private var randomPokemonDisposable: Disposable? = null
+    private var randomPokemonDisposable: Disposable ? = null
     private val random : Random = Random()
+    private var lastInt : Int ?= null
 
     override fun detach() {
         super.detach()
@@ -20,11 +21,20 @@ class QuizPresenter(val pokeApi: PokeApi, schedulerProvider: SchedulerProvider) 
     }
 
     fun getNextPokemon() {
-        var int = random.nextInt(721)
-        while (int == 0) {
-            int = random.nextInt(721)
+        lastInt = random.nextInt(721)
+        while (lastInt == 0) {
+            lastInt = random.nextInt(721)
         }
-        randomPokemonDisposable = pokeApi.getPokemonById(int)
+
+        load()
+    }
+
+    fun retry() {
+        load()
+    }
+
+    private fun load() {
+        randomPokemonDisposable = pokeApi.getPokemonById(lastInt!!)
                 .observeOn(schedulerProvider.ui())
                 .doOnSubscribe {
                     get()?.showLoading()
@@ -32,6 +42,7 @@ class QuizPresenter(val pokeApi: PokeApi, schedulerProvider: SchedulerProvider) 
                 .subscribe({
                     get()?.onPokemonReceived(it)
                 }, {
+                    it.printStackTrace()
                     get()?.showError()
                 })
     }

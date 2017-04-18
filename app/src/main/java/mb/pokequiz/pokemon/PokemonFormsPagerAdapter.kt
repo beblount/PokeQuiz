@@ -18,8 +18,8 @@ import com.bumptech.glide.request.target.Target
 import mb.pokequiz.R
 import mb.pokequiz.api.model.Pokemon
 import mb.pokequiz.databinding.PokemonImageBinding
-import mb.pokequiz.utils.AnimUtils
-import mb.pokequiz.utils.ColorsUtils
+import mb.pokequiz.utils.Anims
+import mb.pokequiz.utils.mostPopulousSwatch
 import java.lang.Exception
 
 /**
@@ -69,9 +69,9 @@ class PokemonFormsPagerAdapter(val activity: Activity, val tabLayout: TabLayout,
                     override fun onResourceReady(resource: Bitmap?, model: String?, target: Target<Bitmap>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
                         Palette.from(resource)
                                 .generate {
-                                    val swatch = ColorsUtils.getMostPopulousSwatch(it)
+                                    val swatch = it.mostPopulousSwatch()
                                     val rgb = swatch.rgb
-                                    val statusBar = AnimUtils.statusBarColor(activity.window, rgb)
+                                    val statusBar = Anims.statusBarColor(activity.window, rgb)
 
                                     tabLayout.setSelectedTabIndicatorColor(rgb)
 

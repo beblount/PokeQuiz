@@ -8,22 +8,30 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator
 import android.util.Property
 import android.view.View
 import android.view.Window
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.BounceInterpolator
 import android.view.animation.DecelerateInterpolator
+import android.view.animation.OvershootInterpolator
 import android.widget.TextView
 
 
 /**
  * Created by mbpeele on 12/27/16.
  */
-object AnimUtils {
+object Anims {
 
-    val argbEvaluator : TypeEvaluator<*> = ArgbEvaluator()
-    val fastOutSlowIn: FastOutSlowInInterpolator = FastOutSlowInInterpolator()
-    val decelerate: DecelerateInterpolator = DecelerateInterpolator()
+    val STATUS_BAR = "statusBarColor"
+
+    val ACCEL_DECEL : AccelerateInterpolator = AccelerateInterpolator()
+    val ARGB_EVAL : ArgbEvaluator = ArgbEvaluator()
+    val OVERSHOOT : OvershootInterpolator = OvershootInterpolator()
+    val BOUNCE: BounceInterpolator = BounceInterpolator()
+    val FAST_OUT_SLOW_IN: FastOutSlowInInterpolator = FastOutSlowInInterpolator()
+    val DECELERATE: DecelerateInterpolator = DecelerateInterpolator()
 
     fun alpha(view: View, vararg alphas: Float): ObjectAnimator {
         val objectAnimator = ObjectAnimator.ofFloat(view, View.ALPHA, *alphas)
-        objectAnimator.interpolator = decelerate
+        objectAnimator.interpolator = DECELERATE
         return objectAnimator
     }
 
@@ -57,6 +65,16 @@ object AnimUtils {
         return alpha
     }
 
+    fun scale(view: View, vararg scales: Float) : ObjectAnimator {
+        val animator = ObjectAnimator.ofPropertyValuesHolder(
+                view,
+                PropertyValuesHolder.ofFloat(View.SCALE_X, *scales),
+                PropertyValuesHolder.ofFloat(View.SCALE_Y, *scales))
+        animator.duration = 500
+        animator.interpolator = DECELERATE
+        return animator
+    }
+
     fun textScale(textView: TextView, vararg scales: Float): ObjectAnimator {
         val floatProperty = object : FloatProperty<TextView>("") {
             override fun setValue(view: TextView, value: Float) {
@@ -70,7 +88,7 @@ object AnimUtils {
 
         val objectAnimator = ObjectAnimator.ofFloat(textView, floatProperty, *scales)
         objectAnimator.duration = 500
-        objectAnimator.interpolator = decelerate
+        objectAnimator.interpolator = DECELERATE
         return objectAnimator
     }
 
@@ -78,7 +96,7 @@ object AnimUtils {
         val statusBarColorAnim = ObjectAnimator.ofArgb(window,
                 "statusBarColor", window.statusBarColor, statusBarColor)
         statusBarColorAnim.duration = 1000
-        statusBarColorAnim.interpolator = fastOutSlowIn
+        statusBarColorAnim.interpolator = FAST_OUT_SLOW_IN
         return statusBarColorAnim
     }
 
@@ -110,6 +128,10 @@ object AnimUtils {
                 .map { it.defaultColor }
                 .toIntArray()
         return argb(*array)
+    }
+
+    fun ValueAnimator.floatAnimatedValue() : Float {
+        return if (animatedValue == null) 0F else animatedValue as Float
     }
 
     abstract class FloatProperty<T>(name: String) : Property<T, Float>(Float::class.java, name) {

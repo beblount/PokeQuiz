@@ -10,6 +10,7 @@
         <item name="icon">@color/icons</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">?attr/colorPrimary</item>
         <item name="android:toolbarStyle">@style/PokeToolbar</item>
     </style>
 

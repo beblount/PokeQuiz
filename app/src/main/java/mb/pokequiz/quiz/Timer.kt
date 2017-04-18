@@ -93,6 +93,9 @@ class Timer : View {
         disposable = Observable.interval(1, TimeUnit.SECONDS)
                 .takeWhile { value > 0 }
                 .map { value -= 1 }
+                .doOnDispose {
+                    value = 0
+                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     invalidate()
@@ -107,6 +110,8 @@ class Timer : View {
         shouldShow = false
 
         disposable?.dispose()
+
+        invalidate()
     }
 
     interface TimerListener {
