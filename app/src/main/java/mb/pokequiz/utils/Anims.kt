@@ -8,10 +8,7 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator
 import android.util.Property
 import android.view.View
 import android.view.Window
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.BounceInterpolator
-import android.view.animation.DecelerateInterpolator
-import android.view.animation.OvershootInterpolator
+import android.view.animation.*
 import android.widget.TextView
 
 
@@ -22,6 +19,7 @@ object Anims {
 
     val STATUS_BAR = "statusBarColor"
 
+    val LINEAR : LinearInterpolator = LinearInterpolator()
     val ACCEL_DECEL : AccelerateInterpolator = AccelerateInterpolator()
     val ARGB_EVAL : ArgbEvaluator = ArgbEvaluator()
     val OVERSHOOT : OvershootInterpolator = OvershootInterpolator()

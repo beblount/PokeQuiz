@@ -1,5 +1,6 @@
 package mb.pokequiz.widget
 
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
@@ -10,8 +11,9 @@ import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
 import mb.pokequiz.R
+import mb.pokequiz.utils.Anims
+import mb.pokequiz.utils.Anims.floatAnimatedValue
 import mb.pokequiz.utils.Circle
-import mb.pokequiz.utils.PreDrawer
 
 /**
  * Created by mbpeele on 4/17/17.
@@ -24,6 +26,8 @@ class LoadingPokeball : View {
 
     var circle : Circle = Circle(0F, 0F, 0F)
     val innerRect : RectF = RectF()
+
+    val shakeAnimator : ValueAnimator = ValueAnimator.ofFloat(0F, -30F, 30F)
 
     constructor(context: Context) : super(context)
 
@@ -59,6 +63,10 @@ class LoadingPokeball : View {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
+        canvas.save()
+        val shakeValue = shakeAnimator.floatAnimatedValue()
+        canvas.rotate(shakeValue, circle.centerX, circle.bounds.height())
+
         // White arc
         paint.color = Color.WHITE
         paint.style = Paint.Style.FILL_AND_STROKE
@@ -90,20 +98,23 @@ class LoadingPokeball : View {
         // Line
         canvas.drawLine(circle.bounds.left, circle.centerY, circle.centerX - innerRect.width() / 2F, circle.centerY, paint)
         canvas.drawLine(circle.bounds.right, circle.centerY, circle.centerX + innerRect.width() / 2F, circle.centerX, paint)
+
+        canvas.restore()
     }
 
     fun stop() {
-
+        shakeAnimator.cancel()
+        invalidate()
     }
 
     fun start() {
-        if (circle.centerX == 0F) {
-            PreDrawer.addPreDrawer(this, {
-                invalidate()
-                true
-            })
-        } else {
+        shakeAnimator.duration = 1000
+        shakeAnimator.interpolator = Anims.LINEAR
+        shakeAnimator.repeatCount = ValueAnimator.INFINITE
+        shakeAnimator.repeatMode = ValueAnimator.REVERSE
+        shakeAnimator.addUpdateListener {
             invalidate()
         }
+        shakeAnimator.start()
     }
 }
