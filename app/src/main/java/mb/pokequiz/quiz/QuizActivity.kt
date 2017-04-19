@@ -43,10 +43,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<QuizBinding>(this, R.layout.quiz)
 
-//        presenter.getNextPokemon()
-        content.visibility = View.GONE
-        loading.visibility = View.VISIBLE
-        loading.start()
+        presenter.getNextPokemon()
 
         failure.movementMethod = LinkMovementMethod.getInstance()
     }
@@ -61,8 +58,15 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
     }
 
     override fun onPokemonReceived(pokemon: Pokemon) {
-        Anims.visible(content).start()
-        Anims.visible(quizControls).start()
+        val set = AnimatorSet()
+        set.playTogether(Anims.visible(content), Anims.visible(quizControls), Anims.invisible(loading), Anims.invisible(error))
+        set.addListener(object: AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                loading.stop()
+            }
+        })
+        set.duration = 150
+        set.start()
 
         if (BuildConfig.DEBUG) {
             Toast.makeText(this, pokemon.name, Toast.LENGTH_LONG).show()
@@ -77,9 +81,6 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
                 .listener(object : RequestListener<String, Bitmap> {
                     override fun onResourceReady(resource: Bitmap, model: String?, target: Target<Bitmap>?,
                                                  isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
-                        Anims.invisible(loading).start()
-                        loading.stop()
-
                         image.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP)
 
                         timer.start(5, this@QuizActivity)
@@ -150,11 +151,11 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
         val set = AnimatorSet()
         set.playTogether(Anims.invisible(content), Anims.invisible(error), Anims.visible(loading))
         set.addListener(object: AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationStart(animation: Animator?) {
                 loading.start()
             }
         })
-        set.duration = 350
+        set.duration = 150
         set.start()
     }
 
@@ -192,6 +193,7 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
 
             val reset = AnimatorSet()
             reset.playTogether(Anims.invisible(postQuizControls), Anims.textScale(guess, 1f))
+            reset.duration = 350
             reset.addListener(object: AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator?) {
                     presenter.getNextPokemon()

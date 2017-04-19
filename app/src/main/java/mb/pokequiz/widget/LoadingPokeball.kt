@@ -1,5 +1,7 @@
 package mb.pokequiz.widget
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
@@ -112,6 +114,11 @@ class LoadingPokeball : View {
         shakeAnimator.interpolator = Anims.LINEAR
         shakeAnimator.repeatCount = ValueAnimator.INFINITE
         shakeAnimator.repeatMode = ValueAnimator.REVERSE
+        shakeAnimator.addListener(object: AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator?) {
+                invalidate()
+            }
+        })
         shakeAnimator.addUpdateListener {
             invalidate()
         }
