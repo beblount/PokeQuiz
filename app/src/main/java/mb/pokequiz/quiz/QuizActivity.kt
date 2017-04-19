@@ -43,7 +43,10 @@ class QuizActivity : QuizView, MvpActivity<QuizView, QuizPresenter>(), Timer.Tim
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<QuizBinding>(this, R.layout.quiz)
 
-        presenter.getNextPokemon()
+//        presenter.getNextPokemon()
+        content.visibility = View.GONE
+        loading.visibility = View.VISIBLE
+        loading.start()
 
         failure.movementMethod = LinkMovementMethod.getInstance()
     }
